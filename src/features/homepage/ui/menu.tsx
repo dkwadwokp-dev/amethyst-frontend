@@ -21,7 +21,7 @@ const Menu = () => {
             case 1: src = 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=200&auto=format&fit=crop'; break; // Plantains
             case 2: src = 'https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?q=80&w=200&auto=format&fit=crop'; break; // Moi Moi
             case 3: src = 'https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=200'; break; // Spicy Wings
-            case 4: src = 'https://images.pexels.com/photos/3575510/pexels-photo-3575510.jpeg?auto=compress&cs=tinysrgb&w=200'; break; // Calamari
+            case 4: src = 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=200&auto=format&fit=crop'; break; // Calamari
             case 5: src = 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=200&auto=format&fit=crop'; break; // Steak Tips
             case 6: src = 'https://images.pexels.com/photos/2625501/pexels-photo-2625501.jpeg?auto=compress&cs=tinysrgb&w=200'; break; // Grilled Fish
             case 7: src = 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=200&auto=format&fit=crop'; break; // Sweet Potato

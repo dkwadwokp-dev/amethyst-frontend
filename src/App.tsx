@@ -13,10 +13,12 @@ import BookingsPage from "./pages/BookingsPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import FaqPage from "./pages/FaqPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ScrollToTop from "./features/shared/ui/scroll-to-top";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/style-guide" element={<StyleGuide />} />
