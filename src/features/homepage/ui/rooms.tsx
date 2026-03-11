@@ -18,12 +18,16 @@ const Rooms = () => {
       <div className="space-y-4 max-w-5xl mx-auto">
         {rooms.map((room) => (
           <div key={room.id} className="bg-white p-4 flex flex-col md:flex-row gap-8 items-center shadow-sm">
-            <ImagePlaceholder className="w-full md:w-64 h-40 flex-shrink-0" text="PHOTO CONTENT" />
+            <ImagePlaceholder 
+              className="w-full md:w-64 h-40 flex-shrink-0 rounded-sm" 
+              text={room.title} 
+              src={room.leadImage}
+            />
             
             <div className="flex-1 py-4">
-              <h3 className="font-bold text-gray-900 mb-2 uppercase tracking-wide">{room.title}</h3>
+              <h3 className="font-bold text-primary mb-2 uppercase tracking-wide">{room.title}</h3>
               <p className="text-gray-500 text-xs leading-relaxed mb-4">{room.desc}</p>
-              <div className="flex gap-4 text-[10px] text-gray-400 font-bold tracking-widest uppercase">
+              <div className="flex gap-4 text-[10px] text-dark font-bold tracking-widest uppercase">
                 <span>{room.bed}</span>
                 <span>{room.size}</span>
               </div>

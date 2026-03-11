@@ -9,7 +9,7 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope">
       <Header />
-      <PageHero title="CONTACT US" subtitle="YOUR PERFECT URBAN HAVEN" />
+      <PageHero title="CONTACT US" subtitle="WE WOULD LOVE TO HEAR FROM YOU" />
       <ContactFormSection />
       <ContactInfoCards />
       <MapSection />

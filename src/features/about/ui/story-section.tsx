@@ -5,7 +5,7 @@ const StorySection = () => {
   return (
     <Section className="bg-white py-24">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <ImagePlaceholder className="w-full h-full min-h-[500px] rounded-sm" text="" />
+        <ImagePlaceholder className="w-full h-full min-h-[500px] rounded-sm object-cover" src="https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg?auto=compress&cs=tinysrgb&w=1200" text="HOTEL EXTEIOR" />
         <div>
           <div className="w-16 h-1 bg-gray-200 mb-6"></div>
           <h2 className="text-3xl md:text-4xl font-marcellus text-gray-900 mb-6 uppercase">Our Story</h2>

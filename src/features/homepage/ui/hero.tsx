@@ -3,8 +3,14 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="relative bg-gray-500 min-h-[600px] flex items-center justify-center text-center px-6">
-      <div className="max-w-4xl mx-auto flex flex-col items-center z-10 text-white">
+    <div 
+      className="relative bg-[#0B1521] min-h-[600px] flex items-center justify-center text-center px-6 bg-cover bg-center"
+      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542314831-c6a4d14faaf2?q=80&w=2600&auto=format&fit=crop')" }}
+    >
+      <div className="absolute inset-0 bg-[#0B1521]/40 mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
+      
+      <div className="max-w-4xl mx-auto flex flex-col items-center z-10 text-white relative">
         <span className="text-[11px] font-bold tracking-[0.3em] uppercase mb-4 opacity-90">
           WELCOME TO AH HOTEL
         </span>

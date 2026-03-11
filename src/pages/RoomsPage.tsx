@@ -9,7 +9,7 @@ const RoomsPage = () => {
   return (
     <div className="min-h-screen bg-white font-manrope">
       <Header />
-      <PageHero title="ROOMS" subtitle="YOUR PERFECT URBAN HAVEN" />
+      <PageHero title="ROOMS" subtitle="DISCOVER YOUR PERFECT URBAN HAVEN" />
       <RoomList />
       <RoomsAmenities />
       <PoliciesSection />

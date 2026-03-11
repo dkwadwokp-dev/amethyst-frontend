@@ -8,7 +8,7 @@ const CheckBookingPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope flex flex-col">
       <Header />
-      <PageHero title="CHECK BOOKING" subtitle="YOUR PERFECT URBAN HAVEN" />
+      <PageHero title="CHECK BOOKING" subtitle="MANAGE AND VERIFY YOUR STAY" />
 
       <div className="flex-1 bg-[red]">
         <CheckBookingForm />

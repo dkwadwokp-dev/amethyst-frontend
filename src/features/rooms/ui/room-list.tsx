@@ -14,15 +14,15 @@ const RoomList = () => {
             className="bg-white p-6 flex flex-col md:flex-row gap-8 shadow-sm items-center"
           >
             <div className="w-full md:w-[35%] shrink-0">
-              <ImagePlaceholder className="w-full h-56 min-h-[220px]" text="" />
+              <ImagePlaceholder className="w-full h-56 min-h-[220px]" src={room.leadImage} text={room.title} />
             </div>
             <div className="flex-1 py-4 flex flex-col md:flex-row justify-between gap-6 h-full">
               <div className="flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-marcellus text-gray-900 uppercase mb-3">
+                  <h3 className="text-xl font-marcellus text-primary uppercase mb-3">
                     {room.title}
                   </h3>
-                  <div className="flex gap-4 mb-4 text-[10px] text-gray-500 font-bold tracking-widest uppercase">
+                  <div className="flex gap-4 mb-4 text-[10px] text-dark font-bold tracking-widest uppercase">
                     <span>{room.guests}</span>
                     <span className="w-1 h-1 bg-gray-300 rounded-full my-auto"></span>
                     <span>{room.bed}</span>

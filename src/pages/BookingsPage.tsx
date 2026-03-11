@@ -9,7 +9,7 @@ const BookingsPage = () => {
       <Header />
       <PageHero 
         title="ALL BOOKINGS"
-        subtitle="MANAGE RESERVATIONS"
+        subtitle="VIEW AND MANAGE ALL RESERVATIONS"
       />
       <BookingList />
       <Footer />

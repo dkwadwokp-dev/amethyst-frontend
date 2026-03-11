@@ -8,8 +8,9 @@ const Contact = () => {
     <Section className="bg-white">
       <div className="grid lg:grid-cols-2 gap-16 items-start">
         <ImagePlaceholder
-          className="w-full h-full min-h-[500px]"
-          text="CONTACT IMAGE PLACEMENT AREA"
+          className="w-full h-[600px] object-cover rounded-sm shadow-lg"
+          text="CONTACT"
+          src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=1200&auto=format&fit=crop"
         />
 
         <div className="py-8">

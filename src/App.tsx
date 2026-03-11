@@ -12,6 +12,7 @@ import ViewBookingPage from "./pages/ViewBookingPage";
 import BookingsPage from "./pages/BookingsPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import FaqPage from "./pages/FaqPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/bookings/:bookingId" element={<ViewBookingPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/faq" element={<FaqPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

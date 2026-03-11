@@ -7,8 +7,9 @@ const About = () => {
     <Section className="bg-white">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <ImagePlaceholder
-          className="w-full aspect-[4/3]"
-          text="YOUR IMAGE PLACEMENT AREA"
+          className="w-full aspect-[4/3] rounded-sm shadow-xl"
+          text="ABOUT HOTEL"
+          src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1200"
         />
 
         <div className="space-y-8">

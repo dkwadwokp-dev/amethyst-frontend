@@ -25,7 +25,7 @@ export const SectionHeading = ({
         </span>
       )}
       <h2
-        className={`text-4xl md:text-5xl font-marcellus ${light ? "text-white" : "text-gray-900"}`}
+        className={`text-4xl md:text-5xl font-marcellus ${light ? "text-white" : "text-primary"}`}
       >
         {title}
       </h2>

@@ -9,6 +9,7 @@ interface DishItem {
   name: string;
   price: string;
   desc: string;
+  image?: string;
 }
 
 interface DishCategoryProps {
@@ -32,7 +33,7 @@ const DishCategory = ({ subtitle, title, items }: DishCategoryProps) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {items.slice(0, visibleCount).map(item => (
           <div key={item.id} className="flex flex-col">
-             <ImagePlaceholder className="w-full aspect-square mb-6" text="" />
+             <ImagePlaceholder className="w-full aspect-square mb-6 rounded-sm object-cover" src={item.image} text={item.name} />
              <div className="flex justify-between items-start mb-2">
                <h4 className="font-bold text-[11px] uppercase tracking-widest text-gray-900">{item.name}</h4>
                <span className="font-bold text-[11px] text-gray-900">{item.price}</span>
