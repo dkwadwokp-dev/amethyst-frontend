@@ -5,8 +5,8 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = ['HOME', 'DINING', 'ROOMS', 'ABOUT US', 'CONTACT', 'BOOKINGS'];
-  const getPath = (item: string) => item === 'HOME' ? '/' : item === 'CONTACT' ? '/contact' : item === 'DINING' ? '/dishes' : item === 'ROOMS' ? '/rooms' : item === 'ABOUT US' ? '/about-us' : item === 'BOOKINGS' ? '/bookings' : '#';
+  const navItems = ['HOME', 'DINING', 'ROOMS', 'EVENTS', 'ABOUT US', 'CONTACT', 'BOOKINGS'];
+  const getPath = (item: string) => item === 'HOME' ? '/' : item === 'CONTACT' ? '/contact' : item === 'DINING' ? '/dishes' : item === 'ROOMS' ? '/rooms' : item === 'EVENTS' ? '/events' : item === 'ABOUT US' ? '/about-us' : item === 'BOOKINGS' ? '/bookings' : '#';
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 

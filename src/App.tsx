@@ -14,6 +14,10 @@ import AdminLoginPage from "./pages/AdminLoginPage";
 import FaqPage from "./pages/FaqPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ScrollToTop from "./features/shared/ui/scroll-to-top";
+import EventsPage from "./pages/EventsPage";
+import SingleEventPage from "./pages/SingleEventPage";
+import NewEventPage from "./pages/NewEventPage";
+import EditEventPage from "./pages/EditEventPage";
 
 function App() {
   return (
@@ -31,6 +35,10 @@ function App() {
         <Route path="/check-booking" element={<CheckBookingPage />} />
         <Route path="/bookings" element={<BookingsPage />} />
         <Route path="/bookings/:bookingId" element={<ViewBookingPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/events/new" element={<NewEventPage />} />
+        <Route path="/events/:eventId" element={<SingleEventPage />} />
+        <Route path="/events/:eventId/edit" element={<EditEventPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="*" element={<NotFoundPage />} />
