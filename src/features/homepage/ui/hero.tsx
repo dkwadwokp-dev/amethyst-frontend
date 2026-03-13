@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useImageModal } from "../../shared/context/image-modal-context";
 
 const slides = [
   {
@@ -33,6 +34,7 @@ const slides = [
 ];
 
 const Hero = () => {
+  const { openModal } = useImageModal();
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -79,11 +81,12 @@ const Hero = () => {
             }`}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === current ? "cursor-pointer pointer-events-auto" : "pointer-events-none"}`}
               style={{ backgroundImage: `url('${slide.image}')` }}
+              onClick={() => openModal(slide.image, slide.mainTitle)}
             />
-            <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent pointer-events-none" />
           </div>
         ))}
       </div>

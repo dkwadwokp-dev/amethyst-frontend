@@ -9,17 +9,19 @@ const Testimonials = () => {
       <SectionHeading 
         subtitle="GUEST REVIEWS"
         title="TESTIMONIALS"
-        className="mb-16"
+        className="mb-10 md:mb-16"
       />
       
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {reviews.map((review, idx) => (
-          <div key={idx} className="bg-white p-8 shadow-sm">
-            <div className="text-primary mb-4 text-3xl font-serif">"</div>
-            <p className="text-gray-600 text-sm leading-relaxed mb-8 italic">
-              {review.text}
-            </p>
-            <div className="flex items-center gap-4 border-t border-gray-100 pt-6">
+          <div key={idx} className="bg-white p-5 md:p-8 shadow-sm flex flex-col h-full">
+            <div className="flex-1">
+              <div className="text-primary mb-4 text-3xl font-serif">"</div>
+              <p className="text-gray-600 text-sm leading-relaxed mb-8 italic">
+                {review.text}
+              </p>
+            </div>
+            <div className="flex items-center gap-4 border-t border-gray-100 pt-5 md:pt-6 mt-auto">
               <img 
                 src={`https://i.pravatar.cc/150?u=${idx}`} 
                 alt={review.name} 

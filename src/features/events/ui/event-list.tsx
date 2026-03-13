@@ -1,19 +1,30 @@
 import { events } from "../data/events";
 import { Link } from "react-router-dom";
 import { Button } from "../../shared/ui/button";
-import { Calendar, Clock, MapPin } from "lucide-react";
+import { Calendar, Clock, MapPin, Maximize2 } from "lucide-react";
+import { useImageModal } from "../../shared/context/image-modal-context";
 
 const EventList = () => {
+  const { openModal } = useImageModal();
+
   return (
     <div className="max-w-6xl mx-auto px-6 lg:px-12 py-16 space-y-12">
       {events.map((event) => (
         <div key={event.id} className="bg-white border border-gray-100 shadow-sm flex flex-col md:flex-row gap-6 overflow-hidden items-center group">
-          <div className="w-full md:w-[40%] h-64 md:h-[350px] shrink-0 relative overflow-hidden">
+          <div 
+            className="w-full md:w-[40%] h-64 md:h-[350px] shrink-0 relative overflow-hidden cursor-pointer"
+            onClick={() => openModal(event.leadImage, event.title)}
+          >
             <img 
               src={event.leadImage} 
               alt={event.title} 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
             />
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <div className="bg-white/20 backdrop-blur-md rounded-full p-4 border border-white/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+                <Maximize2 size={24} className="text-white" />
+              </div>
+            </div>
           </div>
           <div className="flex-1 py-8 px-6 md:px-8 flex flex-col justify-center">
             <div className="flex items-center gap-4 mb-4 text-[10px] uppercase font-bold tracking-widest text-[#0021B3]">

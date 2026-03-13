@@ -17,7 +17,7 @@ const DishesPage = () => {
         image="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=2600&auto=format&fit=crop"
       />
       
-      <div className="py-8">
+      <div className="py-2 md:py-8">
         <DishCategory subtitle="MEALS" title="BREAKFAST" items={breakfastItems} />
         <DishCategory subtitle="MEALS" title="LUNCH" items={lunchItems} />
         <DishCategory subtitle="MEALS" title="DINNER" items={dinnerItems} />

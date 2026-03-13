@@ -26,7 +26,7 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
   const isDark = initialTransparent && !isScrolled;
 
   return (
-    <header className={`py-4 px-6 lg:px-12 flex items-center justify-between left-0 right-0 z-50 transition-all duration-300 ${
+    <header className={`py-4 px-4 lg:px-12 flex items-center justify-between left-0 right-0 z-50 transition-all duration-300 ${
       initialTransparent ? 'fixed top-0' : 'sticky top-0'
     } ${
       isDark ? 'bg-transparent' : 'bg-white shadow-sm'

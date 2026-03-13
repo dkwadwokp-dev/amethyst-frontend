@@ -3,9 +3,17 @@ import { useEffect, useState } from "react";
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    // Check if device has a fine pointer (mouse) and is not mobile
+    const checkIsDesktop = () => {
+      setIsDesktop(window.matchMedia("(pointer: fine)").matches);
+    };
+
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
@@ -26,16 +34,19 @@ const CustomCursor = () => {
     window.addEventListener("mouseover", handleHoverStart);
 
     return () => {
+      window.removeEventListener("resize", checkIsDesktop);
       window.removeEventListener("mousemove", updatePosition);
       window.removeEventListener("mouseover", handleHoverStart);
     };
   }, []);
 
+  if (!isDesktop) return null;
+
   const secondaryColor = "#60a5fa"; // From our theme
 
   return (
     <div
-      className={`custom-cursor-container pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-500 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`custom-cursor-container pointer-events-none fixed inset-0 z-[99999] transition-opacity duration-500`}
     >
       {/* Trailing Ring */}
       <div
@@ -45,7 +56,9 @@ const CustomCursor = () => {
           height: isHovering ? "80px" : "40px",
           transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
           borderColor: secondaryColor,
-          backgroundColor: isHovering ? "rgba(96, 165, 250, 0.1)" : "transparent",
+          backgroundColor: isHovering
+            ? "rgba(96, 165, 250, 0.1)"
+            : "transparent",
         }}
       />
 

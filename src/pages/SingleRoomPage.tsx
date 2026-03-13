@@ -93,8 +93,8 @@ const SingleRoomPage = () => {
                 <h3 className="text-[11px] font-bold tracking-widest text-gray-900 uppercase mb-6 flex items-center">
                   <Info className="w-4 h-4 mr-2 text-gray-400" /> OVERVIEW
                 </h3>
-                <p className="text-gray-500 leading-relaxed max-w-2xl">
-                  {room.desc}
+                <p className="text-gray-500 leading-relaxed max-w-2xl whitespace-pre-line">
+                  {(room as any).longDesc || room.desc}
                 </p>
               </section>
 

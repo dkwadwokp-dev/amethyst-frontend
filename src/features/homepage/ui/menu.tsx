@@ -3,24 +3,31 @@ import { SectionHeading } from "../../shared/ui/section-heading";
 import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
 import { menuItems } from "../data/menu";
+import { useImageModal } from "../../shared/context/image-modal-context";
 
 const Menu = () => {
+  const { openModal } = useImageModal();
+
   return (
     <Section className="bg-white border-t border-gray-100">
       <SectionHeading
         subtitle="SOME MEALS"
         title="FROM OUR MENU"
-        className="mb-16"
+        className="mb-8 md:mb-16"
       />
 
-      <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
+      <div className="grid md:grid-cols-2 gap-x-16 gap-y-6 md:gap-y-10">
         {menuItems.map((item, idx) => {
           return (
-          <div key={idx} className="flex items-center gap-6 group cursor-pointer">
+          <div key={idx} className="flex items-center gap-4 md:gap-6 group cursor-pointer">
             <img 
               src={item.image}
               alt={item.name}
-              className="w-16 h-16 rounded-full flex-shrink-0 border-2 border-white shadow-md object-cover group-hover:scale-110 transition-transform duration-300"
+              onClick={(e) => {
+                e.stopPropagation();
+                openModal(item.image, item.name);
+              }}
+              className="w-12 h-12 md:w-16 md:h-16 rounded-full flex-shrink-0 border-2 border-white shadow-md object-cover group-hover:scale-110 transition-transform duration-300 pointer-events-auto"
             />
             <div className="flex-1">
               <div className="flex justify-between items-baseline mb-1 relative overflow-hidden">
@@ -39,7 +46,7 @@ const Menu = () => {
       </div>
 
 
-      <div className="mt-16 text-center">
+      <div className="mt-10 md:mt-16 text-center">
         <Link to="/dishes">
           <Button variant="ghost">View All Menu</Button>
         </Link>

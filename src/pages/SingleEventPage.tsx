@@ -4,13 +4,15 @@ import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
 import { events } from "../features/events/data/events";
 import { Button } from "../features/shared/ui/button";
-import { ChevronLeft, Calendar, Clock, MapPin, Ticket } from "lucide-react";
+import { ChevronLeft, Calendar, Clock, MapPin, Ticket, Maximize2 } from "lucide-react";
 import PurchaseTicketModal from "../features/events/ui/purchase-ticket-modal";
+import { useImageModal } from "../features/shared/context/image-modal-context";
 
 const SingleEventPage = () => {
   const { eventId } = useParams();
   const event = events.find(e => e.id === eventId);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { openModal } = useImageModal();
 
   if (!event) {
     return (
@@ -48,16 +50,28 @@ const SingleEventPage = () => {
               </div>
             </div>
 
-            <div className="w-full h-[50vh] min-h-[400px]">
-              <img src={event.leadImage} alt={event.title} className="w-full h-full object-cover rounded-sm shadow-sm" />
+            <div 
+              className="w-full h-[50vh] min-h-[400px] cursor-pointer group relative overflow-hidden rounded-sm shadow-sm"
+              onClick={() => openModal(event.leadImage, event.title)}
+            >
+              <img 
+                src={event.leadImage} 
+                alt={event.title} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="bg-white/20 backdrop-blur-md rounded-full p-4 border border-white/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+                  <Maximize2 size={32} className="text-white" />
+                </div>
+              </div>
             </div>
 
             <div>
               <h3 className="text-[11px] font-bold tracking-widest text-gray-900 uppercase mb-6 border-b border-gray-100 pb-4">
                 ABOUT THE EVENT
               </h3>
-              <p className="text-gray-600 leading-relaxed text-lg">
-                {event.desc}
+              <p className="text-gray-600 leading-relaxed text-sm md:text-base whitespace-pre-line">
+                {event.longDesc || event.desc}
               </p>
             </div>
           </div>

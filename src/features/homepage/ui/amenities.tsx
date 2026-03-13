@@ -31,16 +31,16 @@ const Amenities = () => {
       <SectionHeading
         subtitle="OUR FACILITIES"
         title="HOTEL AMENITIES"
-        className="mb-16"
+        className="mb-10 md:mb-16"
       />
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {amenities.map((item, idx) => (
           <div
             key={idx}
-            className="bg-[#F8F9FA] p-8 flex flex-col items-center text-center"
+            className="bg-[#F8F9FA] p-4 md:p-8 flex flex-col items-center text-center"
           >
-            <div className="w-12 h-12 bg-white flex items-center justify-center rounded-full mb-6 text-gray-900 shadow-sm border border-gray-100">
+            <div className="w-12 h-12 bg-white flex items-center justify-center rounded-full mb-4 md:mb-6 text-gray-900 shadow-sm border border-gray-100">
               {item.icon}
             </div>
             <h4 className="font-bold text-[11px] tracking-widest uppercase mb-3 text-gray-900">

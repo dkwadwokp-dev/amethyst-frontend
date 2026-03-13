@@ -13,12 +13,12 @@ const Contact = () => {
           src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2600&auto=format&fit=crop"
         />
 
-        <div className="py-8">
+        <div className="py-4 md:py-8">
           <SectionHeading
             subtitle="GET IN TOUCH"
             title="WE'RE HERE TO ASSIST"
             alignment="left"
-            className="mb-10"
+            className="mb-6 md:mb-10"
           />
 
           <form className="space-y-6 max-w-md">

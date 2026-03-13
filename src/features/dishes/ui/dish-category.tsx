@@ -28,17 +28,17 @@ const DishCategory = ({ subtitle, title, items }: DishCategoryProps) => {
   const hasMore = items.length > visibleCount;
 
   return (
-    <Section className="bg-white py-12">
-      <SectionHeading subtitle={subtitle} title={title} className="mb-12" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <Section className="bg-white py-8 md:py-12">
+      <SectionHeading subtitle={subtitle} title={title} className="mb-8 md:mb-12" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
         {items.slice(0, visibleCount).map(item => (
           <div key={item.id} className="flex flex-col">
-             <ImagePlaceholder className="w-full aspect-square mb-6 rounded-sm object-cover" src={item.image} text={item.name} />
+             <ImagePlaceholder className="w-full aspect-square mb-3 md:mb-6 rounded-sm object-cover" src={item.image} text={item.name} />
              <div className="flex justify-between items-start mb-2">
-               <h4 className="font-bold text-[11px] uppercase tracking-widest text-gray-900">{item.name}</h4>
-               <span className="font-bold text-[11px] text-gray-900">{item.price}</span>
+               <h4 className="font-bold text-[9px] md:text-[11px] uppercase tracking-widest text-gray-900 line-clamp-1">{item.name}</h4>
+               <span className="font-bold text-[9px] md:text-[11px] text-gray-900 ml-1">{item.price}</span>
              </div>
-             <p className="text-[11px] text-gray-500 leading-relaxed pr-4">{item.desc}</p>
+             <p className="text-[9px] md:text-[11px] text-gray-500 leading-relaxed pr-2 line-clamp-2">{item.desc}</p>
           </div>
         ))}
       </div>
