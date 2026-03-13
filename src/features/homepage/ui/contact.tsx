@@ -10,7 +10,7 @@ const Contact = () => {
         <ImagePlaceholder
           className="w-full h-[600px] object-cover rounded-sm shadow-lg"
           text="CONTACT"
-          src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?q=80&w=1200&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=2600&auto=format&fit=crop"
         />
 
         <div className="py-8">

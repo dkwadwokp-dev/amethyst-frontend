@@ -9,7 +9,11 @@ const RoomsPage = () => {
   return (
     <div className="min-h-screen bg-white font-manrope">
       <Header />
-      <PageHero title="ROOMS" subtitle="DISCOVER YOUR PERFECT URBAN HAVEN" />
+      <PageHero 
+        title="ROOMS" 
+        subtitle="DISCOVER YOUR PERFECT URBAN HAVEN" 
+        image="https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=2600&auto=format&fit=crop"
+      />
       <RoomList />
       <RoomsAmenities />
       <PoliciesSection />

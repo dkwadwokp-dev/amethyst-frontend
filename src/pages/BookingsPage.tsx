@@ -10,6 +10,7 @@ const BookingsPage = () => {
       <PageHero 
         title="ALL BOOKINGS"
         subtitle="VIEW AND MANAGE ALL RESERVATIONS"
+        image="https://images.unsplash.com/photo-1571863533956-01c88e79957e?q=80&w=2600&auto=format&fit=crop"
       />
       <BookingList />
       <Footer />

@@ -7,7 +7,11 @@ const FaqPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope flex flex-col">
       <Header />
-      <PageHero title="FAQ" subtitle="ANSWERS TO YOUR QUESTIONS" />
+      <PageHero 
+        title="FAQ" 
+        subtitle="ANSWERS TO YOUR QUESTIONS" 
+        image="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2600&auto=format&fit=crop"
+      />
       
       <div className="flex-1">
         <FaqList />

@@ -7,7 +7,11 @@ const EventsPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope">
       <Header />
-      <PageHero title="EVENTS" subtitle="DISCOVER WHAT'S HAPPENING" />
+      <PageHero 
+        title="EVENTS" 
+        subtitle="DISCOVER WHAT'S HAPPENING" 
+        image="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2600&auto=format&fit=crop"
+      />
       <EventList />
       <Footer />
     </div>

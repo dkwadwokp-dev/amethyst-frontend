@@ -9,7 +9,11 @@ const ViewBookingPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope">
       <Header />
-      <PageHero title="BOOKING DETAILS" subtitle="REVIEW YOUR RESERVATION DETAILS" />
+      <PageHero 
+        title="BOOKING DETAILS" 
+        subtitle="REVIEW YOUR RESERVATION DETAILS" 
+        usePattern={true}
+      />
       
       <BookingDetailsCard />
       <BookingActions />

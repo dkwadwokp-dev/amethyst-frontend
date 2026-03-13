@@ -13,7 +13,7 @@ import Contact from "../features/homepage/ui/contact";
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-gray-900 font-manrope">
-      <Header />
+      <Header isTransparent />
       <Hero />
       <Intro />
       <Services />

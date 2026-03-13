@@ -6,7 +6,11 @@ const ContactFormSection = () => {
   return (
     <Section className="bg-white pt-24 pb-16">
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <ImagePlaceholder className="w-full h-full min-h-[600px] rounded-sm object-cover" src="https://images.pexels.com/photos/545041/pexels-photo-545041.jpeg?auto=compress&cs=tinysrgb&w=1200" text="CONTACT DESK" />
+        <ImagePlaceholder 
+          className="w-full h-full min-h-[600px] rounded-sm object-cover" 
+          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2600&auto=format&fit=crop" 
+          text="CONTACT DESK" 
+        />
         
         <div className="py-2 lg:px-8">
           <div className="mb-10">

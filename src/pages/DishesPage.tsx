@@ -11,7 +11,11 @@ const DishesPage = () => {
   return (
     <div className="min-h-screen bg-white font-manrope">
       <Header />
-      <PageHero title="DISHES" subtitle="SAVOR EXCEPTIONAL CULINARY EXPERIENCES" />
+      <PageHero 
+        title="DISHES" 
+        subtitle="SAVOR EXCEPTIONAL CULINARY EXPERIENCES" 
+        image="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=2600&auto=format&fit=crop"
+      />
       
       <div className="py-8">
         <DishCategory subtitle="MEALS" title="BREAKFAST" items={breakfastItems} />

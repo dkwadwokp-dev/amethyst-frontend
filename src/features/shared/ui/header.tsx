@@ -1,20 +1,55 @@
 import { NavLink, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Header = () => {
+interface HeaderProps {
+  isTransparent?: boolean;
+}
+
+const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = ['HOME', 'DINING', 'ROOMS', 'EVENTS', 'ABOUT US', 'CONTACT', 'BOOKINGS'];
   const getPath = (item: string) => item === 'HOME' ? '/' : item === 'CONTACT' ? '/contact' : item === 'DINING' ? '/dishes' : item === 'ROOMS' ? '/rooms' : item === 'EVENTS' ? '/events' : item === 'ABOUT US' ? '/about-us' : item === 'BOOKINGS' ? '/bookings' : '#';
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 
+  const isDark = initialTransparent && !isScrolled;
+
   return (
-    <header className="bg-white py-4 px-6 lg:px-12 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+    <header className={`py-4 px-6 lg:px-12 flex items-center justify-between left-0 right-0 z-50 transition-all duration-300 ${
+      initialTransparent ? 'fixed top-0' : 'sticky top-0'
+    } ${
+      isDark ? 'bg-transparent' : 'bg-white shadow-sm'
+    }`}>
       <div className="flex items-center gap-3">
-        <Link to="/" className="w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center text-white text-[10px] font-bold z-50" onClick={closeMenu}>LOGO</Link>
-        <Link to="/" className="font-bold text-lg tracking-widest text-gray-900 z-50" onClick={closeMenu}>AH HOTEL</Link>
+        <Link 
+          to="/" 
+          className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold z-50 transition-colors ${
+            isDark ? 'bg-white text-black' : 'bg-gray-900 text-white'
+          }`}
+          onClick={closeMenu}
+        >
+          LOGO
+        </Link>
+        <Link 
+          to="/" 
+          className={`font-bold text-lg tracking-widest z-50 transition-colors ${
+            isDark ? 'text-white' : 'text-gray-900'
+          }`} 
+          onClick={closeMenu}
+        >
+          AH HOTEL
+        </Link>
       </div>
       
       {/* Desktop Navigation */}
@@ -28,8 +63,8 @@ const Header = () => {
               className={({ isActive }) => 
                 `text-[11px] font-bold tracking-widest uppercase transition-all pb-1 ${
                   isActive && path !== '#'
-                    ? 'text-[#0021B3] border-b-[1.5px] border-[#0021B3]' 
-                    : 'text-gray-500 hover:text-[#0021B3]'
+                    ? (isDark ? 'text-white border-b-[1.5px] border-white' : 'text-[#0021B3] border-b-[1.5px] border-[#0021B3]') 
+                    : (isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-[#0021B3]')
                 }`
               }
             >
@@ -44,9 +79,9 @@ const Header = () => {
           to="/check-booking" 
           className={({ isActive }) => 
             `text-[10px] font-bold tracking-widest uppercase pb-0.5 transition-all border-b ${
-              isActive 
-                ? 'text-[#0021B3] border-[#0021B3] border-b-2' 
-                : 'text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]'
+              isDark 
+                ? (isActive ? 'text-white border-white border-b-2' : 'text-white/80 hover:text-white border-white/40 hover:border-white')
+                : (isActive ? 'text-[#0021B3] border-[#0021B3] border-b-2' : 'text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]')
             }`
           }
         >
@@ -56,7 +91,9 @@ const Header = () => {
 
       {/* Mobile Menu Toggle Button */}
       <button 
-        className="lg:hidden z-50 p-2 text-gray-900 focus:outline-none"
+        className={`lg:hidden z-50 p-2 focus:outline-none transition-colors ${
+          isDark ? 'text-white' : 'text-gray-900'
+        }`}
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle Menu"
       >
