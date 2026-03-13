@@ -8,7 +8,7 @@ interface PageHeroProps {
 const PageHero = ({ title, subtitle, image, usePattern }: PageHeroProps) => {
   return (
     <div
-      className="relative bg-[#0a0a0a] py-20 md:py-32 text-center px-6 bg-cover bg-center overflow-hidden"
+      className="relative bg-[#0a0a0a] py-12 md:py-32 text-center px-6 bg-cover bg-center overflow-hidden"
       style={image ? { backgroundImage: `url('${image}')` } : {}}
     >
       {/* Balanced Dark Overlay */}
@@ -26,7 +26,7 @@ const PageHero = ({ title, subtitle, image, usePattern }: PageHeroProps) => {
       )}
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-marcellus text-white mb-6 uppercase tracking-wider leading-tight">
+        <h1 className="text-4xl md:text-7xl font-marcellus text-white mb-6 uppercase tracking-wider leading-tight">
           {title}
         </h1>
         <div className="flex items-center justify-center gap-4 mb-2">

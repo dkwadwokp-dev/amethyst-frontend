@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CheckBookingForm = () => {
   return (
     <Section className="bg-[#F8F9FA] py-24 flex items-center justify-center">
-      <div className="bg-white w-full mx-auto max-w-2xl px-8 py-14 shadow-sm text-center flex flex-col items-center">
+      <div className="bg-white w-full mx-auto max-w-2xl px-6 md:px-8 py-8 md:py-14 shadow-sm text-center flex flex-col items-center">
         <Ticket className="w-8 h-8 text-gray-400 mb-6" />
         <h2 className="text-3xl font-marcellus text-gray-900 mb-4">
           Check Your Booking

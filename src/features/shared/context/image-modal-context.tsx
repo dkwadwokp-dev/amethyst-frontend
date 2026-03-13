@@ -157,7 +157,7 @@ const ImageModal = ({
           <img
             src={src}
             alt={alt}
-            className="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm"
+            className="max-w-full max-h-[85vh] object-contain shadow-2xl "
             onDoubleClick={handleResetZoom}
           />
         </div>

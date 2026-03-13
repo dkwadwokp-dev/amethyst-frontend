@@ -7,7 +7,7 @@ const About = () => {
     <Section className="bg-white">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <ImagePlaceholder
-          className="w-full aspect-[4/3] rounded-sm shadow-xl"
+          className="w-full aspect-[4/3]  shadow-xl"
           text="ABOUT HOTEL"
           src="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=1200"
         />
@@ -19,7 +19,12 @@ const About = () => {
             alignment="left"
           />
           <p className="text-gray-600 text-sm leading-relaxed">
-            At AH Hotel, we redefine the meaning of a luxury stay. Balancing sophisticated modern architecture with warm, Afrocentric hospitality, we create an environment that feels both expansive and intimately familiar. Whether you are seeking a peaceful retreat or a dynamic workspace, our dedicated team is committed to making your stay profoundly memorable. Step into comfort, step into AH Hotel.
+            At AH Hotel, we redefine the meaning of a luxury stay. Balancing
+            sophisticated modern architecture with warm, Afrocentric
+            hospitality, we create an environment that feels both expansive and
+            intimately familiar. Whether you are seeking a peaceful retreat or a
+            dynamic workspace, our dedicated team is committed to making your
+            stay profoundly memorable. Step into comfort, step into AH Hotel.
           </p>
 
           <div className="grid grid-cols-4 gap-4 py-6 border-y border-gray-100">

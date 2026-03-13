@@ -5,6 +5,7 @@ import { rooms } from "../features/rooms/data/rooms";
 import { ImagePlaceholder } from "../features/shared/ui/image-placeholder";
 import { Button } from "../features/shared/ui/button";
 import { ChevronLeft, Info, CheckCircle2 } from "lucide-react";
+import { Section } from "../features/shared/ui/section";
 
 const SingleRoomPage = () => {
   const { roomId } = useParams();
@@ -52,7 +53,7 @@ const SingleRoomPage = () => {
         </div>
 
         {/* Room Header Gallery */}
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 py-12">
+        <Section className="py-12">
           <div className="mb-10 text-center space-y-4">
             <div className="text-[10px] tracking-widest text-gray-600 font-bold uppercase">
               LUXURY ACCOMMODATION
@@ -192,7 +193,7 @@ const SingleRoomPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Section>
       </div>
 
       <Footer />

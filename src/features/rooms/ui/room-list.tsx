@@ -1,17 +1,18 @@
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
+import { Section } from "../../shared/ui/section";
 
 import { rooms } from "../data/rooms";
 
 const RoomList = () => {
   return (
-    <div className="bg-[#F8F9FA] py-16">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12 space-y-6">
+    <Section className="bg-[#F8F9FA]">
+      <div className="space-y-6">
         {rooms.map((room) => (
           <div
             key={room.id}
-            className="bg-white p-6 flex flex-col md:flex-row gap-8 shadow-sm items-center"
+            className="bg-white p-4 md:p-6 flex flex-col md:flex-row gap-8 shadow-sm items-center"
           >
             <div className="w-full md:w-[35%] shrink-0">
               <ImagePlaceholder className="w-full h-56 min-h-[220px]" src={room.leadImage} text={room.title} />
@@ -57,7 +58,7 @@ const RoomList = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Section>
   );
 };
 

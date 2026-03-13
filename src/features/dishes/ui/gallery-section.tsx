@@ -1,5 +1,6 @@
 import { useImageModal } from "../../shared/context/image-modal-context";
 import { Maximize2 } from "lucide-react";
+import { Section } from "../../shared/ui/section";
 
 const GallerySection = () => {
   const { openModal } = useImageModal();
@@ -23,12 +24,12 @@ const GallerySection = () => {
   ];
 
   return (
-    <div className="py-8 md:py-16 px-4">
-      <div className="max-w-6xl mx-auto mb-8 md:mb-12 text-center">
+    <Section className="py-8 md:py-16">
+      <div className="mb-8 md:mb-12 text-center">
         <span className="text-amber-600 font-medium tracking-widest text-sm uppercase block mb-1">Our Gallery</span>
         <h2 className="text-3xl md:text-5xl font-light text-neutral-900 tracking-tight">SIGNATURE CREATIONS</h2>
       </div>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[300px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[300px]">
         {/* Large item top left */}
         <div 
           className="relative overflow-hidden group md:col-span-2 cursor-pointer"
@@ -109,7 +110,7 @@ const GallerySection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 };
 

@@ -1,6 +1,6 @@
-import { NavLink, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -14,91 +14,128 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ['HOME', 'DINING', 'ROOMS', 'EVENTS', 'ABOUT US', 'CONTACT', 'BOOKINGS'];
-  const getPath = (item: string) => item === 'HOME' ? '/' : item === 'CONTACT' ? '/contact' : item === 'DINING' ? '/dishes' : item === 'ROOMS' ? '/rooms' : item === 'EVENTS' ? '/events' : item === 'ABOUT US' ? '/about-us' : item === 'BOOKINGS' ? '/bookings' : '#';
+  const navItems = [
+    "HOME",
+    "DINING",
+    "ROOMS",
+    "EVENTS",
+    "ABOUT US",
+    "CONTACT",
+    "BOOKINGS",
+  ];
+  const getPath = (item: string) =>
+    item === "HOME"
+      ? "/"
+      : item === "CONTACT"
+        ? "/contact"
+        : item === "DINING"
+          ? "/dishes"
+          : item === "ROOMS"
+            ? "/rooms"
+            : item === "EVENTS"
+              ? "/events"
+              : item === "ABOUT US"
+                ? "/about-us"
+                : item === "BOOKINGS"
+                  ? "/bookings"
+                  : "#";
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 
   const isDark = initialTransparent && !isScrolled;
 
   return (
-    <header className={`py-4 px-4 lg:px-12 flex items-center justify-between left-0 right-0 z-50 transition-all duration-300 ${
-      initialTransparent ? 'fixed top-0' : 'sticky top-0'
-    } ${
-      isDark ? 'bg-transparent' : 'bg-white shadow-sm'
-    }`}>
-      <div className="flex items-center gap-3">
-        <Link 
-          to="/" 
-          className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold z-50 transition-colors ${
-            isDark ? 'bg-white text-black' : 'bg-gray-900 text-white'
-          }`}
-          onClick={closeMenu}
-        >
-          LOGO
-        </Link>
-        <Link 
-          to="/" 
-          className={`font-bold text-lg tracking-widest z-50 transition-colors ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`} 
-          onClick={closeMenu}
-        >
-          AH HOTEL
-        </Link>
-      </div>
-      
-      {/* Desktop Navigation */}
-      <nav className="hidden lg:flex items-center gap-8">
-        {navItems.map((item) => {
-          const path = getPath(item);
-          return (
-            <NavLink 
-              key={item} 
-              to={path} 
-              className={({ isActive }) => 
-                `text-[11px] font-bold tracking-widest uppercase transition-all pb-1 ${
-                  isActive && path !== '#'
-                    ? (isDark ? 'text-white border-b-[1.5px] border-white' : 'text-[#0021B3] border-b-[1.5px] border-[#0021B3]') 
-                    : (isDark ? 'text-white/70 hover:text-white' : 'text-gray-500 hover:text-[#0021B3]')
-                }`
-              }
-            >
-              {item}
-            </NavLink>
-          );
-        })}
-      </nav>
-      
-      <div className="hidden lg:block">
-        <NavLink 
-          to="/check-booking" 
-          className={({ isActive }) => 
-            `text-[10px] font-bold tracking-widest uppercase pb-0.5 transition-all border-b ${
-              isDark 
-                ? (isActive ? 'text-white border-white border-b-2' : 'text-white/80 hover:text-white border-white/40 hover:border-white')
-                : (isActive ? 'text-[#0021B3] border-[#0021B3] border-b-2' : 'text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]')
-            }`
-          }
-        >
-          Check Booking
-        </NavLink>
-      </div>
+    <header
+      className={`py-4 px-4 md:px-12 left-0 right-0 z-50 transition-all duration-300 ${
+        initialTransparent ? "fixed top-0" : "sticky top-0"
+      } ${isDark ? "bg-transparent" : "bg-white shadow-sm"}`}
+    >
+      <div className="max-w-8xl mx-auto w-full flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Link
+            to="/"
+            className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold z-50 transition-colors ${
+              isDark ? "bg-white text-black" : "bg-gray-900 text-white"
+            }`}
+            onClick={closeMenu}
+          >
+            LOGO
+          </Link>
+          <Link
+            to="/"
+            className={`font-bold text-lg tracking-widest z-50 transition-colors ${
+              isDark ? "text-white" : "text-gray-900"
+            }`}
+            onClick={closeMenu}
+          >
+            AH HOTEL
+          </Link>
+        </div>
 
-      {/* Mobile Menu Toggle Button */}
-      <button 
-        className={`lg:hidden z-50 p-2 focus:outline-none transition-colors ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle Menu"
-      >
-        {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-      </button>
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navItems.map((item) => {
+            const path = getPath(item);
+            return (
+              <NavLink
+                key={item}
+                to={path}
+                className={({ isActive }) =>
+                  `text-[11px] font-bold tracking-widest uppercase transition-all pb-1 ${
+                    isActive && path !== "#"
+                      ? isDark
+                        ? "text-white border-b-[1.5px] border-white"
+                        : "text-[#0021B3] border-b-[1.5px] border-[#0021B3]"
+                      : isDark
+                        ? "text-white/70 hover:text-white"
+                        : "text-gray-500 hover:text-[#0021B3]"
+                  }`
+                }
+              >
+                {item}
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        <div className="hidden lg:block">
+          <NavLink
+            to="/check-booking"
+            className={({ isActive }) =>
+              `text-[10px] font-bold tracking-widest uppercase pb-0.5 transition-all border-b ${
+                isDark
+                  ? isActive
+                    ? "text-white border-white border-b-2"
+                    : "text-white/80 hover:text-white border-white/40 hover:border-white"
+                  : isActive
+                    ? "text-[#0021B3] border-[#0021B3] border-b-2"
+                    : "text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]"
+              }`
+            }
+          >
+            Check Booking
+          </NavLink>
+        </div>
+
+        {/* Mobile Menu Toggle Button */}
+        <button
+          className={`lg:hidden z-50 p-2 focus:outline-none transition-colors ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
+        </button>
+      </div>
 
       {/* Mobile Navigation Overlay */}
       {isMobileMenuOpen && (
@@ -106,10 +143,14 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
           {/* Menu Header */}
           <div className="flex justify-between items-center py-4 px-6 border-b border-white/5">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-[10px] font-bold">LOGO</div>
-              <span className="font-bold text-lg tracking-widest text-white">AH HOTEL</span>
+              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-[10px] font-bold">
+                LOGO
+              </div>
+              <span className="font-bold text-lg tracking-widest text-white">
+                AH HOTEL
+              </span>
             </div>
-            <button 
+            <button
               className="p-2 text-white/70 hover:text-white transition-colors"
               onClick={closeMenu}
             >
@@ -122,17 +163,21 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
               {navItems.map((item, index) => {
                 const path = getPath(item);
                 return (
-                  <NavLink 
-                    key={item} 
-                    to={path} 
+                  <NavLink
+                    key={item}
+                    to={path}
                     onClick={closeMenu}
-                    className={({ isActive }) => 
+                    className={({ isActive }) =>
                       `text-3xl md:text-5xl font-marcellus tracking-tight transition-all duration-500 transform ${
-                        index === 0 ? "delay-[100ms]" : index === 1 ? "delay-[150ms]" : "delay-[200ms]"
+                        index === 0
+                          ? "delay-[100ms]"
+                          : index === 1
+                            ? "delay-[150ms]"
+                            : "delay-[200ms]"
                       } animate-in slide-in-from-bottom-4 fade-in ${
-                        isActive && path !== '#'
-                          ? 'text-white' 
-                          : 'text-white/40 hover:text-white'
+                        isActive && path !== "#"
+                          ? "text-white"
+                          : "text-white/40 hover:text-white"
                       }`
                     }
                   >
@@ -140,17 +185,17 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
                   </NavLink>
                 );
               })}
-              
+
               <div className="w-12 h-px bg-white/10 my-8 animate-in zoom-in-0 duration-700 delay-500"></div>
-              
-              <NavLink 
-                to="/check-booking" 
+
+              <NavLink
+                to="/check-booking"
                 onClick={closeMenu}
-                className={({ isActive }) => 
+                className={({ isActive }) =>
                   `text-sm font-manrope font-bold tracking-[0.3em] uppercase pb-2 transition-all border-b animate-in slide-in-from-bottom-2 fade-in delay-700 ${
-                    isActive 
-                      ? 'text-primary border-primary' 
-                      : 'text-white/60 hover:text-white border-transparent'
+                    isActive
+                      ? "text-primary border-primary"
+                      : "text-white/60 hover:text-white border-transparent"
                   }`
                 }
               >
@@ -162,15 +207,23 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
           {/* Social / Contact Footer */}
           <div className="p-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-1000">
             <div className="flex gap-8">
-              {['INSTAGRAM', 'FACEBOOK', 'LINKEDIN'].map((social) => (
-                <a key={social} href="#" className="text-[10px] font-bold tracking-[0.2em] text-white/40 hover:text-primary transition-colors">
+              {["INSTAGRAM", "FACEBOOK", "LINKEDIN"].map((social) => (
+                <a
+                  key={social}
+                  href="#"
+                  className="text-[10px] font-bold tracking-[0.2em] text-white/40 hover:text-primary transition-colors"
+                >
                   {social}
                 </a>
               ))}
             </div>
             <div className="text-center md:text-right">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase mb-2">RESERVATIONS</p>
-              <p className="text-white font-manrope text-sm">+234 800 123 4567</p>
+              <p className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase mb-2">
+                RESERVATIONS
+              </p>
+              <p className="text-white font-manrope text-sm">
+                +234 800 123 4567
+              </p>
             </div>
           </div>
         </div>

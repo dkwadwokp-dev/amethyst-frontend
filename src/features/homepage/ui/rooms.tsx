@@ -20,7 +20,7 @@ const Rooms = () => {
           <div
             key={room.id}
             data-cursor-text="VIEW"
-            className="bg-white flex flex-col md:flex-row md:items-center shadow-sm group overflow-hidden"
+            className="bg-white md:px-2 flex flex-col md:flex-row md:items-center shadow-sm group overflow-hidden"
           >
             {/* Image Container */}
             <div className="relative w-full md:w-72 h-64 md:h-48 flex-shrink-0 overflow-hidden">
@@ -30,14 +30,18 @@ const Rooms = () => {
                 src={room.leadImage}
               />
               {/* Mobile Price Tag */}
-              <div className="absolute top-4 right-4 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2 rounded-sm shadow-xl z-10">
-                <div className="text-lg font-bold font-marcellus text-gray-900">${room.price}</div>
-                <div className="text-[7px] tracking-[0.2em] font-black text-gray-400 -mt-1 uppercase">Per Night</div>
+              <div className="absolute top-4 right-4 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2  shadow-xl z-10">
+                <div className="text-lg font-bold font-marcellus text-gray-900">
+                  ${room.price}
+                </div>
+                <div className="text-[7px] tracking-[0.2em] font-black text-gray-400 -mt-1 uppercase">
+                  Per Night
+                </div>
               </div>
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-6">
+            <div className="flex-1 p-4 md:p-8 flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-lg md:text-xl font-marcellus text-gray-900 uppercase tracking-wide">
@@ -45,20 +49,28 @@ const Rooms = () => {
                   </h3>
                   <div className="h-px w-8 bg-primary/20 hidden md:block"></div>
                 </div>
-                
+
                 <p className="text-gray-500 text-xs md:text-sm leading-relaxed mb-6 line-clamp-2 md:line-clamp-none">
                   {room.desc}
                 </p>
 
                 <div className="flex items-center gap-6">
                   <div className="flex flex-col gap-1">
-                    <span className="text-[8px] md:text-[9px] text-gray-400 font-bold tracking-widest uppercase">Bed Type</span>
-                    <span className="text-[10px] md:text-[11px] font-bold text-gray-700 uppercase tracking-wider">{room.bed}</span>
+                    <span className="text-[8px] md:text-[9px] text-gray-400 font-bold tracking-widest uppercase">
+                      Bed Type
+                    </span>
+                    <span className="text-[10px] md:text-[11px] font-bold text-gray-700 uppercase tracking-wider">
+                      {room.bed}
+                    </span>
                   </div>
                   <div className="h-8 w-px bg-gray-100"></div>
                   <div className="flex flex-col gap-1">
-                    <span className="text-[8px] md:text-[9px] text-gray-400 font-bold tracking-widest uppercase">Area</span>
-                    <span className="text-[10px] md:text-[11px] font-bold text-gray-700 uppercase tracking-wider">{room.size}</span>
+                    <span className="text-[8px] md:text-[9px] text-gray-400 font-bold tracking-widest uppercase">
+                      Area
+                    </span>
+                    <span className="text-[10px] md:text-[11px] font-bold text-gray-700 uppercase tracking-wider">
+                      {room.size}
+                    </span>
                   </div>
                 </div>
               </div>
