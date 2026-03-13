@@ -2,13 +2,34 @@ import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
 import { Section } from "../../shared/ui/section";
+import { Loading } from "../../shared/ui/loading";
 
-import { rooms } from "../data/rooms";
+import { useRooms } from "../actions/use-rooms";
 
 const RoomList = () => {
+  const { data: rooms, isLoading, isError } = useRooms();
+
+  if (isLoading) {
+    return (
+      <Section className="bg-[#F8F9FA] min-h-[50vh] flex items-center justify-center">
+        <Loading />
+      </Section>
+    );
+  }
+
+  if (isError || !rooms) {
+    return (
+      <Section className="bg-[#F8F9FA] min-h-[50vh] flex items-center justify-center">
+        <div className="text-center text-sm font-bold tracking-widest uppercase text-red-400">
+          Failed to load rooms
+        </div>
+      </Section>
+    );
+  }
+
   return (
-    <Section className="bg-[#F8F9FA]">
-      <div className="space-y-6">
+    <Section className="bg-[#F8F9FA] py-12 md:py-20">
+      <div className="space-y-6 md:space-y-8 max-w-5xl mx-auto">
         {rooms.map((room) => (
           <div
             key={room.id}

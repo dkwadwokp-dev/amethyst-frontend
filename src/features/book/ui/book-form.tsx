@@ -36,17 +36,21 @@ const BookForm = () => {
   const selectedDiningArea = watch("selectedDiningArea");
   const selectedTable = watch("selectedTable");
   const guests = watch("guests");
-  
+
   // Date/Time watchers (need careful handling since they can be undefined)
   const checkIn = activeTab === "room" ? (watch() as any).checkIn : null;
   const checkOut = activeTab === "room" ? (watch() as any).checkOut : null;
-  const diningDate = activeTab === "dining" ? (watch() as any).diningDate : null;
-  const diningTime = activeTab === "dining" ? (watch() as any).diningTime : null;
+  const diningDate =
+    activeTab === "dining" ? (watch() as any).diningDate : null;
+  const diningTime =
+    activeTab === "dining" ? (watch() as any).diningTime : null;
 
   // Sync instances when room type changes
   useEffect(() => {
     if (activeTab === "room" && selectedRoom) {
-      const newInstances = roomInstances.filter((inst) => inst.roomId === selectedRoom);
+      const newInstances = roomInstances.filter(
+        (inst) => inst.roomId === selectedRoom,
+      );
       if (newInstances.length > 0) {
         setValue("selectedInstance", newInstances[0].id);
       }
@@ -59,7 +63,9 @@ const BookForm = () => {
   // Sync tables when dining area changes
   useEffect(() => {
     if (activeTab === "dining" && selectedDiningArea) {
-      const newTables = tableInstances.filter((tbl) => tbl.areaId === selectedDiningArea);
+      const newTables = tableInstances.filter(
+        (tbl) => tbl.areaId === selectedDiningArea,
+      );
       if (newTables.length > 0) {
         setValue("selectedTable", newTables[0].id);
       }
@@ -69,24 +75,41 @@ const BookForm = () => {
     }
   }, [selectedDiningArea, activeTab, setValue]);
 
-  const availableInstances = roomInstances.filter((inst) => inst.roomId === selectedRoom);
-  const availableTables = tableInstances.filter((tbl) => tbl.areaId === selectedDiningArea);
+  const availableInstances = roomInstances.filter(
+    (inst) => inst.roomId === selectedRoom,
+  );
+  const availableTables = tableInstances.filter(
+    (tbl) => tbl.areaId === selectedDiningArea,
+  );
 
   const today = new Date();
-  const currentMonthName = today.toLocaleString("default", { month: "long" }).toUpperCase();
+  const currentMonthName = today
+    .toLocaleString("default", { month: "long" })
+    .toUpperCase();
   const currentYear = today.getFullYear();
   const monthLabel = `${currentMonthName} ${currentYear}`;
 
-  const daysInCurrentMonth = new Date(currentYear, today.getMonth() + 1, 0).getDate();
-  const calendarDays = Array.from({ length: daysInCurrentMonth }, (_, i) => i + 1);
+  const daysInCurrentMonth = new Date(
+    currentYear,
+    today.getMonth() + 1,
+    0,
+  ).getDate();
+  const calendarDays = Array.from(
+    { length: daysInCurrentMonth },
+    (_, i) => i + 1,
+  );
   const currentDay = today.getDate();
   const firstDayOfMonth = new Date(currentYear, today.getMonth(), 1).getDay();
 
-  const currentInstanceObj = roomInstances.find((i) => i.id === selectedInstance);
+  const currentInstanceObj = roomInstances.find(
+    (i) => i.id === selectedInstance,
+  );
   const currentBookedRanges = currentInstanceObj?.bookedDates || [];
 
   const currentTableObj = tableInstances.find((t) => t.id === selectedTable);
-  const tableDayBookings = currentTableObj?.bookings.find((b) => b.date === diningDate)?.bookedTimes || [];
+  const tableDayBookings =
+    currentTableObj?.bookings.find((b) => b.date === diningDate)?.bookedTimes ||
+    [];
 
   const isDayBooked = (day: number) => {
     return currentBookedRanges.some((r) => day >= r.start && day <= r.end);
@@ -138,7 +161,9 @@ const BookForm = () => {
 
   const onSubmit = (data: BookingFormData) => {
     console.log("Booking data:", data);
-    alert(`Thank you ${data.firstName}! Your booking request for ${data.type === 'room' ? 'a room' : 'a table'} has been received.`);
+    alert(
+      `Thank you ${data.firstName}! Your booking request for ${data.type === "room" ? "a room" : "a table"} has been received.`,
+    );
     reset();
   };
 
@@ -148,8 +173,8 @@ const BookForm = () => {
       <div className="flex w-full mb-8 border-b border-gray-100">
         <button
           onClick={() => {
-              setValue("type", "room");
-              setValue("selectedRoom", rooms[0].id);
+            setValue("type", "room");
+            setValue("selectedRoom", rooms[0].id);
           }}
           className={`w-1/2 py-6 flex items-center justify-center gap-3 border-t-2 transition-colors ${
             activeTab === "room"
@@ -164,8 +189,8 @@ const BookForm = () => {
         </button>
         <button
           onClick={() => {
-               setValue("type", "dining");
-               setValue("selectedDiningArea" as any, diningAreas[0].id);
+            setValue("type", "dining");
+            setValue("selectedDiningArea" as any, diningAreas[0].id);
           }}
           className={`w-1/2 py-6 flex items-center justify-center gap-3 border-t-2 transition-colors ${
             activeTab === "dining"
@@ -191,7 +216,9 @@ const BookForm = () => {
             </label>
             <div className="relative">
               <select
-                {...(activeTab === "room" ? register("selectedRoom") : register("selectedDiningArea" as any))}
+                {...(activeTab === "room"
+                  ? register("selectedRoom")
+                  : register("selectedDiningArea" as any))}
                 className="w-full appearance-none border border-gray-200 text-gray-900 text-sm p-4 rounded-none focus:outline-none focus:border-gray-900 bg-transparent"
               >
                 {activeTab === "room" ? (
@@ -222,7 +249,9 @@ const BookForm = () => {
             </label>
             <div className="relative">
               <select
-                {...(activeTab === "room" ? register("selectedInstance") : register("selectedTable" as any))}
+                {...(activeTab === "room"
+                  ? register("selectedInstance")
+                  : register("selectedTable" as any))}
                 className="w-full appearance-none border border-gray-200 text-gray-900 text-sm p-4 rounded-none focus:outline-none focus:border-gray-900 bg-transparent"
               >
                 {activeTab === "room"
@@ -243,7 +272,9 @@ const BookForm = () => {
         </div>
 
         {/* Date / Calendar Picker */}
-        <div className={`border ${errors.type === 'room' ? ((errors as any).checkIn || (errors as any).checkOut ? 'border-primary' : 'border-gray-100') : ((errors as any).diningDate ? 'border-primary' : 'border-gray-100')} p-4`}>
+        <div
+          className={`border ${activeTab === "room" ? ((errors as any).checkIn || (errors as any).checkOut ? "border-red-400" : "border-gray-100") : (errors as any).diningDate ? "border-red-400" : "border-gray-100"} p-4`}
+        >
           <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
             <span className="text-xs font-bold font-manrope text-gray-900 flex items-center gap-2">
               <CalendarDays className="w-4 h-4 text-gray-400" />
@@ -291,13 +322,17 @@ const BookForm = () => {
               );
             })}
           </div>
-          {activeTab === "room" && ((errors as any).checkIn || (errors as any).checkOut) && (
+          {activeTab === "room" &&
+            ((errors as any).checkIn || (errors as any).checkOut) && (
               <p className="text-[10px] text-primary font-bold mt-2">
-                  {(errors as any).checkIn?.message || (errors as any).checkOut?.message}
+                {(errors as any).checkIn?.message ||
+                  (errors as any).checkOut?.message}
               </p>
-          )}
+            )}
           {activeTab === "dining" && (errors as any).diningDate && (
-              <p className="text-[10px] text-primary font-bold mt-2">{(errors as any).diningDate.message}</p>
+            <p className="text-[10px] text-primary font-bold mt-2">
+              {(errors as any).diningDate.message}
+            </p>
           )}
         </div>
 
@@ -318,7 +353,11 @@ const BookForm = () => {
                     key={hour}
                     type="button"
                     disabled={isTimeBooked}
-                    onClick={() => setValue("diningTime" as any, hour, { shouldValidate: true })}
+                    onClick={() =>
+                      setValue("diningTime" as any, hour, {
+                        shouldValidate: true,
+                      })
+                    }
                     className={`py-3 text-xs font-semibold border transition-colors ${
                       isTimeBooked
                         ? "bg-gray-50 border-gray-100 text-gray-300 cursor-not-allowed"
@@ -337,7 +376,9 @@ const BookForm = () => {
               })}
             </div>
             {(errors as any).diningTime && (
-              <p className="text-[10px] text-primary font-bold mt-2">{(errors as any).diningTime.message}</p>
+              <p className="text-[10px] text-primary font-bold mt-2">
+                {(errors as any).diningTime.message}
+              </p>
             )}
           </div>
         )}
@@ -364,7 +405,9 @@ const BookForm = () => {
             ))}
           </div>
           {errors.guests && (
-              <p className="text-[10px] text-primary font-bold mt-2">{errors.guests.message}</p>
+            <p className="text-[10px] text-primary font-bold mt-2">
+              {errors.guests.message}
+            </p>
           )}
         </div>
 
@@ -377,11 +420,13 @@ const BookForm = () => {
             <input
               {...register("firstName")}
               type="text"
-              className={`w-full border-b ${errors.firstName ? 'border-primary' : 'border-gray-200'} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
+              className={`w-full border-b ${errors.firstName ? "border-primary" : "border-gray-200"} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
               placeholder="e.g. Jane"
             />
             {errors.firstName && (
-                <p className="text-[10px] text-primary font-bold mt-1">{errors.firstName.message}</p>
+              <p className="text-[10px] text-primary font-bold mt-1">
+                {errors.firstName.message}
+              </p>
             )}
           </div>
           <div>
@@ -391,11 +436,13 @@ const BookForm = () => {
             <input
               {...register("lastName")}
               type="text"
-              className={`w-full border-b ${errors.lastName ? 'border-primary' : 'border-gray-200'} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
+              className={`w-full border-b ${errors.lastName ? "border-primary" : "border-gray-200"} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
               placeholder="e.g. Doe"
             />
             {errors.lastName && (
-                <p className="text-[10px] text-primary font-bold mt-1">{errors.lastName.message}</p>
+              <p className="text-[10px] text-primary font-bold mt-1">
+                {errors.lastName.message}
+              </p>
             )}
           </div>
           <div className="md:col-span-2 mt-4">
@@ -405,11 +452,13 @@ const BookForm = () => {
             <input
               {...register("email")}
               type="email"
-              className={`w-full border-b ${errors.email ? 'border-primary' : 'border-gray-200'} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
+              className={`w-full border-b ${errors.email ? "border-primary" : "border-gray-200"} p-2 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300`}
               placeholder="jane.doe@example.com"
             />
             {errors.email && (
-                <p className="text-[10px] text-primary font-bold mt-1">{errors.email.message}</p>
+              <p className="text-[10px] text-primary font-bold mt-1">
+                {errors.email.message}
+              </p>
             )}
           </div>
         </div>
@@ -422,9 +471,11 @@ const BookForm = () => {
             disabled={isSubmitting}
             className="w-full bg-primary hover:bg-black text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none disabled:opacity-50"
           >
-            {isSubmitting ? "PROCESSING..." : (activeTab === "room"
-              ? "COMPLETE BOOKING REQUEST"
-              : "RESERVE TABLE")}
+            {isSubmitting
+              ? "PROCESSING..."
+              : activeTab === "room"
+                ? "COMPLETE BOOKING REQUEST"
+                : "RESERVE TABLE"}
           </Button>
         </div>
       </form>
@@ -433,4 +484,3 @@ const BookForm = () => {
 };
 
 export default BookForm;
-

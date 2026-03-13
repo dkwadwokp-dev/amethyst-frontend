@@ -3,29 +3,28 @@ import { Section } from "../../shared/ui/section";
 import { SectionHeading } from "../../shared/ui/section-heading";
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { Button } from "../../shared/ui/button";
-
-interface DishItem {
-  id: string | number;
-  name: string;
-  price: string;
-  desc: string;
-  image?: string;
-}
+import {
+  useDishCategory,
+  type DishCategoryType,
+} from "../actions/use-dish-category";
+import { Loading } from "../../shared/ui/loading";
+import type { DishItem } from "../interfaces/dish.interface";
 
 interface DishCategoryProps {
   subtitle: string;
   title: string;
-  items: DishItem[];
+  category: DishCategoryType;
 }
 
-const DishCategory = ({ subtitle, title, items }: DishCategoryProps) => {
+const DishCategory = ({ subtitle, title, category }: DishCategoryProps) => {
+  const { data: items, isLoading, isError } = useDishCategory(category);
   const [visibleCount, setVisibleCount] = useState(4);
 
   const handleLoadMore = () => {
-    setVisibleCount(items.length); // Show all items
+    if (items) setVisibleCount(items.length); // Show all items
   };
 
-  const hasMore = items.length > visibleCount;
+  const hasMore = items ? items.length > visibleCount : false;
 
   return (
     <Section className="bg-white py-8 md:py-12">
@@ -34,38 +33,49 @@ const DishCategory = ({ subtitle, title, items }: DishCategoryProps) => {
         title={title}
         className="mb-8 md:mb-12"
       />
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
-        {items.slice(0, visibleCount).map((item) => (
-          <div key={item.id} className="flex flex-col">
-            <ImagePlaceholder
-              className="w-full aspect-square mb-3 md:mb-6  object-cover"
-              src={item.image}
-              text={item.name}
-            />
-            <div className="flex justify-between items-start mb-2">
-              <h4 className="font-bold text-[9px] md:text-[11px] uppercase tracking-widest text-gray-900 line-clamp-1">
-                {item.name}
-              </h4>
-              <span className="font-bold text-[9px] md:text-[11px] text-gray-900 ml-1">
-                {item.price}
-              </span>
-            </div>
-            <p className="text-[9px] md:text-[11px] text-gray-500 leading-relaxed pr-2 line-clamp-2">
-              {item.desc}
-            </p>
-          </div>
-        ))}
-      </div>
-      {hasMore && (
-        <div className="text-center transition-all">
-          <Button
-            variant="primary"
-            onClick={handleLoadMore}
-            className="bg-black text-white hover:bg-gray-800 text-[10px] tracking-widest px-10 py-3 rounded-none border-none shadow-none"
-          >
-            LOAD MORE
-          </Button>
+
+      {isLoading ? (
+        <Loading className="py-12" />
+      ) : isError || !items ? (
+        <div className="text-center py-10 text-red-500 font-marcellus tracking-wider text-sm">
+          Failed to load {title.toLowerCase()} menu.
         </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
+            {items.slice(0, visibleCount).map((item: DishItem) => (
+              <div key={item.id} className="flex flex-col">
+                <ImagePlaceholder
+                  className="w-full aspect-square mb-3 md:mb-6  object-cover"
+                  src={item.image}
+                  text={item.name}
+                />
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-bold text-[9px] md:text-[11px] uppercase tracking-widest text-gray-900 line-clamp-1">
+                    {item.name}
+                  </h4>
+                  <span className="font-bold text-[9px] md:text-[11px] text-gray-900 ml-1">
+                    {item.price}
+                  </span>
+                </div>
+                <p className="text-[9px] md:text-[11px] text-gray-500 leading-relaxed pr-2 line-clamp-2">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          {hasMore && (
+            <div className="text-center transition-all">
+              <Button
+                variant="primary"
+                onClick={handleLoadMore}
+                className="bg-black text-white hover:bg-gray-800 text-[10px] tracking-widest px-10 py-3 rounded-none border-none shadow-none"
+              >
+                LOAD MORE
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </Section>
   );
