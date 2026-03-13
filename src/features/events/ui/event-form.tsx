@@ -148,7 +148,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
               type="button"
               onClick={addTicket}
               variant="ghost"
-              className="text-[10px] tracking-widest flex items-center gap-1 text-[#0021B3]"
+              className="text-[10px] tracking-widest flex items-center gap-1 text-primary"
             >
               <Plus className="w-3 h-3" /> ADD TICKET
             </Button>

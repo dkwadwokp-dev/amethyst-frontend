@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Logo from "./logo";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -55,26 +56,9 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
       } ${isDark ? "bg-transparent" : "bg-white shadow-sm"}`}
     >
       <div className="max-w-8xl mx-auto w-full flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link
-            to="/"
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold z-50 transition-colors ${
-              isDark ? "bg-white text-black" : "bg-gray-900 text-white"
-            }`}
-            onClick={closeMenu}
-          >
-            LOGO
-          </Link>
-          <Link
-            to="/"
-            className={`font-bold text-lg tracking-widest z-50 transition-colors ${
-              isDark ? "text-white" : "text-gray-900"
-            }`}
-            onClick={closeMenu}
-          >
-            AH HOTEL
-          </Link>
-        </div>
+        <Link to="/" onClick={closeMenu}>
+          <Logo variant={isDark ? "light" : "dark"} />
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
@@ -87,12 +71,10 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
                 className={({ isActive }) =>
                   `text-[11px] font-bold tracking-widest uppercase transition-all pb-1 ${
                     isActive && path !== "#"
-                      ? isDark
-                        ? "text-white border-b-[1.5px] border-white"
-                        : "text-[#0021B3] border-b-[1.5px] border-[#0021B3]"
+                      ? "text-primary border-b-[1.5px] border-primary"
                       : isDark
                         ? "text-white/70 hover:text-white"
-                        : "text-gray-500 hover:text-[#0021B3]"
+                        : "text-gray-500 hover:text-primary"
                   }`
                 }
               >
@@ -109,11 +91,11 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
               `text-[10px] font-bold tracking-widest uppercase pb-0.5 transition-all border-b ${
                 isDark
                   ? isActive
-                    ? "text-white border-white border-b-2"
+                    ? "text-primary border-primary border-b-2"
                     : "text-white/80 hover:text-white border-white/40 hover:border-white"
                   : isActive
-                    ? "text-[#0021B3] border-[#0021B3] border-b-2"
-                    : "text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]"
+                    ? "text-primary border-primary border-b-2"
+                    : "text-gray-900 hover:text-primary border-gray-900 hover:border-primary"
               }`
             }
           >
@@ -142,14 +124,9 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
         <div className="fixed inset-0 bg-[#0a0a0a] z-[60] flex flex-col lg:hidden overflow-y-auto">
           {/* Menu Header */}
           <div className="flex justify-between items-center py-4 px-6 border-b border-white/5">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-[10px] font-bold">
-                LOGO
-              </div>
-              <span className="font-bold text-lg tracking-widest text-white">
-                AH HOTEL
-              </span>
-            </div>
+            <Link to="/" onClick={closeMenu}>
+              <Logo variant="light" />
+            </Link>
             <button
               className="p-2 text-white/70 hover:text-white transition-colors"
               onClick={closeMenu}
@@ -176,7 +153,7 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
                             : "delay-[200ms]"
                       } animate-in slide-in-from-bottom-4 fade-in ${
                         isActive && path !== "#"
-                          ? "text-white"
+                          ? "text-primary"
                           : "text-white/40 hover:text-white"
                       }`
                     }

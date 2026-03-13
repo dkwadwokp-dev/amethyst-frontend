@@ -47,7 +47,7 @@ const AdminLoginForm = () => {
           <Link to="/bookings" className="block w-full">
             <Button
               variant="primary"
-              className="w-full bg-primary hover:bg-blue-800 text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-[0_4px_14px_0_rgba(0,33,179,0.25)] hover:shadow-[0_6px_20px_rgba(0,33,179,0.3)] transition-all"
+              className="w-full bg-primary hover:opacity-90 text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-sm transition-all"
             >
               LOGIN TO DASHBOARD
             </Button>

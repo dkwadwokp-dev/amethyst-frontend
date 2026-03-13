@@ -87,13 +87,13 @@ const StyleGuide = () => {
             <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 font-marcellus">Color Palette</h3>
             <p className="text-lg text-gray-600 leading-relaxed">
               Our color system is designed to evoke trust, modern hospitality, and elegant simplicity. 
-              The primary blue anchors the precise nature of the brand, while warm accents provide an inviting touch.
+              The rich restaurant red anchors the warm nature of the brand, while elegant accents provide a premium touch.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <ColorCard name="Primary" hex="#0021B3" varName="primary" labelColor="text-white" />
-            <ColorCard name="Secondary" hex="#60A5FA" varName="secondary" labelColor="text-white" />
+            <ColorCard name="Primary" hex="#941B1B" varName="primary" labelColor="text-white" />
+            <ColorCard name="Secondary" hex="#C2410C" varName="secondary" labelColor="text-white" />
             <ColorCard name="Accent" hex="#D9D2C2" varName="accent" labelColor="text-gray-900" />
             <ColorCard name="Dark" hex="#62412E" varName="dark" labelColor="text-white" />
             <ColorCard name="Light" hex="#FFFFFF" varName="light" labelColor="text-gray-900" />
@@ -195,7 +195,7 @@ const StyleGuide = () => {
               
               <div className="grid grid-cols-2 gap-6">
                 <ButtonDisplay variant="Primary" description="Main call to action">
-                  <button className="bg-primary text-white px-8 py-3.5 rounded-[4px] font-semibold text-sm tracking-wide shadow-[0_4px_14px_0_rgba(0,33,179,0.39)] hover:shadow-[0_6px_20px_rgba(0,33,179,0.23)] hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2 cursor-pointer">
+                  <button className="bg-primary text-white px-8 py-3.5 rounded-[4px] font-semibold text-sm tracking-wide shadow-sm hover:opacity-90 hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2 cursor-pointer">
                     Book Now <FaArrowRight className="w-3 h-3" />
                   </button>
                 </ButtonDisplay>
@@ -213,7 +213,7 @@ const StyleGuide = () => {
                 </ButtonDisplay>
 
                 <ButtonDisplay variant="Secondary Solid" description="Muted actions">
-                  <button className="bg-secondary text-white px-8 py-3.5 rounded-[4px] font-semibold text-sm tracking-wide shadow-sm hover:bg-blue-500 transition-colors duration-200 cursor-pointer">
+                  <button className="bg-secondary text-white px-8 py-3.5 rounded-[4px] font-semibold text-sm tracking-wide shadow-sm hover:opacity-90 transition-colors duration-200 cursor-pointer">
                     Check Info
                   </button>
                 </ButtonDisplay>
@@ -332,8 +332,8 @@ const StyleGuide = () => {
 
                 {/* Socials */}
                 <FaInstagram className="w-8 h-8 text-[#E1306C] hover:scale-110 transition-transform cursor-pointer" />
-                <FaLinkedin className="w-8 h-8 text-[#0A66C2] hover:scale-110 transition-transform cursor-pointer" />
-                <FaFacebook className="w-8 h-8 text-[#0866FF] hover:scale-110 transition-transform cursor-pointer" />
+                <FaLinkedin className="w-8 h-8 text-gray-700 hover:text-primary hover:scale-110 transition-transform cursor-pointer" />
+                <FaFacebook className="w-8 h-8 text-gray-700 hover:text-primary hover:scale-110 transition-transform cursor-pointer" />
                 <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center hover:scale-110 transition-transform cursor-pointer mt-4">
                   <FaXTwitter className="w-4 h-4 text-white" />
                 </div>

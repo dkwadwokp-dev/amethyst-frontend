@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import Logo from "./logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,13 +9,8 @@ const Footer = () => {
     <footer className="bg-[#2A2E33] text-gray-300 md:pt-16 py-8 px-4 lg:px-12 font-manrope">
       <div className="mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
         <div className="col-span-2 lg:col-span-2">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-900 text-[10px] font-bold">
-              LOGO
-            </div>
-            <span className="font-bold text-lg tracking-widest text-white">
-              AH HOTEL
-            </span>
+          <div className="mb-8">
+            <Logo variant="light" />
           </div>
           <div className="space-y-6">
             <p className="text-sm leading-relaxed max-w-xl text-gray-400 md:w-9/10">
@@ -38,7 +34,7 @@ const Footer = () => {
               <NavLink
                 to="/about-us"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 About Us
@@ -48,7 +44,7 @@ const Footer = () => {
               <NavLink
                 to="/rooms"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 Rooms
@@ -58,7 +54,7 @@ const Footer = () => {
               <NavLink
                 to="/dishes"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 Dining
@@ -68,7 +64,7 @@ const Footer = () => {
               <NavLink
                 to="/check-booking"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 Check Booking
@@ -86,7 +82,7 @@ const Footer = () => {
               <NavLink
                 to="/faq"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 FAQ
@@ -96,7 +92,7 @@ const Footer = () => {
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? "text-white font-bold" : "hover:text-white"}`
+                  `transition-colors ${isActive ? "text-primary font-bold" : "hover:text-white"}`
                 }
               >
                 Contact Us

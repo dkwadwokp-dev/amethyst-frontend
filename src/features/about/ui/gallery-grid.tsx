@@ -44,7 +44,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[0].url}
-              className="bg-[#D1D5DB] object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[0].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -62,7 +62,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[1].url}
-              className="bg-[#E5E7EB] object-cover h-56 md:h-96 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-56 md:h-96 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[1].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -80,7 +80,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[2].url}
-              className="bg-[#D1D5DB] object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[2].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -100,7 +100,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[3].url}
-              className="bg-[#E5E7EB] object-cover h-56 md:h-96 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-56 md:h-96 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[3].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -118,7 +118,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[4].url}
-              className="bg-[#D1D5DB] object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-40 md:h-64 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[4].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -136,7 +136,7 @@ const GalleryGrid = () => {
           >
             <img
               src={galleryImages[5].url}
-              className="bg-[#E5E7EB] object-cover h-48 md:h-80 w-full transition-transform duration-700 group-hover:scale-105"
+              className="object-cover h-48 md:h-80 w-full transition-transform duration-700 group-hover:scale-105"
               alt={galleryImages[5].alt}
             />
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

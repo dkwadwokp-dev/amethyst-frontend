@@ -44,7 +44,7 @@ const SingleRoomPage = () => {
           <div className="max-w-6xl mx-auto px-6 lg:px-12 py-4">
             <Link
               to="/rooms"
-              className="inline-flex items-center text-[10px] text-gray-500 hover:text-[#0021B3] uppercase tracking-widest font-bold transition-colors"
+              className="inline-flex items-center text-[10px] text-gray-500 hover:text-primary uppercase tracking-widest font-bold transition-colors"
             >
               <ChevronLeft className="w-3 h-3 mr-1" />
               BACK TO ALL ROOMS

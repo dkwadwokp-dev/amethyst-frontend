@@ -19,7 +19,7 @@ const BookingList = () => {
       case "CONFIRMED":
         return "bg-green-100 text-green-800";
       case "COMPLETED":
-        return "bg-blue-100 text-blue-800";
+        return "bg-red-50 text-primary";
       case "PENDING":
         return "bg-yellow-100 text-yellow-800";
       case "CANCELLED":
@@ -116,7 +116,7 @@ const BookingList = () => {
                     <Link to={`/bookings/${booking.id}`} className="w-full">
                       <Button
                         variant="primary"
-                        className="w-full !px-3 !py-3 text-[10px] bg-primary hover:bg-blue-800"
+                        className="w-full !px-3 !py-3 text-[10px] bg-primary hover:opacity-90"
                       >
                         OPEN
                       </Button>

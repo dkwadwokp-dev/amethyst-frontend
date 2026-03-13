@@ -57,7 +57,7 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                   onClick={() => setSelectedTicket(idx)}
                   className={`flex justify-between items-center p-4 border cursor-pointer transition-all ${
                     selectedTicket === idx
-                      ? "border-[#0021B3] bg-blue-50/30"
+                      ? "border-primary bg-red-50/30"
                       : "border-gray-200 hover:border-gray-300"
                   }`}
                 >
@@ -65,19 +65,19 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                     <div
                       className={`w-4 h-4 rounded-full border flex items-center justify-center ${
                         selectedTicket === idx
-                          ? "border-[#0021B3]"
+                          ? "border-primary"
                           : "border-gray-300"
                       }`}
                     >
                       {selectedTicket === idx && (
-                        <div className="w-2 h-2 rounded-full bg-[#0021B3]"></div>
+                        <div className="w-2 h-2 rounded-full bg-primary"></div>
                       )}
                     </div>
                     <span className="text-sm font-bold text-gray-900">
                       {ticket.type}
                     </span>
                   </div>
-                  <span className="font-marcellus text-lg text-[#0021B3]">
+                  <span className="font-marcellus text-lg text-primary">
                     ${ticket.price}
                   </span>
                 </div>

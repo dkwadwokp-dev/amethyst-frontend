@@ -100,12 +100,12 @@ const FaqList = () => {
                       className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
                     >
                       <h4
-                        className={`text-sm tracking-wide font-manrope pr-8 transition-colors ${isOpen ? "font-bold text-[#0021B3]" : "font-semibold text-gray-900 hover:text-gray-600"}`}
+                        className={`text-sm tracking-wide font-manrope pr-8 transition-colors ${isOpen ? "font-bold text-primary" : "font-semibold text-gray-900 hover:text-gray-600"}`}
                       >
                         {faq.q}
                       </h4>
                       {isOpen ? (
-                        <ChevronUp className="w-5 h-5 text-[#0021B3] shrink-0" />
+                        <ChevronUp className="w-5 h-5 text-primary shrink-0" />
                       ) : (
                         <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
                       )}

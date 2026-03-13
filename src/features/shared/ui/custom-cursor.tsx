@@ -42,7 +42,7 @@ const CustomCursor = () => {
 
   if (!isDesktop) return null;
 
-  const secondaryColor = "#60a5fa"; // From our theme
+  const primaryRed = "#941b1b"; // From our theme
 
   return (
     <div
@@ -55,9 +55,9 @@ const CustomCursor = () => {
           width: isHovering ? "80px" : "40px",
           height: isHovering ? "80px" : "40px",
           transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
-          borderColor: secondaryColor,
+          borderColor: primaryRed,
           backgroundColor: isHovering
-            ? "rgba(96, 165, 250, 0.1)"
+            ? "rgba(148, 27, 27, 0.1)"
             : "transparent",
         }}
       />
@@ -67,7 +67,7 @@ const CustomCursor = () => {
         className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full transition-transform duration-100 ease-out z-[100] border-2 shadow-[0_0_10px_rgba(255,255,255,0.5)]"
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%) ${isHovering ? "scale(0.6)" : "scale(1)"}`,
-          borderColor: secondaryColor,
+          borderColor: primaryRed,
         }}
       />
     </div>

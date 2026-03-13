@@ -111,7 +111,7 @@ const Hero = () => {
               </div>
 
               {/* Tagline */}
-              <p className="text-white/80 font-manrope text-xs md:text-sm font-bold tracking-[0.5em] uppercase mb-4">
+              <p className="text-primary font-manrope text-xs md:text-sm font-bold tracking-[0.5em] uppercase mb-4">
                 {slide.smallTitle}
               </p>
 

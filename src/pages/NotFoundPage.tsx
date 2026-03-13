@@ -31,7 +31,10 @@ const NotFoundPage = () => {
         
         <div className="relative z-10">
           <Link to="/">
-            <Button variant="primary" className="bg-primary hover:bg-blue-800 text-white px-8 py-4 text-[11px] font-bold tracking-widest rounded-none shadow-[0_4px_14px_0_rgba(0,33,179,0.25)] hover:shadow-[0_6px_20px_rgba(0,33,179,0.3)] transition-all">
+            <Button
+              variant="primary"
+              className="bg-primary hover:opacity-90 text-white px-8 py-4 text-[11px] font-bold tracking-widest rounded-none shadow-sm transition-all"
+            >
               RETURN HOME
             </Button>
           </Link>

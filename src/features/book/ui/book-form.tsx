@@ -401,7 +401,7 @@ const BookForm = () => {
         <div className="pt-6">
           <Button
             variant="primary"
-            className="w-full bg-primary hover:bg-blue-800 text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none"
+            className="w-full bg-primary hover:opacity-90 text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none"
           >
             {activeTab === "room"
               ? "COMPLETE BOOKING REQUEST"

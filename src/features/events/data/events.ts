@@ -25,9 +25,9 @@ export const events: Event[] = [
     desc: "An enchanting evening of live jazz under the stars, featuring acclaimed local and international artists.",
     longDesc: `Join us for the most anticipated musical event of the season – the AH Hotel Summer Jazz Night. Set against the breathtaking backdrop of the city skyline on our exclusive Rooftop Lounge, this evening promises a sensory journey through the timeless sounds of jazz.
 
-We have curated a world-class lineup featuring the legendary Marcus 'Blue' Thornton on saxophone, accompanied by the sultry vocals of jazz sensation Elena Rodriguez. The night will transition from smooth, traditional standards to energetic modern improvisations that will keep the spirit of the city alive.
+We have curated a world-class lineup featuring the legendary Marcus 'Red' Thornton on saxophone, accompanied by the sultry vocals of jazz sensation Elena Rodriguez. The night will transition from smooth, traditional standards to energetic modern improvisations that will keep the spirit of the city alive.
 
-Guests will be greeted with a signature "Midnight Blue" cocktail upon arrival. Our culinary team has prepared a specialized tapas menu designed to complement the musical selections, featuring artisanal cheeses, hand-pulled sliders, and delicate seafood small plates. Whether you are a jazz aficionado or simply looking for the city's most elegant night out, this is an experience you cannot miss.`,
+Guests will be greeted with a signature "Crimson Velvet" cocktail upon arrival. Our culinary team has prepared a specialized tapas menu designed to complement the musical selections, featuring artisanal cheeses, hand-pulled sliders, and delicate seafood small plates. Whether you are a jazz aficionado or simply looking for the city's most elegant night out, this is an experience you cannot miss.`,
     leadImage: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2600&auto=format&fit=crop",
     tickets: [
       { type: "General Admission", price: 50 },

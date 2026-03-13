@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0021b3;
-  --color-secondary: #60a5fa;
+  --color-primary: #941B1B;
+  --color-secondary: #C2410C;
   --color-accent: #d9d2c2;
   --color-dark: #62412e;
   --color-light: #ffffff;
@@ -12,7 +12,7 @@
   --font-abhaya: "Abhaya Libre", serif;
   --font-marcellus: "Marcellus", serif;
   --font-manrope: "Manrope", sans-serif;
-  --color-primary-transparent: rgba(0, 33, 179, 0.1);
+  --color-primary-transparent: rgba(148, 27, 27, 0.1);
 }
 
 @media (pointer: fine) {
@@ -27,6 +27,11 @@
 body {
   background-color: #ebe8e3;
   transition: background-color 0.3s ease;
+}
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
 }
 
 /* Prevent auto-zoom on focus for mobile devices */

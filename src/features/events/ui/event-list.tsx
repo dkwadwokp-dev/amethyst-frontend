@@ -31,7 +31,7 @@ const EventList = () => {
             </div>
           </div>
           <div className="flex-1 py-6 px-4 md:py-8 md:px-8 flex flex-col justify-center w-full">
-            <div className="flex items-center gap-4 mb-4 text-[10px] uppercase font-bold tracking-widest text-[#0021B3]">
+            <div className="flex items-center gap-4 mb-4 text-[10px] uppercase font-bold tracking-widest text-primary">
               <div className="flex items-center gap-1.5">
                 <Calendar className="w-3 h-3" /> {event.date}
               </div>
