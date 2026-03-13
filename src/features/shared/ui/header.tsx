@@ -172,7 +172,7 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
                   `text-sm font-manrope font-bold tracking-[0.3em] uppercase pb-2 transition-all border-b animate-in slide-in-from-bottom-2 fade-in delay-700 ${
                     isActive
                       ? "text-primary border-primary"
-                      : "text-white/60 hover:text-white border-transparent"
+                      : "text-white hover:text-white border-transparent"
                   }`
                 }
               >
