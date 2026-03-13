@@ -102,42 +102,77 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
 
       {/* Mobile Navigation Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 lg:hidden animate-in fade-in duration-200">
-          <nav className="flex flex-col gap-8 items-center">
-            {navItems.map((item) => {
-              const path = getPath(item);
-              return (
-                <NavLink 
-                  key={item} 
-                  to={path} 
-                  onClick={closeMenu}
-                  className={({ isActive }) => 
-                    `text-xl font-bold tracking-widest uppercase transition-all ${
-                      isActive && path !== '#'
-                        ? 'text-[#0021B3]' 
-                        : 'text-gray-900 hover:text-[#0021B3]'
-                    }`
-                  }
-                >
-                  {item}
-                </NavLink>
-              );
-            })}
-            <div className="mt-8 border-t border-gray-200 w-16 mx-auto pt-8 flex justify-center"></div>
-            <NavLink 
-              to="/check-booking" 
+        <div className="fixed inset-0 bg-[#0a0a0a] z-[60] flex flex-col lg:hidden overflow-y-auto">
+          {/* Menu Header */}
+          <div className="flex justify-between items-center py-4 px-6 border-b border-white/5">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-[10px] font-bold">LOGO</div>
+              <span className="font-bold text-lg tracking-widest text-white">AH HOTEL</span>
+            </div>
+            <button 
+              className="p-2 text-white/70 hover:text-white transition-colors"
               onClick={closeMenu}
-              className={({ isActive }) => 
-                `text-sm font-bold tracking-widest uppercase pb-1 transition-all border-b-2 ${
-                  isActive 
-                    ? 'text-[#0021B3] border-[#0021B3]' 
-                    : 'text-gray-900 hover:text-[#0021B3] border-gray-900 hover:border-[#0021B3]'
-                }`
-              }
             >
-              Check Booking
-            </NavLink>
-          </nav>
+              <X className="w-8 h-8" />
+            </button>
+          </div>
+
+          <div className="flex-1 flex flex-col items-center justify-center py-12 px-6">
+            <nav className="flex flex-col gap-6 items-center w-full">
+              {navItems.map((item, index) => {
+                const path = getPath(item);
+                return (
+                  <NavLink 
+                    key={item} 
+                    to={path} 
+                    onClick={closeMenu}
+                    className={({ isActive }) => 
+                      `text-3xl md:text-5xl font-marcellus tracking-tight transition-all duration-500 transform ${
+                        index === 0 ? "delay-[100ms]" : index === 1 ? "delay-[150ms]" : "delay-[200ms]"
+                      } animate-in slide-in-from-bottom-4 fade-in ${
+                        isActive && path !== '#'
+                          ? 'text-white' 
+                          : 'text-white/40 hover:text-white'
+                      }`
+                    }
+                  >
+                    {item}
+                  </NavLink>
+                );
+              })}
+              
+              <div className="w-12 h-px bg-white/10 my-8 animate-in zoom-in-0 duration-700 delay-500"></div>
+              
+              <NavLink 
+                to="/check-booking" 
+                onClick={closeMenu}
+                className={({ isActive }) => 
+                  `text-sm font-manrope font-bold tracking-[0.3em] uppercase pb-2 transition-all border-b animate-in slide-in-from-bottom-2 fade-in delay-700 ${
+                    isActive 
+                      ? 'text-primary border-primary' 
+                      : 'text-white/60 hover:text-white border-transparent'
+                  }`
+                }
+              >
+                CHECK BOOKING
+              </NavLink>
+            </nav>
+          </div>
+
+          {/* Social / Contact Footer */}
+          <div className="p-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-1000">
+            <div className="flex gap-8">
+              {['INSTAGRAM', 'FACEBOOK', 'LINKEDIN'].map((social) => (
+                <a key={social} href="#" className="text-[10px] font-bold tracking-[0.2em] text-white/40 hover:text-primary transition-colors">
+                  {social}
+                </a>
+              ))}
+            </div>
+            <div className="text-center md:text-right">
+              <p className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase mb-2">RESERVATIONS</p>
+              <p className="text-white font-manrope text-sm">+234 800 123 4567</p>
+            </div>
+          </div>
         </div>
       )}
     </header>

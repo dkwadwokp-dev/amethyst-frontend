@@ -15,7 +15,7 @@ const About = () => {
         <div className="space-y-8">
           <SectionHeading
             subtitle="ABOUT US"
-            title="URBAN COMFORT MEETS AFROCENTRIC HOSPITALITY"
+            title="AFROCENTRIC URBAN LUXURY"
             alignment="left"
           />
           <p className="text-gray-600 text-sm leading-relaxed">

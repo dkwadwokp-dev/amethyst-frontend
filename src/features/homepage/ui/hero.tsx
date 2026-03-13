@@ -70,21 +70,23 @@ const Hero = () => {
   return (
     <div className="relative bg-[#0a0a0a] h-[100dvh] w-full overflow-hidden flex items-center">
       {/* Background Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
-            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-        >
+      <div className="absolute inset-0 cursor-none" data-cursor-text="EXPLORE">
+        {slides.map((slide, index) => (
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url('${slide.image}')` }}
-          />
-          <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
-        </div>
-      ))}
+            key={index}
+            className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
+              index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+              style={{ backgroundImage: `url('${slide.image}')` }}
+            />
+            <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent" />
+          </div>
+        ))}
+      </div>
 
       {/* Content Layer */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-20">
@@ -140,9 +142,9 @@ const Hero = () => {
       </div>
 
       {/* Navigation Layer */}
-      <div className="absolute bottom-12 right-6 md:right-12 lg:right-20 z-30 flex flex-col items-center gap-8">
+      <div className="absolute bottom-6 md:bottom-12 left-6 right-6 md:left-auto md:right-12 lg:right-20 z-30 flex flex-row md:flex-col items-center justify-between md:justify-center gap-6 md:gap-8">
         {/* Indicators */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-row md:flex-col gap-2 md:gap-3">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -154,10 +156,10 @@ const Hero = () => {
                   resetTimer();
                 }
               }}
-              className={`w-1 transition-all duration-500 rounded-full ${
+              className={`transition-all duration-500 rounded-full ${
                 index === current
-                  ? "h-12 bg-primary"
-                  : "h-3 bg-white/20 hover:bg-white/40"
+                  ? "w-12 h-1 md:w-1 md:h-12 bg-primary"
+                  : "w-3 h-1 md:w-1 md:h-3 bg-white/80 hover:bg-white/40"
               }`}
             />
           ))}
@@ -167,13 +169,13 @@ const Hero = () => {
         <div className="flex gap-2">
           <button
             onClick={handlePrev}
-            className="w-12 h-12 flex items-center justify-center border border-white/10 text-white/40 hover:text-white hover:border-white/40 transition-all rounded-full"
+            className="w-10 h-10 md:w-12 md:h-12 flex cursor-pointer items-center justify-center border border-white/10 text-white/40 hover:text-white hover:border-white/40 transition-all rounded-full"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={handleNext}
-            className="w-12 h-12 flex items-center justify-center border border-white/10 text-white/40 hover:text-white hover:border-white/40 transition-all rounded-full"
+            className="w-10 h-10 md:w-12 md:h-12 flex cursor-pointer items-center justify-center border border-white/10 text-white/40 hover:text-white hover:border-white/40 transition-all rounded-full"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

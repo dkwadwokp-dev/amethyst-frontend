@@ -33,8 +33,8 @@ const Services = () => {
   return (
     <Section className="bg-[#F8F9FA]">
       <SectionHeading
-        subtitle="QUALITY FACILITIES AND MORE"
-        title="FAMILIAR IN A REDEFINED BALANCE OF MODERN & LUXURY."
+        subtitle="OUR FACILITIES"
+        title="REDEFINED MODERN LUXURY"
         className="mb-16 max-w-2xl mx-auto"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -7,8 +7,8 @@ const ContactFormSection = () => {
     <Section className="bg-white pt-24 pb-16">
       <div className="grid lg:grid-cols-2 gap-12 items-start">
         <ImagePlaceholder 
-          className="w-full h-full min-h-[600px] rounded-sm object-cover" 
-          src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2600&auto=format&fit=crop" 
+          className="w-full h-[300px] lg:h-[600px] rounded-sm object-cover" 
+          src="/assets/reception-attendant.png" 
           text="CONTACT DESK" 
         />
         

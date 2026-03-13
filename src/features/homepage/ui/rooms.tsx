@@ -17,7 +17,7 @@ const Rooms = () => {
       
       <div className="space-y-4 max-w-5xl mx-auto">
         {rooms.map((room) => (
-          <div key={room.id} className="bg-white p-4 flex flex-col md:flex-row gap-8 items-center shadow-sm">
+          <div key={room.id} data-cursor-text="VIEW" className="bg-white p-4 flex flex-col md:flex-row gap-8 items-center shadow-sm">
             <ImagePlaceholder 
               className="w-full md:w-64 h-40 flex-shrink-0 rounded-sm" 
               text={room.title} 

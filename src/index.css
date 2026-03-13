@@ -12,8 +12,19 @@
   --font-abhaya: "Abhaya Libre", serif;
   --font-marcellus: "Marcellus", serif;
   --font-manrope: "Manrope", sans-serif;
+  --color-primary-transparent: rgba(0, 33, 179, 0.1);
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none !important;
+  }
+  a, button, [role="button"] {
+    cursor: none !important;
+  }
 }
 
 body {
   background-color: #ebe8e3;
+  transition: background-color 0.3s ease;
 }

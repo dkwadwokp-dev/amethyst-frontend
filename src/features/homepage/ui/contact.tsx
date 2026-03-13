@@ -8,9 +8,9 @@ const Contact = () => {
     <Section className="bg-white">
       <div className="grid lg:grid-cols-2 gap-16 items-start">
         <ImagePlaceholder
-          className="w-full h-[600px] object-cover rounded-sm shadow-lg"
+          className="w-full h-[300px] lg:h-[600px] object-cover rounded-sm shadow-lg"
           text="CONTACT"
-          src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=2600&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2600&auto=format&fit=crop"
         />
 
         <div className="py-8">
