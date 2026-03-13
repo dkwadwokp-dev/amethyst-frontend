@@ -106,35 +106,44 @@ const SingleEventPage = () => {
               <div className="bg-[#F8F9FA] p-6 lg:p-8 border border-gray-100 shadow-sm sticky top-24">
                 <div className="mb-8 border-b border-gray-200 pb-6">
                   <h4 className="text-[10px] uppercase text-gray-400 font-bold tracking-widest mb-2 flex items-center gap-2">
-                    <Ticket className="w-4 h-4" /> SECURE YOUR SPOT
+                    <Ticket className="w-4 h-4" />{" "}
+                    {event.tickets.length > 0
+                      ? "SECURE YOUR SPOT"
+                      : "FREE ADMISSION"}
                   </h4>
                   <div className="font-marcellus text-2xl text-gray-900">
-                    Tickets Available
+                    {event.tickets.length > 0
+                      ? "Tickets Available"
+                      : "No Reservation Required"}
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-8">
-                  {event.tickets.map((ticket, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center p-4 bg-white border border-gray-100"
-                    >
-                      <span className="text-sm font-bold text-gray-700">
-                        {ticket.type}
-                      </span>
-                      <span className="text-lg font-marcellus text-primary">
-                        ${ticket.price}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                {event.tickets.length > 0 && (
+                  <div className="space-y-4 mb-8">
+                    {event.tickets.map((ticket, i) => (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center p-4 bg-white border border-gray-100"
+                      >
+                        <span className="text-sm font-bold text-gray-700">
+                          {ticket.type}
+                        </span>
+                        <span className="text-lg font-marcellus text-primary">
+                          ${ticket.price}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 <Button
                   onClick={() => setIsModalOpen(true)}
                   variant="primary"
                   className="w-full bg-primary hover:opacity-90 text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none"
                 >
-                  PURCHASE TICKETS
+                  {event.tickets.length > 0
+                    ? "PURCHASE TICKETS"
+                    : "REGISTER INTEREST"}
                 </Button>
               </div>
             </div>

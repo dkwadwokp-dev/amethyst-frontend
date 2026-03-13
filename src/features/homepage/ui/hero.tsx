@@ -2,11 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useImageModal } from "../../shared/context/image-modal-context";
+import hero1 from "../../../assets/hero-1.png";
+import hero2 from "../../../assets/hero-2.png";
 
 const slides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2600&auto=format&fit=crop",
+    image: hero1,
     smallTitle: "Epicurean Excellence",
     mainTitle: "A Symphony of Modern Luxury",
     desc: "Discover a harmonious blend of tailored experiences and world-class comfort in the heart of the city.",
@@ -14,8 +15,7 @@ const slides = [
     cta: "Explore Our Story",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2600&auto=format&fit=crop",
+    image: hero2,
     smallTitle: "Culinary Artistry",
     mainTitle: "Sensory Dining Experiences",
     desc: "Experience the art of fine dining with seasonal menus crafted by world-class chefs in an intimate setting.",
@@ -81,12 +81,16 @@ const Hero = () => {
             }`}
           >
             <div
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${index === current ? "cursor-pointer pointer-events-auto" : "pointer-events-none"}`}
-              style={{ backgroundImage: `url('${slide.image}')` }}
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-[3000ms] ${
+                index === current ? "scale-105" : "scale-100"
+              } ${index === current ? "cursor-pointer pointer-events-auto" : "pointer-events-none"}`}
+              style={{ backgroundImage: `url('${slide.image}')`, backgroundPosition: 'center 50%' }}
               onClick={() => openModal(slide.image, slide.mainTitle)}
             />
+            {/* Fine-tuned Overlays for an elegant balance */}
             <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_150px_rgba(0,0,0,0.6)] pointer-events-none" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/15 pointer-events-none" />
           </div>
         ))}
       </div>

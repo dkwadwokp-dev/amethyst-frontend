@@ -50,7 +50,9 @@ const EventList = () => {
             </p>
             <div className="flex items-center justify-between border-t border-gray-100 pt-6 mt-auto">
               <div className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
-                Tickets from ${Math.min(...event.tickets.map((t) => t.price))}
+                {event.tickets.length > 0
+                  ? `Tickets from $${Math.min(...event.tickets.map((t) => t.price))}`
+                  : "Free Entry"}
               </div>
               <Link to={`/events/${event.id}`}>
                 <Button

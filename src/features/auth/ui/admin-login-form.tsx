@@ -1,8 +1,33 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import { Package, Lock } from "lucide-react";
 import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
+import { loginSchema, type LoginFormData } from "../schema/auth-schema";
+import { useLoginAdmin } from "../actions/use-login-admin";
 
 const AdminLoginForm = () => {
+  const navigate = useNavigate();
+  const { mutate: loginAdmin, isPending, error } = useLoginAdmin();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    loginAdmin(data.passcode, {
+      onSuccess: (res) => {
+        localStorage.setItem("admin_token", res.token);
+        navigate("/bookings");
+      },
+    });
+  };
+
   return (
     <div className="bg-white p-10 md:p-14 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100  w-full max-w-md mx-auto relative bg-white">
       {/* Icon */}
@@ -21,39 +46,43 @@ const AdminLoginForm = () => {
       </div>
 
       {/* Form */}
-      <div className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <label className="block text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-2">
             ACCESS CODE
           </label>
           <div className="relative">
             <input
+              {...register("passcode")}
               type="password"
-              className="w-full border border-gray-200 p-4 pl-4 pr-12 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300"
+              className={`w-full border ${errors.passcode ? "border-primary" : "border-gray-200"} p-4 pl-4 pr-12 text-gray-900 text-sm focus:outline-none focus:border-gray-900 bg-transparent placeholder:text-gray-300 transition-colors`}
               placeholder="••••••••"
             />
             <Lock className="w-4 h-4 text-gray-400 absolute top-1/2 right-4 -translate-y-1/2 pointer-events-none" />
           </div>
-        </div>
-
-        <div className="flex justify-center">
-          <button className="text-[9px] text-gray-400 hover:text-gray-600 font-bold tracking-widest uppercase">
-            FORGOT PASSCODE?
-          </button>
+          {errors.passcode && (
+            <p className="text-[10px] text-primary font-bold mt-2">
+              {errors.passcode.message}
+            </p>
+          )}
+          {error && (
+            <p className="text-[10px] text-primary font-bold mt-2">
+              {error.message}
+            </p>
+          )}
         </div>
 
         <div className="pt-2">
-          {/* We'll just link directly to bookings for the demo */}
-          <Link to="/bookings" className="block w-full">
-            <Button
-              variant="primary"
-              className="w-full bg-primary hover:opacity-90 text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-sm transition-all"
-            >
-              LOGIN TO DASHBOARD
-            </Button>
-          </Link>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={isPending}
+            className="w-full bg-primary hover:bg-black text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-sm transition-all disabled:opacity-50"
+          >
+            {isPending ? "LOGGING IN..." : "LOGIN TO DASHBOARD"}
+          </Button>
         </div>
-      </div>
+      </form>
 
       {/* Footer Links */}
       <div className="mt-8 pt-6 border-t border-gray-100 text-center flex flex-col gap-3">

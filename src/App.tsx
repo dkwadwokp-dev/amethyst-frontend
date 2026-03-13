@@ -20,14 +20,18 @@ import EventsPage from "./pages/EventsPage";
 import SingleEventPage from "./pages/SingleEventPage";
 import NewEventPage from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <CustomCursor />
-      <ImageModalProvider>
-        <Routes>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <ScrollToTop />
+        <CustomCursor />
+        <ImageModalProvider>
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/style-guide" element={<StyleGuide />} />
           <Route path="/contact" element={<ContactPage />} />
@@ -49,6 +53,7 @@ function App() {
         </Routes>
       </ImageModalProvider>
     </Router>
+    </QueryClientProvider>
   );
 }
 

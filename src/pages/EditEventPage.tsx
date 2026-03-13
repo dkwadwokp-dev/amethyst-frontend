@@ -22,7 +22,7 @@ const EditEventPage = () => {
               location: event.location,
               desc: event.desc,
               leadImage: event.leadImage,
-              tickets: event.tickets.length > 0 ? event.tickets : [{ type: "", price: "" }]
+              tickets: event.tickets.length > 0 ? event.tickets : [{ type: "", price: 0 }]
             }}
             onSubmit={(data) => console.log('Edit:', data)} 
           />
