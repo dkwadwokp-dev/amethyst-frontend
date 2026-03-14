@@ -1,5 +1,5 @@
 import { Button } from "../../shared/ui/button";
-import { Edit2, Download, Send, XCircle } from "lucide-react";
+import { Edit2, Download, XCircle } from "lucide-react";
 import { Section } from "../../shared/ui/section";
 
 const BookingActions = () => {
@@ -17,12 +17,6 @@ const BookingActions = () => {
           className="border-gray-300 text-gray-700 bg-white hover:bg-gray-50 !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none shadow-none flex items-center justify-center gap-2 font-bold"
         >
           <Download className="w-3 h-3" /> DOWNLOAD INVOICE
-        </Button>
-        <Button
-          variant="outline"
-          className="border-gray-300 text-gray-700 bg-white hover:bg-gray-50 !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none shadow-none flex items-center justify-center gap-2 font-bold"
-        >
-          <Send className="w-3 h-3" /> RESEND INFO
         </Button>
         <Button
           variant="outline"

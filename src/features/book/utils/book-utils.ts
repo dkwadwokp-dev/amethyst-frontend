@@ -45,8 +45,8 @@ export const getDateStyle = (
 
 export const getTimeStyle = (
   hour: number,
-  arrivalHour: number | null,
-  departureHour: number | null,
+  arrivalHour: number | undefined,
+  departureHour: number | undefined,
 ) => {
   if (arrivalHour === hour || departureHour === hour)
     return "border-primary bg-primary text-white shadow-sm";

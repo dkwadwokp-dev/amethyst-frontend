@@ -1,38 +1,59 @@
-import { tableInstances } from "../data/tables";
 import { Clock } from "lucide-react";
 import { getTimeStyle } from "../utils/book-utils";
 
 interface BookingTimePickerProps {
   item: string;
-  diningDate: number | null;
-  arrivalHour: number | null;
-  departureHour: number | null;
+  diningDate: string | undefined;
+  arrivalHour: number | undefined;
+  departureHour: number | undefined;
   errors: any;
   setFormData: React.Dispatch<React.SetStateAction<any>>;
+  availabilityData?: any;
 }
 
 export const BookingTimePicker = ({
-  item,
   diningDate,
   arrivalHour,
   departureHour,
   errors,
   setFormData,
+  availabilityData,
 }: BookingTimePickerProps) => {
-  const currentTableObj = tableInstances.find((t) => t.id === item);
-  const tableDayBookings =
-    currentTableObj?.bookings.find((b) => b.date === diningDate)?.bookedTimes ||
-    [];
+  const tableDayBookings = (availabilityData?.bookedPeriods || [])
+    .filter((p: any) => {
+      if (!diningDate) return false;
+      const bookingStart = new Date(p.start);
+      const selected = new Date(diningDate);
+      return (
+        bookingStart.getFullYear() === selected.getFullYear() &&
+        bookingStart.getMonth() === selected.getMonth() &&
+        bookingStart.getDate() === selected.getDate()
+      );
+    })
+    .map((p: any) => {
+      const start = new Date(p.start).getUTCHours();
+      const end = new Date(p.end).getUTCHours();
+      return { startHour: start, endHour: end };
+    });
 
   const handleTimeClick = (hour: number) => {
-    if (!arrivalHour || (arrivalHour && departureHour)) {
+    // Normalize hours for comparison (4 PM is base, things after midnight are +24)
+    const norm = (h: number) => (h < 4 ? h + 24 : h);
+    const normalizedHour = norm(hour);
+    const normalizedArrival =
+      arrivalHour !== undefined ? norm(arrivalHour) : undefined;
+
+    if (
+      !arrivalHour ||
+      (arrivalHour !== undefined && departureHour !== undefined)
+    ) {
       setFormData((prev: any) => ({
         ...prev,
         arrivalHour: hour,
         departureHour: undefined,
       }));
-    } else if (hour > arrivalHour) {
-      if (hour - arrivalHour > 3) {
+    } else if (normalizedHour > normalizedArrival!) {
+      if (normalizedHour - normalizedArrival! > 3) {
         // Enforce 3 hour max limit
         setFormData((prev: any) => ({
           ...prev,
@@ -42,9 +63,11 @@ export const BookingTimePicker = ({
         return;
       }
 
-      const hasConflict = tableDayBookings.some(
-        (b: any) => hour > b.startHour && arrivalHour < b.endHour,
-      );
+      const hasConflict = tableDayBookings.some((b: any) => {
+        const bStart = norm(b.startHour);
+        const bEnd = norm(b.endHour);
+        return normalizedHour > bStart && normalizedArrival! < bEnd;
+      });
 
       if (!hasConflict) {
         setFormData((prev: any) => ({ ...prev, departureHour: hour }));
@@ -70,11 +93,24 @@ export const BookingTimePicker = ({
           Max 3 hours
         </span>
       </div>
-      <div className="grid grid-cols-4 sm:grid-cols-8 gap-2">
-        {Array.from({ length: 16 }, (_, i) => i + 8).map((hour) => {
-          const isTimeBooked = tableDayBookings.some(
-            (b: any) => hour >= b.startHour && hour < b.endHour,
-          );
+      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-5 gap-2">
+        {[15, 16, 17, 18, 19, 20, 21, 22, 23, 0].map((hour) => {
+          const isTimeBooked = tableDayBookings.some((b: any) => {
+            // Adjust logic for next-day hours (0-3)
+            const checkHour = hour < 4 ? hour + 24 : hour;
+            const bStart = b.startHour < 4 ? b.startHour + 24 : b.startHour;
+            const bEnd = b.endHour < 4 ? b.endHour + 24 : b.endHour;
+            return checkHour >= bStart && checkHour < bEnd;
+          });
+
+          const displayLabel =
+            hour === 0
+              ? "12 AM"
+              : hour === 12
+                ? "12 PM"
+                : hour > 12
+                  ? `${hour - 12} PM`
+                  : `${hour} AM`;
 
           return (
             <button
@@ -88,13 +124,7 @@ export const BookingTimePicker = ({
                   : getTimeStyle(hour, arrivalHour, departureHour)
               }`}
             >
-              {hour === 0
-                ? "12 AM"
-                : hour === 12
-                  ? "12 PM"
-                  : hour > 12
-                    ? `${hour - 12} PM`
-                    : `${hour} AM`}
+              {displayLabel}
             </button>
           );
         })}

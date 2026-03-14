@@ -12,11 +12,27 @@ export const roomBookingSchema = baseSchema
     type: z.literal("room"),
     itemType: z.string(),
     item: z.string(),
-    checkIn: z.string({ message: "Please select a check-in date" }),
-    checkOut: z.string({ message: "Please select a check-out date" }),
+    checkIn: z.string({ message: "Please select a check-in date" }).optional(),
+    checkOut: z
+      .string({ message: "Please select a check-out date" })
+      .optional(),
   })
-  .refine((data) => new Date(data.checkOut) > new Date(data.checkIn), {
-    message: "Check-out date must be after check-in date",
+  .refine(
+    (data) => {
+      if (!data.checkIn || !data.checkOut) return true;
+      return new Date(data.checkOut) > new Date(data.checkIn);
+    },
+    {
+      message: "Check-out date must be after check-in date",
+      path: ["checkOut"],
+    },
+  )
+  .refine((data) => data.checkIn !== undefined, {
+    message: "Please select a check-in date",
+    path: ["checkIn"],
+  })
+  .refine((data) => data.checkOut !== undefined, {
+    message: "Please select a check-out date",
     path: ["checkOut"],
   });
 
@@ -25,22 +41,50 @@ export const diningBookingSchema = baseSchema
     type: z.literal("dining"),
     itemType: z.string(),
     item: z.string(),
-    diningDate: z.string({ message: "Please select a date" }),
+    diningDate: z.string({ message: "Please select a date" }).optional(),
     arrivalHour: z
       .number({ message: "Please select an arrival time" })
       .min(8)
-      .max(23),
+      .max(23)
+      .optional(),
     departureHour: z
       .number({ message: "Please select a departure time" })
       .min(8)
-      .max(23),
+      .max(23)
+      .optional(),
   })
-  .refine((data) => data.departureHour > data.arrivalHour, {
-    message: "Departure must be after arrival",
-    path: ["departureHour"],
+  .refine(
+    (data) => {
+      if (data.arrivalHour === undefined || data.departureHour === undefined)
+        return true;
+      return data.departureHour > data.arrivalHour;
+    },
+    {
+      message: "Departure must be after arrival",
+      path: ["departureHour"],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.arrivalHour === undefined || data.departureHour === undefined)
+        return true;
+      return data.departureHour - data.arrivalHour <= 3;
+    },
+    {
+      message: "Maximum duration is 3 hours",
+      path: ["departureHour"],
+    },
+  )
+  .refine((data) => data.diningDate !== undefined, {
+    message: "Please select a date",
+    path: ["diningDate"],
   })
-  .refine((data) => data.departureHour - data.arrivalHour <= 3, {
-    message: "Maximum duration is 3 hours",
+  .refine((data) => data.arrivalHour !== undefined, {
+    message: "Please select an arrival time",
+    path: ["arrivalHour"],
+  })
+  .refine((data) => data.departureHour !== undefined, {
+    message: "Please select a departure time",
     path: ["departureHour"],
   });
 

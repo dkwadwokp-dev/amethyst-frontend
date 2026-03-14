@@ -1,10 +1,11 @@
 import { Section } from "../../shared/ui/section";
 import { useState } from "react";
-import { useRoom } from "../../rooms/actions/use-rooms";
 import { GeneralInfoCard } from "./general-info-card";
 import { PaymentSummaryCard } from "./payment-summary-card";
 import { RoomDetailsCard } from "./room-details-card";
 import { ContactPoliciesCard } from "./contact-policies-card";
+import { DiningDetailsCard } from "./dining-details-card";
+import { AreaDetailsCard } from "./area-details-card";
 
 interface BookingDetailsCardProps {
   booking: any;
@@ -40,15 +41,26 @@ const BookingDetailsCard = ({ booking }: BookingDetailsCardProps) => {
       </div>
 
       <div className="max-w-5xl mx-auto space-y-4 md:space-y-6">
-        {/* Top Row: General & Payment */}
+        {/* Top Row: General & (Payment or Dining Details) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <GeneralInfoCard booking={booking} formatDate={formatDate} />
-          <PaymentSummaryCard booking={booking} />
+          {booking.type === "room" ? (
+            <PaymentSummaryCard booking={booking} />
+          ) : (
+            <DiningDetailsCard booking={booking} />
+          )}
         </div>
 
-        {/* Bottom Row: Room & Contact/Policies */}
+        {/* Bottom Row: Resource Details & Contact/Policies */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          <RoomDetailsCard resourceId={resourceId} bookingType={booking.type} />
+          {booking.type === "room" ? (
+            <RoomDetailsCard
+              resourceId={resourceId}
+              bookingType={booking.type}
+            />
+          ) : (
+            <AreaDetailsCard areaId={booking.itemType} />
+          )}
           <ContactPoliciesCard
             booking={booking}
             openAccordion={openAccordion}

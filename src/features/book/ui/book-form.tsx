@@ -35,8 +35,14 @@ const BookForm = () => {
     email: "",
     checkIn: undefined,
     checkOut: undefined,
-    diningDate: undefined,
   } as unknown as BookingFormData);
+
+  // Separate state for internal dining selection helpers
+  const [diningSelection, setDiningSelection] = useState<{
+    diningDate?: string;
+    arrivalHour?: number;
+    departureHour?: number;
+  }>({});
 
   // Sync search params with form data
   useEffect(() => {
@@ -71,15 +77,9 @@ const BookForm = () => {
 
   const { type: activeTab, itemType, item, guests } = formData;
 
-  const checkIn = activeTab === "room" ? (formData as any).checkIn : undefined;
-  const checkOut =
-    activeTab === "room" ? (formData as any).checkOut : undefined;
-  const diningDate =
-    activeTab === "dining" ? (formData as any).diningDate : undefined;
-  const arrivalHour =
-    activeTab === "dining" ? (formData as any).arrivalHour : undefined;
-  const departureHour =
-    activeTab === "dining" ? (formData as any).departureHour : undefined;
+  const checkIn = activeTab === "room" ? formData.checkIn : undefined;
+  const checkOut = activeTab === "room" ? formData.checkOut : undefined;
+  const { diningDate, arrivalHour, departureHour } = diningSelection;
 
   const {
     data: availabilityData,
@@ -89,9 +89,14 @@ const BookForm = () => {
     type: activeTab,
     item,
   });
-  const isAvailable = availabilityData?.bookedPeriods?.length === 0;
   const validate = () => {
-    const result = bookingSchema.safeParse(formData);
+    // Merge dining selection into a temporary object for validation
+    const validationData = {
+      ...formData,
+      ...(activeTab === "dining" ? diningSelection : {}),
+    };
+
+    const result = bookingSchema.safeParse(validationData);
     if (!result.success) {
       const fieldErrors: any = {};
       result.error.issues.forEach((issue) => {
@@ -143,16 +148,13 @@ const BookForm = () => {
     } else if (activeTab === "dining" && itemType) {
       const newTables = tableInstances.filter((tbl) => tbl.areaId === itemType);
       if (newTables.length > 0) {
-        setFormData(
-          (prev) =>
-            ({
-              ...prev,
-              item: newTables[0].id,
-              diningDate: undefined,
-              arrivalHour: undefined,
-              departureHour: undefined,
-            }) as any,
-        );
+        setFormData((prev) => ({
+          ...prev,
+          item: newTables[0].id,
+          checkIn: undefined,
+          checkOut: undefined,
+        }));
+        setDiningSelection({});
       }
     }
   }, [itemType, activeTab]);
@@ -169,12 +171,31 @@ const BookForm = () => {
     if (!validate()) return;
 
     try {
-      console.log("Submitting Raw Form Data:", formData);
-
-      const payload: BookingFormData = {
+      const payload: any = {
         ...formData,
         guests: Number(formData.guests),
       };
+
+      // For dining, handle cross-midnight reservations (e.g., 11 PM to 1 AM)
+      if (formData.type === "dining" && diningSelection.diningDate) {
+        const arrivalHour = diningSelection.arrivalHour!;
+        const departureHour = diningSelection.departureHour!;
+
+        // Base date object from selection
+        const checkInDate = new Date(diningSelection.diningDate);
+        checkInDate.setHours(arrivalHour, 0, 0, 0);
+
+        const checkOutDate = new Date(diningSelection.diningDate);
+        checkOutDate.setHours(departureHour, 0, 0, 0);
+
+        // If departure is early morning (0-3) and arrival is evening, it belongs to next day
+        if (departureHour < 4 && arrivalHour >= 16) {
+          checkOutDate.setDate(checkOutDate.getDate() + 1);
+        }
+
+        payload.checkIn = checkInDate.toISOString();
+        payload.checkOut = checkOutDate.toISOString();
+      }
 
       console.log("Submitting API Payload:", payload);
       const booking = await createBooking(payload);
@@ -189,6 +210,7 @@ const BookForm = () => {
         lastName: "",
         email: "",
       } as any);
+      setDiningSelection({});
     } catch (error) {
       console.error("Booking error:", error);
       alert("Failed to create booking. Please try again.");
@@ -317,7 +339,7 @@ const BookForm = () => {
           checkIn={checkIn}
           checkOut={checkOut}
           diningDate={diningDate}
-          setFormData={setFormData}
+          setFormData={activeTab === "room" ? setFormData : setDiningSelection}
           availabilityData={availabilityData}
           isCheckingAvailability={isCheckingAvailability}
         />
@@ -330,7 +352,8 @@ const BookForm = () => {
             arrivalHour={arrivalHour}
             departureHour={departureHour}
             errors={errors}
-            setFormData={setFormData}
+            setFormData={setDiningSelection}
+            availabilityData={availabilityData}
           />
         )}
 

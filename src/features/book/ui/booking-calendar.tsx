@@ -204,7 +204,9 @@ export const BookingCalendar = ({
             date.setHours(0, 0, 0, 0);
             const isPast = date < today;
             const isBooked = isDayBooked(date);
-            const isUnavailable = isPast || isBooked;
+            // Only make the date unclickable if it's past, or if it's booked for a ROOM.
+            // For dining, we allow clicking even if there are bookings because tables/times vary.
+            const isUnavailable = isPast || (activeTab === "room" && isBooked);
 
             return (
               <div key={day} className="flex justify-center items-center">
@@ -226,7 +228,7 @@ export const BookingCalendar = ({
                     currentYear,
                   )}`}
                 >
-                  {isBooked && !isPast ? "X" : day}
+                  {isBooked && !isPast && activeTab === "room" ? "X" : day}
                 </button>
               </div>
             );
