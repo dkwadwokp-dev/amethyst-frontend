@@ -1,13 +1,21 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Section } from "../../shared/ui/section";
 import { Button } from "../../shared/ui/button";
 import { Ticket } from "lucide-react";
-import { checkBookingSchema, type CheckBookingFormData } from "../schema/check-booking-schema";
+import {
+  checkBookingSchema,
+  type CheckBookingFormData,
+} from "../schema/check-booking-schema";
+import { useVerifyBookingMutation } from "../actions/use-verify-booking";
 
 const CheckBookingForm = () => {
   const navigate = useNavigate();
+  const [serverError, setServerError] = useState<string | null>(null);
+  const { mutateAsync: verifyBooking } = useVerifyBookingMutation();
+
   const {
     register,
     handleSubmit,
@@ -16,10 +24,21 @@ const CheckBookingForm = () => {
     resolver: zodResolver(checkBookingSchema),
   });
 
-  const onSubmit = (data: CheckBookingFormData) => {
-    // In a real app, you would verify the booking first
-    console.log("Checking booking:", data);
-    navigate(`/bookings/${data.reference}`);
+  const onSubmit = async (data: CheckBookingFormData) => {
+    setServerError(null);
+    try {
+      const booking = await verifyBooking(data);
+      if (booking && booking.reference) {
+        navigate(
+          `/bookings/${booking.reference}?email=${encodeURIComponent(data.email)}`,
+        );
+      }
+    } catch (error: any) {
+      console.error("Verification error:", error);
+      setServerError(
+        "No booking found with these details. Please check and try again.",
+      );
+    }
   };
 
   return (
@@ -29,12 +48,15 @@ const CheckBookingForm = () => {
         <h2 className="text-3xl font-marcellus text-gray-900 mb-4">
           Check Your Booking
         </h2>
-        <p className="text-xs text-gray-500 leading-relaxed max-w-sm mb-12 font-manrope">
-          Enter your booking reference number below to view, modify, or cancel
-          your upcoming reservation.
+        <p className="text-xs text-gray-500 leading-relaxed max-w-sm mb-12 font-manrope font-semibold">
+          Enter your booking reference number and the email used during
+          registration to view, modify, or cancel your upcoming reservation.
         </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md space-y-6 text-left">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-md space-y-6 text-left"
+        >
           <div className="space-y-2">
             <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
               BOOKING REFERENCE
@@ -43,27 +65,43 @@ const CheckBookingForm = () => {
               {...register("reference")}
               type="text"
               placeholder="e.g. A1B2C3D4"
-              className={`w-full border-b ${errors.reference ? 'border-primary' : 'border-gray-200'} py-3 text-sm focus:border-black outline-none transition-colors`}
+              className={`w-full border-b ${
+                errors.reference ? "border-primary" : "border-gray-200"
+              } py-3 text-sm focus:border-black outline-none transition-colors uppercase font-mono tracking-widest`}
             />
             {errors.reference && (
-              <p className="text-[10px] text-primary font-bold">{errors.reference.message}</p>
+              <p className="text-[10px] text-primary font-bold">
+                {errors.reference.message}
+              </p>
             )}
           </div>
 
           <div className="space-y-2">
             <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
-              LAST NAME / EMAIL
+              EMAIL ADDRESS (SAME AS BOOKING)
             </label>
             <input
-              {...register("identifier")}
-              type="text"
-              placeholder="e.g. Jane Doe / user@email.com"
-              className={`w-full border-b ${errors.identifier ? 'border-primary' : 'border-gray-200'} py-3 text-sm focus:border-black outline-none transition-colors`}
+              {...register("email")}
+              type="email"
+              placeholder="e.g. user@email.com"
+              className={`w-full border-b ${
+                errors.email ? "border-primary" : "border-gray-200"
+              } py-3 text-sm focus:border-black outline-none transition-colors`}
             />
-            {errors.identifier && (
-              <p className="text-[10px] text-primary font-bold">{errors.identifier.message}</p>
+            {errors.email && (
+              <p className="text-[10px] text-primary font-bold">
+                {errors.email.message}
+              </p>
             )}
           </div>
+
+          {serverError && (
+            <div className="bg-primary/5 border border-primary/10 p-4 animate-in fade-in slide-in-from-top-1 duration-300">
+              <p className="text-[10px] text-primary font-bold text-center leading-relaxed">
+                {serverError}
+              </p>
+            </div>
+          )}
 
           <div className="pt-8">
             <Button

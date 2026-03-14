@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const checkBookingSchema = z.object({
-  reference: z.string().min(4, "Booking reference must be at least 4 characters"),
-  identifier: z.string().min(2, "Last name or email is required"),
+  reference: z.string().min(4, "Booking reference is required"),
+  email: z.string().email("Please enter a valid email address"),
 });
 
 export type CheckBookingFormData = z.infer<typeof checkBookingSchema>;

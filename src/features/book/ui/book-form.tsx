@@ -10,6 +10,7 @@ import { bookingSchema, type BookingFormData } from "../schema/booking-schema";
 import { BookingCalendar } from "./booking-calendar";
 import { BookingTimePicker } from "./booking-time-picker";
 import { BookingUserDetails } from "./booking-user-details";
+import { BookingSuccessModal } from "./booking-success-modal";
 import { useCreateBooking } from "../actions/use-create-booking";
 import { useCheckAvailability } from "../actions/use-check-availability";
 
@@ -64,6 +65,7 @@ const BookForm = () => {
   ]);
 
   const [errors, setErrors] = useState<any>({});
+  const [successBooking, setSuccessBooking] = useState<any>(null);
   const { mutateAsync: createBooking, isPending: isSubmitting } =
     useCreateBooking();
 
@@ -175,11 +177,9 @@ const BookForm = () => {
       };
 
       console.log("Submitting API Payload:", payload);
-      await createBooking(payload);
+      const booking = await createBooking(payload);
+      setSuccessBooking(booking);
 
-      alert(
-        `Thank you ${formData.firstName}! Your ${formData.type} booking is ready.`,
-      );
       setFormData({
         type: initialType,
         itemType: initialItemType,
@@ -393,6 +393,13 @@ const BookForm = () => {
           </Button>
         </div>
       </form>
+
+      {successBooking && (
+        <BookingSuccessModal
+          booking={successBooking}
+          onClose={() => setSuccessBooking(null)}
+        />
+      )}
     </div>
   );
 };
