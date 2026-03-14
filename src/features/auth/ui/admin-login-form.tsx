@@ -21,8 +21,8 @@ const AdminLoginForm = () => {
 
   const onSubmit = (data: LoginFormData) => {
     loginAdmin(data.passcode, {
-      onSuccess: (res) => {
-        localStorage.setItem("admin_token", res.token);
+      onSuccess: () => {
+        // Token is saved automatically by the hook
         navigate("/bookings");
       },
     });
@@ -76,10 +76,10 @@ const AdminLoginForm = () => {
           <Button
             type="submit"
             variant="primary"
-            disabled={isPending}
-            className="w-full bg-primary hover:bg-black text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-sm transition-all disabled:opacity-50"
+            isLoading={isPending}
+            className="w-full bg-primary hover:bg-black text-white px-6 py-4 text-[11px] font-bold tracking-widest rounded-none border-none shadow-sm transition-all"
           >
-            {isPending ? "LOGGING IN..." : "LOGIN TO DASHBOARD"}
+            {isPending ? "VERIFYING..." : "LOGIN TO DASHBOARD"}
           </Button>
         </div>
       </form>

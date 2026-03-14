@@ -18,14 +18,15 @@ const api = async <T>(
     headers.set("Content-Type", "application/json");
   }
 
-  // Inject token if required
-  if (requireAuth) {
-    const token = localStorage.getItem("admin_token");
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    } else {
-      throw new Error("Authentication required but no token found");
-    }
+  // Always inject token if available
+  const token = localStorage.getItem("admin_token");
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  // If requireAuth is true and no token, throw error
+  if (requireAuth && !token) {
+    throw new Error("Authentication required but no token found");
   }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -43,4 +44,4 @@ const api = async <T>(
   return response.json();
 };
 
-export default api
+export default api;
