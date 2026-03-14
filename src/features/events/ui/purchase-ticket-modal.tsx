@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Event } from "../data/events";
+import type { Event } from "../actions/use-events";
 import { Button } from "../../shared/ui/button";
 import { X, Minus, Plus } from "lucide-react";
 
@@ -20,7 +20,8 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
   };
 
   const handleIncrease = () => {
-    if (ticketCount < 10) setTicketCount(ticketCount + 1);
+    const maxAvailable = currentTicket.availableQuantity ?? 10;
+    if (ticketCount < maxAvailable) setTicketCount(ticketCount + 1);
   };
 
   const handlePurchase = () => {
@@ -79,9 +80,16 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                           {ticket.type}
                         </span>
                       </div>
-                      <span className="font-marcellus text-lg text-primary">
-                        ${ticket.price}
-                      </span>
+                      <div className="flex flex-col items-end">
+                        <span className="font-marcellus text-lg text-primary">
+                          ${ticket.price}
+                        </span>
+                        {ticket.availableQuantity !== null && ticket.availableQuantity !== undefined && (
+                          <span className="text-[9px] uppercase font-bold tracking-tighter text-gray-400">
+                            {ticket.availableQuantity} LEFT
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

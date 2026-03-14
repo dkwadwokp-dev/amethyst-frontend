@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
-import { events } from "../features/events/data/events";
 import { Button } from "../features/shared/ui/button";
 import {
   ChevronLeft,
@@ -11,29 +10,46 @@ import {
   MapPin,
   Ticket,
   Maximize2,
+  Loader2,
 } from "lucide-react";
 import PurchaseTicketModal from "../features/events/ui/purchase-ticket-modal";
 import { useImageModal } from "../features/shared/context/image-modal-context";
 import { Section } from "../features/shared/ui/section";
+import { useEventById } from "../features/events/actions/use-events";
 
 const SingleEventPage = () => {
   const { eventId } = useParams();
-  const event = events.find((e) => e.id === eventId);
+  const { data: event, isLoading, error } = useEventById(eventId);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { openModal } = useImageModal();
 
-  if (!event) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
+        <Header />
+        <div className="flex-1 flex flex-col items-center justify-center gap-4">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <p className="text-[10px] tracking-widest font-bold text-gray-400">
+            LOADING EVENT...
+          </p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error || !event) {
     return (
       <div className="min-h-screen bg-[#F8F9FA] font-manrope flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-marcellus text-gray-900 mb-4">
+        <h1 className="text-3xl font-marcellus text-gray-900 mb-4 uppercase">
           Event Not Found
         </h1>
         <Link to="/events">
           <Button
             variant="primary"
-            className="bg-[#2A2E33] text-white px-8 py-3 text-[10px] tracking-widest rounded-none"
+            className="bg-[#2A2E33] text-white px-8 py-3 text-[10px] tracking-widest rounded-none uppercase"
           >
-            BACK TO EVENTS
+            BACK TO ALL EVENTS
           </Button>
         </Link>
       </div>

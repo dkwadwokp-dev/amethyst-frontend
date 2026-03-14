@@ -1,20 +1,28 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../shared/ui/button";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Loader2 } from "lucide-react";
 import { eventSchema, type EventFormData } from "../schema/event-schema";
 
 interface EventFormProps {
   initialData?: any;
   onSubmit: (data: EventFormData) => void;
   title: string;
+  isLoading?: boolean;
 }
 
-const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
+const EventForm = ({
+  initialData,
+  onSubmit,
+  title,
+  isLoading,
+}: EventFormProps) => {
   const {
     register,
     control,
     handleSubmit,
+    watch,
+    getValues,
     formState: { errors },
   } = useForm<EventFormData>({
     resolver: zodResolver(eventSchema),
@@ -30,7 +38,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: "tickets",
   });
@@ -69,8 +77,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
             </label>
             <input
               {...register("date")}
-              type="text"
-              placeholder="e.g. Aug 24, 2026"
+              type="date"
               className={`w-full border ${errors.date ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
             />
             {errors.date && (
@@ -85,8 +92,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
             </label>
             <input
               {...register("time")}
-              type="text"
-              placeholder="e.g. 7:00 PM - 11:00 PM"
+              type="time"
               className={`w-full border ${errors.time ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
             />
             {errors.time && (
@@ -151,7 +157,13 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
             </h3>
             <Button
               type="button"
-              onClick={() => append({ type: "", price: undefined as any })}
+              onClick={() =>
+                append({
+                  type: "",
+                  price: undefined as any,
+                  totalQuantity: null,
+                })
+              }
               variant="ghost"
               className="text-[10px] tracking-widest flex items-center gap-1 text-primary"
             >
@@ -168,8 +180,19 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
           )}
 
           {fields.map((field, index) => (
-            <div key={field.id} className="space-y-2">
-              <div className="grid grid-cols-[1fr_1fr_auto] gap-4 items-start bg-[#F8F9FA] p-4 border border-gray-100 relative">
+            <div
+              key={field.id}
+              className="space-y-4 bg-[#F8F9FA] p-6 border border-gray-100 relative group"
+            >
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+
+              <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                     Ticket Type
@@ -186,6 +209,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
                     </p>
                   )}
                 </div>
+
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                     Ticket Price ($)
@@ -194,6 +218,7 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
                     {...register(`tickets.${index}.price`, {
                       valueAsNumber: true,
                     })}
+                    placeholder="0.00"
                     className={`w-full border ${errors.tickets?.[index]?.price ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none bg-white transition-colors`}
                   />
                   {errors.tickets?.[index]?.price && (
@@ -202,14 +227,63 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
                     </p>
                   )}
                 </div>
+              </div>
+
+              {watch(`tickets.${index}.totalQuantity`) === null ? (
                 <button
                   type="button"
-                  onClick={() => remove(index)}
-                  className="p-3 text-red-500 hover:text-red-700 transition-colors border border-transparent hover:bg-white mb-[2px]"
+                  onClick={() => {
+                    const currentValues = getValues(`tickets.${index}`);
+                    update(index, {
+                      ...currentValues,
+                      price: isNaN(currentValues.price)
+                        ? (undefined as any)
+                        : currentValues.price,
+                      totalQuantity: 100,
+                    });
+                  }}
+                  className="text-[10px] font-bold tracking-widest text-primary flex items-center gap-1 hover:opacity-75 transition-opacity"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  <Plus className="w-3 h-3" /> ADD QUANTITY LIMIT
                 </button>
-              </div>
+              ) : (
+                <div className="space-y-2 animate-in fade-in slide-in-from-top-1 duration-200">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
+                      Quantity Limit
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const currentValues = getValues(`tickets.${index}`);
+                        update(index, {
+                          ...currentValues,
+                          price: isNaN(currentValues.price)
+                            ? (undefined as any)
+                            : currentValues.price,
+                          totalQuantity: null,
+                        });
+                      }}
+                      className="text-[9px] font-bold tracking-widest text-gray-400 hover:text-red-500 uppercase"
+                    >
+                      Make Unlimited
+                    </button>
+                  </div>
+                  <input
+                    {...register(`tickets.${index}.totalQuantity`, {
+                      valueAsNumber: true,
+                    })}
+                    type="number"
+                    placeholder="e.g. 50"
+                    className={`w-full border ${errors.tickets?.[index]?.totalQuantity ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none bg-white transition-colors`}
+                  />
+                  {errors.tickets?.[index]?.totalQuantity && (
+                    <p className="text-[10px] text-primary font-bold">
+                      {errors.tickets?.[index]?.totalQuantity?.message}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           ))}
           {errors.tickets?.root && (
@@ -223,9 +297,17 @@ const EventForm = ({ initialData, onSubmit, title }: EventFormProps) => {
           <Button
             type="submit"
             variant="primary"
-            className="w-full bg-[#2A2E33] hover:bg-black text-white px-8 py-4 text-[11px] tracking-widest rounded-none border-none"
+            disabled={isLoading}
+            className="w-full bg-[#2A2E33] hover:bg-black text-white px-8 py-4 text-[11px] tracking-widest rounded-none border-none flex items-center justify-center gap-2"
           >
-            SAVE EVENT
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                SAVING...
+              </>
+            ) : (
+              "SAVE EVENT"
+            )}
           </Button>
         </div>
       </form>

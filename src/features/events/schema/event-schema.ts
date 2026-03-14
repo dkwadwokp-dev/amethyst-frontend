@@ -10,8 +10,11 @@ export const eventSchema = z.object({
   tickets: z.array(
     z.object({
       type: z.string().min(1, "Ticket type is required"),
-      price: z.number({ message: "Price is required" }).min(0, "Price cannot be negative"),
-    })
+      price: z
+        .number({ message: "Price is required" })
+        .min(0, "Price cannot be negative"),
+      totalQuantity: z.number().optional().nullable(),
+    }),
   ),
 });
 
