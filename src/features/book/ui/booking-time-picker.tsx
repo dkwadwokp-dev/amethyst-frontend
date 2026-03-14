@@ -1,5 +1,6 @@
 import { Clock } from "lucide-react";
 import { getTimeStyle } from "../utils/book-utils";
+import { Loading } from "../../shared/ui/loading";
 
 interface BookingTimePickerProps {
   item: string;
@@ -9,6 +10,7 @@ interface BookingTimePickerProps {
   errors: any;
   setFormData: React.Dispatch<React.SetStateAction<any>>;
   availabilityData?: any;
+  isCheckingAvailability?: boolean;
 }
 
 export const BookingTimePicker = ({
@@ -84,7 +86,7 @@ export const BookingTimePicker = ({
   };
 
   return (
-    <div className="animate-in fade-in slide-in-from-top-4">
+    <div className="animate-in fade-in slide-in-from-top-4 relative">
       <div className="flex justify-between items-end mb-3">
         <label className="block text-[10px] text-gray-400 font-bold tracking-widest uppercase flex items-center gap-2">
           <Clock className="w-3 h-3" /> ARRIVAL — DEPARTURE (SEATING TIMES)

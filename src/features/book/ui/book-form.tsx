@@ -126,6 +126,11 @@ const BookForm = () => {
   ) => {
     const { name, value } = e.target;
     updateField(name, value);
+
+    // Clear dining selection when table changes
+    if (name === "item" && activeTab === "dining") {
+      setDiningSelection({});
+    }
   };
 
   // Sync instances/tables when itemType or type changes
