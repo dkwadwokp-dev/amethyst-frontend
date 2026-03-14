@@ -3,6 +3,10 @@ interface PaymentSummaryCardProps {
 }
 
 export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
+  const amount = booking.amount || 0;
+  const subtotal = amount / 1.14; // Approximate subtotal if 14% tax is included, or handle as base
+  const tax = amount - subtotal;
+
   return (
     <div className="bg-white p-4 md:p-8 shadow-sm border border-gray-100 flex flex-col justify-between h-full">
       <div>
@@ -12,11 +16,23 @@ export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
         <div className="space-y-4 font-manrope">
           <div className="flex justify-between items-center text-sm text-gray-600">
             <span>{booking.type === "room" ? "Room" : "Resource"} Rate</span>
-            <span>$1,100.00</span>
+            <span>
+              $
+              {subtotal.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm text-gray-600">
-            <span>Taxes & Fees</span>
-            <span>$154.00</span>
+            <span>Taxes & Fees (14%)</span>
+            <span>
+              $
+              {tax.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
           </div>
         </div>
       </div>
@@ -26,11 +42,21 @@ export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
           <span className="font-bold text-sm text-gray-900 uppercase tracking-widest">
             Total Amount
           </span>
-          <span className="font-bold text-lg text-gray-900">$1,254.00</span>
+          <span className="font-bold text-lg text-gray-900">
+            $
+            {amount.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
         </div>
         <div className="flex items-center gap-2 text-xs text-gray-500">
-          <div className="w-2 h-2 rounded-full bg-green-500"></div>
-          Verified Reservation
+          <div
+            className={`w-2 h-2 rounded-full ${booking.status === "PENDING" ? "bg-orange-400" : "bg-green-500"}`}
+          ></div>
+          {booking.status === "PENDING"
+            ? "Payment Awaiting"
+            : "Verified Reservation"}
         </div>
       </div>
     </div>

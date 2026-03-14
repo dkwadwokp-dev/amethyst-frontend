@@ -7,13 +7,12 @@ import BookingActions from "../features/view-booking/ui/booking-actions";
 import CheckBookingFaq from "../features/check-booking/ui/check-booking-faq";
 import { useVerifyBookingQuery } from "../features/check-booking/actions/use-verify-booking";
 import { Loading } from "../features/shared/ui/loading";
+import { AlertCircle, Clock } from "lucide-react";
 
 const ViewBookingPage = () => {
   const { bookingId: id } = useParams<{ bookingId: string }>();
   const [searchParams] = useSearchParams();
   const email = searchParams.get("email") || "";
-
-  console.log({ id, email });
 
   const {
     data: booking,
@@ -57,9 +56,25 @@ const ViewBookingPage = () => {
     );
   }
 
+  const isRoomPending = booking.type === "room" && booking.status === "PENDING";
+
   return (
     <div className="min-h-screen bg-[#F8F9FA] font-manrope">
       <Header />
+
+      {isRoomPending && (
+        <div className="bg-orange-50 border-b border-orange-100 py-3 md:py-4 px-4 sticky top-[64px] z-40">
+          <div className="max-w-6xl mx-auto flex items-center justify-center gap-3 text-orange-800 text-[10px] md:text-xs font-bold tracking-widest uppercase text-center animate-in fade-in slide-in-from-top duration-500">
+            <Clock className="w-4 h-4 text-orange-600 animate-pulse shrink-0" />
+            <span>
+              Reserving a room booking and not making payment in 2 hours voids
+              the reservation
+            </span>
+            <AlertCircle className="w-4 h-4 text-orange-600 shrink-0 hidden md:block" />
+          </div>
+        </div>
+      )}
+
       <PageHero
         title="BOOKING DETAILS"
         subtitle="REVIEW YOUR RESERVATION DETAILS"
@@ -67,7 +82,7 @@ const ViewBookingPage = () => {
       />
 
       <BookingDetailsCard booking={booking} />
-      <BookingActions />
+      <BookingActions booking={booking} />
 
       <CheckBookingFaq />
 

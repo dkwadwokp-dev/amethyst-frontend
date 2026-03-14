@@ -1,6 +1,5 @@
 import { Clock } from "lucide-react";
 import { getTimeStyle } from "../utils/book-utils";
-import { Loading } from "../../shared/ui/loading";
 
 interface BookingTimePickerProps {
   item: string;

@@ -1,25 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Section } from "../../shared/ui/section";
+import { Loading } from "../../shared/ui/loading";
+import { Calendar, Users, Clock, ArrowRight, Mail } from "lucide-react";
 import { Button } from "../../shared/ui/button";
-import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
-import { Calendar, Users, Clock, MoreHorizontal, Download } from "lucide-react";
-import { mockBookings, type Booking } from "../data/bookings";
+import { useGetBookingsQuery } from "../actions/use-get-bookings";
+import { rooms } from "../../rooms/data/rooms";
+import { diningAreas } from "../../book/data/tables";
 
 const BookingList = () => {
   const [filter, setFilter] = useState<"ALL" | "ROOMS" | "DINING">("ALL");
+  const { data: bookings, isLoading, error } = useGetBookingsQuery(filter);
 
-  const filteredBookings = mockBookings.filter((b) => {
-    if (filter === "ALL") return true;
-    return b.type === (filter === "ROOMS" ? "room" : "dining");
-  });
+  const filteredBookings = bookings || [];
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "CONFIRMED":
         return "bg-green-100 text-green-800";
       case "COMPLETED":
-        return "bg-red-50 text-primary";
+        return "bg-gray-100 text-gray-500";
+      case "PROCESSED":
+        return "bg-blue-100 text-blue-800";
       case "PENDING":
         return "bg-yellow-100 text-yellow-800";
       case "CANCELLED":
@@ -28,6 +30,52 @@ const BookingList = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
+  const getMedia = (booking: any) => {
+    if (booking.type === "room") {
+      const room = rooms.find((r) => r.id === booking.itemType);
+      return {
+        image: room?.leadImage,
+        title: room?.title || "Luxury Accommodation",
+        subtitle: `Room #${booking.item.split("_")[1] || "Selected Room"}`,
+      };
+    } else {
+      const area = diningAreas.find((a) => a.id === booking.itemType);
+      return {
+        image: area?.leadImage,
+        title: area?.title || "Fine Dining",
+        subtitle: `Table #${booking.item.split("_")[1] || "Selected Table"}`,
+      };
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <Section className="bg-[#F8F9FA]">
+        <div className="flex flex-col items-center justify-center py-20">
+          <Loading />
+          <p className="mt-4 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+            Loading your bookings...
+          </p>
+        </div>
+      </Section>
+    );
+  }
+
+  if (error) {
+    return (
+      <Section className="bg-[#F8F9FA]">
+        <div className="text-center py-20">
+          <p className="text-sm font-bold text-primary uppercase">
+            Failed to load bookings
+          </p>
+          <p className="text-xs text-gray-500 mt-2">
+            Please try again later or contact support.
+          </p>
+        </div>
+      </Section>
+    );
+  }
 
   return (
     <Section className="bg-[#F8F9FA]">
@@ -51,96 +99,111 @@ const BookingList = () => {
           ))}
         </div>
 
-        <div className="space-y-4 md:space-y-6">
-          {filteredBookings.map((booking: Booking) => (
-            <div
-              key={booking.id}
-              className="bg-white p-4 md:p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 md:gap-6"
-            >
-              {/* Image box */}
-              <div className="w-full md:w-56 h-40 flex-shrink-0">
-                <ImagePlaceholder
-                  className="w-full h-full"
-                  text={booking.type === "room" ? "ROOM VIEW" : "TABLE VIEW"}
-                />
-              </div>
+        {filteredBookings.length === 0 ? (
+          <div className="text-center py-20 bg-white border border-gray-100">
+            <p className="text-xs text-gray-400 font-bold tracking-widest uppercase">
+              No bookings found
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-4 md:space-y-6">
+            {filteredBookings.map((booking) => {
+              const media = getMedia(booking);
+              const checkIn = new Date(booking.checkIn);
+              const checkOut = new Date(booking.checkOut);
 
-              {/* Details & Action Split */}
-              <div className="flex-1 flex flex-col md:flex-row gap-6">
-                {/* Information */}
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-start mb-3">
-                      <span
-                        className={`text-[9px] font-bold tracking-widest px-2 py-1  uppercase ${getStatusColor(booking.status)}`}
-                      >
-                        {booking.status}
-                      </span>
-                    </div>
-                    <p className="text-xs text-secondary font-bold tracking-wide uppercase mb-1">
-                      {booking.subtitle}
-                    </p>
-                    <h3 className="text-lg font-marcellus text-gray-900 mb-4">
-                      {booking.title}
-                    </h3>
+              const dateRange =
+                booking.type === "room"
+                  ? `${checkIn.toLocaleDateString("en-US", { month: "short", day: "numeric" })} — ${checkOut.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`
+                  : `${checkIn.toLocaleDateString("en-US", { month: "short", day: "numeric" })} @ ${checkIn.getHours()}:00`;
 
-                    <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-xs text-gray-500 font-manrope">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-gray-400" />
-                        {booking.dateRange}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-gray-400" />
-                        {booking.guests} Guests
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-gray-400" />
-                        {booking.placedAt}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Action Area */}
-                <div className="w-full md:w-32 flex flex-row md:flex-col justify-between items-end md:border-l border-gray-100 md:pl-6 pt-4 md:pt-0 border-t md:border-t-0">
-                  <div className="text-right w-full hidden md:block">
-                    <p className="text-[10px] tracking-widest font-bold text-gray-400 uppercase mb-1">
-                      Total
-                    </p>
-                    <p className="text-xl font-bold text-gray-900">
-                      ${booking.amount.toFixed(2)}
-                    </p>
+              return (
+                <div
+                  key={booking._id}
+                  className="bg-white p-4 md:p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 md:gap-6 group hover:border-gray-200 transition-all"
+                >
+                  {/* Image box */}
+                  <div className="w-full md:w-56 h-40 flex-shrink-0 overflow-hidden">
+                    <img
+                      src={media.image}
+                      alt={media.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
 
-                  <div className="flex flex-row md:flex-col gap-2 w-full mt-auto">
-                    <Link to={`/bookings/${booking.id}`} className="w-full">
+                  {/* Details & Action Split */}
+                  <div className="flex-1 flex flex-col md:flex-row gap-6">
+                    {/* Information */}
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-3">
+                          <span
+                            className={`text-[9px] font-bold tracking-widest px-2 py-1 uppercase ${getStatusColor(booking.status)}`}
+                          >
+                            {booking.status}
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-1">
+                          {media.subtitle}
+                        </p>
+                        <h3 className="text-lg font-marcellus text-gray-900 mb-4">
+                          {media.title}
+                        </h3>
+
+                        <div className="grid grid-cols-2 gap-y-3 gap-x-6 text-[11px] text-gray-500 font-manrope font-medium">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-3.5 h-3.5 text-gray-400" />
+                            {dateRange}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Users className="w-3.5 h-3.5 text-gray-400" />
+                            {booking.guests} Guests
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-3.5 h-3.5 text-gray-400" />
+                            Ref: {booking.reference}
+                          </div>
+                          <div className="flex items-center gap-2 overflow-hidden">
+                            <Mail className="w-3.5 h-3.5 text-gray-400" />
+                            <span className="truncate">{booking.email}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action */}
+                    <div className="flex flex-row md:flex-col justify-end items-end md:items-stretch gap-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 min-w-[140px]">
+                      {booking.type === "room" && (
+                        <span className="text-xl md:text-2xl font-marcellus tracking-normal normal-case text-black/80 ">
+                          ${(booking.amount || 0).toLocaleString()}
+                        </span>
+                      )}
                       <Button
                         variant="primary"
-                        className="w-full !px-3 !py-3 text-[10px] bg-primary hover:opacity-90"
+                        className="flex-1 md:flex-none text-[10px] font-bold tracking-[0.12em] uppercase py-4 h-auto rounded-none bg-primary hover:bg-black transition-all duration-300 relative group/btn overflow-hidden"
                       >
-                        OPEN
+                        <Link
+                          to={`/bookings/${booking.reference}?email=${booking.email}`}
+                          className="flex flex-col items-center gap-1"
+                        >
+                          <span className="opacity-90 group-hover/btn:scale-95 transition-transform">
+                            View Details
+                          </span>
+                        </Link>
                       </Button>
-                    </Link>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        className="flex-1 !px-2 !py-2 flex items-center justify-center"
+                      <Link
+                        to={`/bookings/${booking.reference}?email=${booking.email}`}
+                        className="flex items-center justify-center w-14 h-14 md:hidden border border-gray-100 bg-gray-50/50 hover:bg-white transition-colors"
                       >
-                        <Download className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="flex-1 !px-2 !py-2 flex items-center justify-center"
-                      >
-                        <MoreHorizontal className="w-4 h-4" />
-                      </Button>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-primary transition-colors" />
+                      </Link>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </Section>
   );

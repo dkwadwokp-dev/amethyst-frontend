@@ -23,17 +23,6 @@ export const DiningDetailsCard = ({ booking }: DiningDetailsCardProps) => {
           <h4 className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
             Dining Reservation
           </h4>
-          <span
-            className={`text-[10px] font-bold tracking-widest px-3 py-1 uppercase ${
-              booking.status === "CONFIRMED" || booking.status === "COMPLETED"
-                ? "bg-green-100 text-green-800"
-                : booking.status === "CANCELLED"
-                  ? "bg-red-100 text-red-800"
-                  : "bg-orange-100 text-orange-800"
-            }`}
-          >
-            {booking.status}
-          </span>
         </div>
 
         <div className="space-y-6">
