@@ -1,23 +1,17 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../shared/ui/button";
-import { Calendar, Clock, MapPin, Maximize2, Loader2 } from "lucide-react";
+import { Calendar, Clock, MapPin, Maximize2 } from "lucide-react";
 import { useImageModal } from "../../shared/context/image-modal-context";
 import { Section } from "../../shared/ui/section";
 import { useEvents } from "../actions/use-events";
+import { Loading } from "../../shared/ui/loading";
 
 const EventList = () => {
   const { openModal } = useImageModal();
   const { data: events, isLoading, error } = useEvents();
 
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-        <p className="text-[10px] tracking-widest font-bold text-gray-400 uppercase">
-          Fetching Upcoming Events...
-        </p>
-      </div>
-    );
+    return <Loading className="py-12 md:py-36" />;
   }
 
   if (error || !events) {

@@ -65,7 +65,7 @@ const DishCategory = ({ subtitle, title, category }: DishCategoryProps) => {
             ))}
           </div>
           {hasMore && (
-            <div className="text-center transition-all">
+            <div className="flex justify-center transition-all">
               <Button
                 variant="primary"
                 onClick={handleLoadMore}

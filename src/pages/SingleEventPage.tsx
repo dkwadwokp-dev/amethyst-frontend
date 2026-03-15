@@ -161,6 +161,18 @@ const SingleEventPage = () => {
                     ? "PURCHASE TICKETS"
                     : "REGISTER INTEREST"}
                 </Button>
+
+                <div className="mt-6 text-center pt-6 border-t border-gray-100">
+                  <p className="text-[10px] text-gray-400 font-medium mb-3 uppercase tracking-widest">
+                    Already have a ticket?
+                  </p>
+                  <Link
+                    to="/verify-ticket"
+                    className="text-[10px] font-bold text-gray-900 border-b border-gray-900 pb-1 hover:text-primary hover:border-primary transition-colors uppercase tracking-widest"
+                  >
+                    VERIFY TICKET STATUS
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
