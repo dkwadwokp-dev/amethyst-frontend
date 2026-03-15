@@ -1,9 +1,11 @@
 import { Button } from "../../shared/ui/button";
-import { Edit2, Download, XCircle, CreditCard, Loader2 } from "lucide-react";
+import { Download, XCircle, CreditCard, Loader2, Check } from "lucide-react";
 import { Section } from "../../shared/ui/section";
 import { generateInvoicePDF } from "../utils/generate-invoice";
 import { useState } from "react";
 import { useCreateBookingPayment } from "../../check-booking/actions/use-booking-payment";
+import { useManageBooking } from "../../check-booking/actions/use-manage-booking";
+import { useGetLoggedInUser } from "../../auth/actions/use-get-user";
 
 interface BookingActionsProps {
   booking: any;
@@ -13,9 +15,13 @@ const BookingActions = ({ booking }: BookingActionsProps) => {
   const [isDownloading, setIsDownloading] = useState(false);
   const { mutateAsync: createPayment, isPending: isPaying } =
     useCreateBookingPayment();
+  const { cancelBooking, completeBooking } = useManageBooking();
+  const { data: user } = useGetLoggedInUser();
 
   const isRoomPending = booking.type === "room" && booking.status === "PENDING";
   const canDownloadInvoice = booking.status !== "PENDING";
+  const isCancelled = booking.status === "CANCELLED";
+  const isCompleted = booking.status === "COMPLETED";
 
   const handlePayNow = async () => {
     try {
@@ -42,10 +48,18 @@ const BookingActions = ({ booking }: BookingActionsProps) => {
     }
   };
 
+  const handleCancel = () => {
+    cancelBooking.mutate(booking.reference);
+  };
+
+  const handleComplete = () => {
+    completeBooking.mutate(booking.reference);
+  };
+
   return (
     <Section className="bg-[#F8F9FA] pt-0">
       <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 max-w-5xl mx-auto border-t border-gray-100 pt-8">
-        {isRoomPending && (
+        {isRoomPending && !isCancelled && (
           <Button
             variant="primary"
             onClick={handlePayNow}
@@ -60,13 +74,8 @@ const BookingActions = ({ booking }: BookingActionsProps) => {
             {isPaying ? "PROCESSING..." : "PAY NOW & CONFIRM"}
           </Button>
         )}
-        <Button
-          variant="primary"
-          className="bg-[#2A2E33] hover:bg-black text-white !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none border-none shadow-none flex items-center justify-center gap-2"
-        >
-          <Edit2 className="w-3 h-3" /> MODIFY BOOKING
-        </Button>
-        {canDownloadInvoice && (
+
+        {canDownloadInvoice && !isCancelled && (
           <Button
             variant="outline"
             onClick={handleDownloadInvoice}
@@ -81,12 +90,37 @@ const BookingActions = ({ booking }: BookingActionsProps) => {
             {isDownloading ? "GENERATING..." : "DOWNLOAD INVOICE"}
           </Button>
         )}
-        <Button
-          variant="outline"
-          className="border-red-100 text-red-500 bg-red-50 hover:bg-red-100 hover:border-red-200 !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none shadow-none flex items-center justify-center gap-2 font-bold sm:ml-auto"
-        >
-          <XCircle className="w-3 h-3" /> CANCEL BOOKING
-        </Button>
+
+        {user && !isCompleted && !isCancelled && (
+          <>
+            <Button
+              variant="outline"
+              onClick={handleComplete}
+              disabled={completeBooking.isPending}
+              className="border-green-100 text-green-600 bg-green-50 hover:bg-green-100 hover:border-green-200 !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none shadow-none flex items-center justify-center gap-2 font-bold sm:ml-auto disabled:opacity-70"
+            >
+              {completeBooking.isPending ? (
+                <Loader2 className="w-3 h-3 animate-spin" />
+              ) : (
+                <Check className="w-3 h-3" />
+              )}
+              {completeBooking.isPending ? "COMPLETING..." : "MARK COMPLETED"}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleCancel}
+              disabled={cancelBooking.isPending}
+              className="border-red-100 text-red-500 bg-red-50 hover:bg-red-100 hover:border-red-200 !px-3 md:px-6 py-3 text-[10px] tracking-widest rounded-none shadow-none flex items-center justify-center gap-2 font-bold disabled:opacity-70"
+            >
+              {cancelBooking.isPending ? (
+                <Loader2 className="w-3 h-3 animate-spin" />
+              ) : (
+                <XCircle className="w-3 h-3" />
+              )}
+              {cancelBooking.isPending ? "CANCELLING..." : "CANCEL BOOKING"}
+            </Button>
+          </>
+        )}
       </div>
     </Section>
   );

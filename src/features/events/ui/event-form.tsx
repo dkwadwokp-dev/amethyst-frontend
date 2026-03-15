@@ -28,13 +28,15 @@ const EventForm = ({
     resolver: zodResolver(eventSchema),
     defaultValues: {
       title: "",
-      date: "",
       time: "",
       location: "",
       desc: "",
       leadImage: "",
       tickets: [],
       ...initialData,
+      date: initialData?.date
+        ? new Date(initialData.date).toISOString().split("T")[0]
+        : "",
     },
   });
 
@@ -78,6 +80,13 @@ const EventForm = ({
             <input
               {...register("date")}
               type="date"
+              min={(() => {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, "0");
+                const day = String(now.getDate()).padStart(2, "0");
+                return `${year}-${month}-${day}`;
+              })()}
               className={`w-full border ${errors.date ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
             />
             {errors.date && (

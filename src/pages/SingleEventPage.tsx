@@ -1,9 +1,10 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
 import { Button } from "../features/shared/ui/button";
 import { useGetLoggedInUser } from "../features/auth/actions/use-get-user";
+import { useDeleteEvent } from "../features/events/actions/use-delete-event";
 import {
   ChevronLeft,
   Calendar,
@@ -13,6 +14,7 @@ import {
   Maximize2,
   Loader2,
   Edit,
+  Trash2,
 } from "lucide-react";
 import PurchaseTicketModal from "../features/events/ui/purchase-ticket-modal";
 import { useImageModal } from "../features/shared/context/image-modal-context";
@@ -21,19 +23,27 @@ import { useEventById } from "../features/events/actions/use-events";
 
 const SingleEventPage = () => {
   const { eventId } = useParams();
+  const navigate = useNavigate();
   const { data: user } = useGetLoggedInUser();
+  const { mutate: deleteEvent, isPending: isDeleting } = useDeleteEvent();
   const { data: event, isLoading, error } = useEventById(eventId);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { openModal } = useImageModal();
 
-  if (isLoading) {
+  const handleDelete = () => {
+    deleteEvent(eventId!, {
+      onSuccess: () => navigate("/events"),
+    });
+  };
+
+  if (isLoading || isDeleting) {
     return (
       <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
         <Header />
         <div className="flex-1 flex flex-col items-center justify-center gap-4">
           <Loader2 className="w-8 h-8 animate-spin text-primary" />
           <p className="text-[10px] tracking-widest font-bold text-gray-400">
-            LOADING EVENT...
+            {isDeleting ? "DELETING EVENT..." : "LOADING EVENT..."}
           </p>
         </div>
         <Footer />
@@ -73,12 +83,20 @@ const SingleEventPage = () => {
             </Link>
 
             {user && (
-              <Link
-                to={`/events/${eventId}/edit`}
-                className="inline-flex items-center text-[10px] text-primary hover:text-primary/80 uppercase tracking-widest font-bold gap-2"
-              >
-                <Edit className="w-3 h-3" /> Edit Event
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  to={`/events/${eventId}/edit`}
+                  className="inline-flex items-center text-[10px] text-primary hover:text-primary/80 uppercase tracking-widest font-bold gap-2"
+                >
+                  <Edit className="w-3 h-3" /> Edit Event
+                </Link>
+                <button
+                  onClick={handleDelete}
+                  className="inline-flex items-center text-[10px] text-red-600 hover:text-red-700 uppercase tracking-widest font-bold gap-2"
+                >
+                  <Trash2 className="w-3 h-3" /> Delete Event
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -132,7 +150,7 @@ const SingleEventPage = () => {
 
             <div className="lg:col-span-1 lg:mt-0">
               <div className="bg-[#F8F9FA] p-6 lg:p-8 border border-gray-100 shadow-sm sticky top-24">
-                <div className="mb-8 border-b border-gray-200 pb-6">
+                <div className="border-b border-gray-200 pb-6 mb-8">
                   <h4 className="text-[10px] uppercase text-gray-400 font-bold tracking-widest mb-2 flex items-center gap-2">
                     <Ticket className="w-4 h-4" />{" "}
                     {event.tickets.length > 0
@@ -146,45 +164,49 @@ const SingleEventPage = () => {
                   </div>
                 </div>
 
-                {event.tickets.length > 0 && (
-                  <div className="space-y-4 mb-8">
-                    {event.tickets.map((ticket, i) => (
-                      <div
-                        key={i}
-                        className="flex justify-between items-center p-4 bg-white border border-gray-100"
+                {event.tickets.length > 0 ? (
+                  <>
+                    <div className="space-y-4 mb-8">
+                      {event.tickets.map((ticket, i) => (
+                        <div
+                          key={i}
+                          className="flex justify-between items-center p-4 bg-white border border-gray-100"
+                        >
+                          <span className="text-sm font-bold text-gray-700">
+                            {ticket.type}
+                          </span>
+                          <span className="text-lg font-marcellus text-primary">
+                            ${ticket.price}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <Button
+                      onClick={() => setIsModalOpen(true)}
+                      variant="primary"
+                      className="w-full bg-primary hover:opacity-90 text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none"
+                    >
+                      PURCHASE TICKETS
+                    </Button>
+
+                    <div className="mt-6 text-center pt-6 border-t border-gray-100">
+                      <p className="text-[10px] text-gray-400 font-medium mb-3 uppercase tracking-widest">
+                        Already have a ticket?
+                      </p>
+                      <Link
+                        to="/verify-ticket"
+                        className="text-[10px] font-bold text-gray-900 border-b border-gray-900 pb-1 hover:text-primary hover:border-primary transition-colors uppercase tracking-widest"
                       >
-                        <span className="text-sm font-bold text-gray-700">
-                          {ticket.type}
-                        </span>
-                        <span className="text-lg font-marcellus text-primary">
-                          ${ticket.price}
-                        </span>
-                      </div>
-                    ))}
+                        VERIFY TICKET STATUS
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">
+                    This event is open to everyone. No tickets or registration
+                    required so please just show up.
                   </div>
                 )}
-
-                <Button
-                  onClick={() => setIsModalOpen(true)}
-                  variant="primary"
-                  className="w-full bg-primary hover:opacity-90 text-white px-6 py-5 text-[11px] font-bold tracking-widest rounded-none border-none shadow-none"
-                >
-                  {event.tickets.length > 0
-                    ? "PURCHASE TICKETS"
-                    : "REGISTER INTEREST"}
-                </Button>
-
-                <div className="mt-6 text-center pt-6 border-t border-gray-100">
-                  <p className="text-[10px] text-gray-400 font-medium mb-3 uppercase tracking-widest">
-                    Already have a ticket?
-                  </p>
-                  <Link
-                    to="/verify-ticket"
-                    className="text-[10px] font-bold text-gray-900 border-b border-gray-900 pb-1 hover:text-primary hover:border-primary transition-colors uppercase tracking-widest"
-                  >
-                    VERIFY TICKET STATUS
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
