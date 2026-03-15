@@ -23,47 +23,75 @@ import EditEventPage from "./pages/EditEventPage";
 import VerifyTicketPage from "./pages/VerifyTicketPage";
 import VerifyBookingPaymentPage from "./pages/VerifyBookingPaymentPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { InitialDispatch } from "./features/shared/ui/initial-dispatch";
+import { ProtectedRoute } from "./features/shared/ui/protected-route";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <ScrollToTop />
-        <CustomCursor />
-        <ImageModalProvider>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/style-guide" element={<StyleGuide />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/dishes" element={<DishesPage />} />
-            <Route path="/rooms" element={<RoomsPage />} />
-            <Route path="/rooms/:roomId" element={<SingleRoomPage />} />
-            <Route path="/about-us" element={<AboutPage />} />
-            <Route path="/book" element={<BookPage />} />
-            <Route path="/check-booking" element={<CheckBookingPage />} />
-            <Route path="/bookings" element={<BookingsPage />} />
-            <Route path="/bookings/:bookingId" element={<ViewBookingPage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/events/new" element={<NewEventPage />} />
-            <Route path="/events/:eventId" element={<SingleEventPage />} />
-            <Route path="/events/:eventId/edit" element={<EditEventPage />} />
-            <Route
-              path="/verify-ticket-payment"
-              element={<VerifyTicketPage />}
-            />
-            <Route path="/verify-ticket" element={<VerifyTicketPage />} />
-            <Route
-              path="/verify-booking-payment"
-              element={<VerifyBookingPaymentPage />}
-            />
-            <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/faq" element={<FaqPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </ImageModalProvider>
-      </Router>
+      <InitialDispatch>
+        <Router>
+          <ScrollToTop />
+          <CustomCursor />
+          <ImageModalProvider>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/style-guide" element={<StyleGuide />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/dishes" element={<DishesPage />} />
+              <Route path="/rooms" element={<RoomsPage />} />
+              <Route path="/rooms/:roomId" element={<SingleRoomPage />} />
+              <Route path="/about-us" element={<AboutPage />} />
+              <Route path="/book" element={<BookPage />} />
+              <Route path="/check-booking" element={<CheckBookingPage />} />
+              <Route
+                path="/bookings"
+                element={
+                  <ProtectedRoute>
+                    <BookingsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/bookings/:bookingId"
+                element={<ViewBookingPage />}
+              />
+              <Route path="/events" element={<EventsPage />} />
+              <Route
+                path="/events/new"
+                element={
+                  <ProtectedRoute>
+                    <NewEventPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/events/:eventId" element={<SingleEventPage />} />
+              <Route
+                path="/events/:eventId/edit"
+                element={
+                  <ProtectedRoute>
+                    <EditEventPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/verify-ticket-payment"
+                element={<VerifyTicketPage />}
+              />
+              <Route path="/verify-ticket" element={<VerifyTicketPage />} />
+              <Route
+                path="/verify-booking-payment"
+                element={<VerifyBookingPaymentPage />}
+              />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/faq" element={<FaqPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </ImageModalProvider>
+        </Router>
+      </InitialDispatch>
     </QueryClientProvider>
   );
 }

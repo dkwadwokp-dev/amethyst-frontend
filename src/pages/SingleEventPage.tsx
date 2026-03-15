@@ -3,6 +3,7 @@ import { useState } from "react";
 import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
 import { Button } from "../features/shared/ui/button";
+import { useGetLoggedInUser } from "../features/auth/actions/use-get-user";
 import {
   ChevronLeft,
   Calendar,
@@ -11,6 +12,7 @@ import {
   Ticket,
   Maximize2,
   Loader2,
+  Edit,
 } from "lucide-react";
 import PurchaseTicketModal from "../features/events/ui/purchase-ticket-modal";
 import { useImageModal } from "../features/shared/context/image-modal-context";
@@ -19,6 +21,7 @@ import { useEventById } from "../features/events/actions/use-events";
 
 const SingleEventPage = () => {
   const { eventId } = useParams();
+  const { data: user } = useGetLoggedInUser();
   const { data: event, isLoading, error } = useEventById(eventId);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { openModal } = useImageModal();
@@ -61,13 +64,22 @@ const SingleEventPage = () => {
       <Header />
       <div className="flex-1 bg-white">
         <div className="bg-[#F8F9FA] border-b border-gray-100">
-          <div className="max-w-6xl mx-auto py-4 px-4 md:px-0">
+          <div className="max-w-6xl mx-auto py-4 px-4 md:px-0 flex justify-between items-center">
             <Link
               to="/events"
               className="inline-flex items-center text-[10px] text-gray-500 hover:text-primary uppercase tracking-widest font-bold"
             >
               <ChevronLeft className="w-3 h-3 mr-1" /> BACK TO ALL EVENTS
             </Link>
+
+            {user && (
+              <Link
+                to={`/events/${eventId}/edit`}
+                className="inline-flex items-center text-[10px] text-primary hover:text-primary/80 uppercase tracking-widest font-bold gap-2"
+              >
+                <Edit className="w-3 h-3" /> Edit Event
+              </Link>
+            )}
           </div>
         </div>
 

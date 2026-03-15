@@ -1,4 +1,4 @@
-import { Bed, Wifi, Wind, Check } from "lucide-react";
+import { Bed, Wifi, Wind } from "lucide-react";
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { useRoom } from "../../rooms/actions/use-rooms";
 

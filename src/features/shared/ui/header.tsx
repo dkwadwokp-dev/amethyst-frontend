@@ -2,6 +2,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "./logo";
+import { useGetLoggedInUser } from "../../auth/actions/use-get-user";
 
 interface HeaderProps {
   isTransparent?: boolean;
@@ -10,6 +11,7 @@ interface HeaderProps {
 const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: user } = useGetLoggedInUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +28,7 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
     "EVENTS",
     "ABOUT US",
     "CONTACT",
-    "BOOKINGS",
+    user ? "BOOKINGS" : "BOOK",
   ];
   const getPath = (item: string) =>
     item === "HOME"
@@ -43,7 +45,9 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
                 ? "/about-us"
                 : item === "BOOKINGS"
                   ? "/bookings"
-                  : "#";
+                  : item === "BOOK"
+                    ? "/book"
+                    : "#";
 
   const closeMenu = () => setIsMobileMenuOpen(false);
 
