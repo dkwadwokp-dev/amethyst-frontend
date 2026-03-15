@@ -31,10 +31,12 @@ const ContactInfoCards = () => {
         {cards.map((card, idx) => (
           <div
             key={idx}
-            className="bg-white p-6 md:p-10 flex flex-col items-center text-center shadow-sm border border-gray-100"
+            className="bg-white group p-6 md:p-10 flex flex-col items-center text-center shadow-sm border border-gray-100"
           >
-            <div className="text-gray-900 mb-4 md:mb-6">{card.icon}</div>
-            <h4 className="font-bold text-[8px] md:text-[11px] tracking-widest text-gray-900 uppercase mb-4 md:mb-6 flex flex-col items-center gap-2 md:gap-4">
+            <div className="text-gray-900 mb-4 group-hover:text-primary md:mb-6">
+              {card.icon}
+            </div>
+            <h4 className="font-bold text-[8px] group-hover:text-primary md:text-[11px] tracking-widest text-gray-900 uppercase mb-4 md:mb-6 flex flex-col items-center gap-2 md:gap-4">
               {card.title}
               <div className="w-4 md:w-6 h-[1px] md:h-[1.5px] bg-gray-300"></div>
             </h4>

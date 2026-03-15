@@ -36,7 +36,7 @@ const ContactFormSection = () => {
             <h4 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-3">
               WE'RE HERE TO ASSIST
             </h4>
-            <h2 className="text-3xl md:text-4xl font-marcellus text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-marcellus text-primary">
               Let's Talk
             </h2>
           </div>
@@ -51,10 +51,12 @@ const ContactFormSection = () => {
                   {...register("name")}
                   type="text"
                   placeholder="Full Name"
-                  className={`w-full border ${errors.name ? 'border-primary' : 'border-gray-200'} p-3 text-sm focus:border-black outline-none transition-colors`}
+                  className={`w-full border ${errors.name ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
                 />
                 {errors.name && (
-                  <p className="text-[10px] text-primary font-bold">{errors.name.message}</p>
+                  <p className="text-[10px] text-primary font-bold">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
               <div className="space-y-2">
@@ -65,10 +67,12 @@ const ContactFormSection = () => {
                   {...register("email")}
                   type="email"
                   placeholder="email@example.com"
-                  className={`w-full border ${errors.email ? 'border-primary' : 'border-gray-200'} p-3 text-sm focus:border-black outline-none transition-colors`}
+                  className={`w-full border ${errors.email ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
                 />
                 {errors.email && (
-                  <p className="text-[10px] text-primary font-bold">{errors.email.message}</p>
+                  <p className="text-[10px] text-primary font-bold">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -81,10 +85,12 @@ const ContactFormSection = () => {
                 {...register("subject")}
                 type="text"
                 placeholder="How can we help?"
-                className={`w-full border ${errors.subject ? 'border-primary' : 'border-gray-200'} p-3 text-sm focus:border-black outline-none transition-colors`}
+                className={`w-full border ${errors.subject ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors`}
               />
               {errors.subject && (
-                <p className="text-[10px] text-primary font-bold">{errors.subject.message}</p>
+                <p className="text-[10px] text-primary font-bold">
+                  {errors.subject.message}
+                </p>
               )}
             </div>
 
@@ -95,28 +101,32 @@ const ContactFormSection = () => {
               <textarea
                 {...register("message")}
                 placeholder="Your message here..."
-                className={`w-full border ${errors.message ? 'border-primary' : 'border-gray-200'} p-3 text-sm focus:border-black outline-none transition-colors min-h-[160px] resize-y`}
+                className={`w-full border ${errors.message ? "border-primary" : "border-gray-200"} p-3 text-sm focus:border-black outline-none transition-colors min-h-[160px] resize-y`}
               ></textarea>
               {errors.message && (
-                <p className="text-[10px] text-primary font-bold">{errors.message.message}</p>
+                <p className="text-[10px] text-primary font-bold">
+                  {errors.message.message}
+                </p>
               )}
             </div>
 
             <div className="space-y-2">
-                <div className="flex items-center gap-3 py-2">
+              <div className="flex items-center gap-3 py-2">
                 <input
-                    {...register("privacy")}
-                    type="checkbox"
-                    id="privacy"
-                    className="w-4 h-4 border-gray-300 rounded text-gray-900 focus:ring-gray-900"
+                  {...register("privacy")}
+                  type="checkbox"
+                  id="privacy"
+                  className="w-4 h-4 border-gray-300 rounded text-gray-900 focus:ring-gray-900"
                 />
                 <label htmlFor="privacy" className="text-xs text-gray-600">
-                    I agree to the privacy terms and conditions.
+                  I agree to the privacy terms and conditions.
                 </label>
-                </div>
-                {errors.privacy && (
-                    <p className="text-[10px] text-primary font-bold">{errors.privacy.message}</p>
-                )}
+              </div>
+              {errors.privacy && (
+                <p className="text-[10px] text-primary font-bold">
+                  {errors.privacy.message}
+                </p>
+              )}
             </div>
 
             <div className="pt-2">

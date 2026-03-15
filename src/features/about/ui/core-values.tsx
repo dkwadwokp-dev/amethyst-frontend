@@ -15,13 +15,13 @@ const CoreValues = () => {
         {values.map((val, idx) => (
           <div
             key={idx}
-            className="flex flex-col items-center justify-center text-center"
+            className="flex group flex-col items-center justify-center text-center"
           >
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-white flex items-center justify-center shadow-sm mb-3 md:mb-4 text-gray-900 ">
+            <div className="w-10 h-10 group-hover:text-primary md:w-12 md:h-12 bg-white flex items-center justify-center shadow-sm mb-3 md:mb-4 text-gray-900 ">
               {val.icon}
             </div>
             <div className="w-4 h-[1px] md:w-6 md:h-[1.5px] bg-gray-300 mb-3 md:mb-4"></div>
-            <h4 className="text-[8px] md:text-[10px] font-bold tracking-widest text-gray-900 uppercase">
+            <h4 className="text-[8px] group-hover:text-primary md:text-[10px] font-bold tracking-widest text-gray-900 uppercase">
               {val.title}
             </h4>
           </div>

@@ -9,7 +9,7 @@ const VideoTour = () => {
           <h4 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-4">
             EXPERIENCE IT
           </h4>
-          <h2 className="text-3xl md:text-4xl font-marcellus text-gray-900 mb-6 uppercase">
+          <h2 className="text-3xl md:text-4xl font-marcellus text-primary mb-6 uppercase">
             Take a Tour
           </h2>
           <p className="text-xs text-gray-500 leading-relaxed font-manrope">

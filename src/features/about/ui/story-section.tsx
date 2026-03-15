@@ -12,7 +12,7 @@ const StorySection = () => {
         />
         <div>
           <div className="w-16 h-1 bg-gray-200 mb-6"></div>
-          <h2 className="text-3xl md:text-4xl font-marcellus text-gray-900 mb-6 uppercase">
+          <h2 className="text-3xl md:text-4xl font-marcellus text-primary mb-6 uppercase">
             Our Story
           </h2>
           <p className="text-xs text-gray-500 leading-relaxed font-manrope mb-6">

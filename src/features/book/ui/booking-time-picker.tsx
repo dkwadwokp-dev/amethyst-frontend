@@ -95,7 +95,7 @@ export const BookingTimePicker = ({
         </span>
       </div>
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-5 gap-2">
-        {[15, 16, 17, 18, 19, 20, 21, 22, 23, 0].map((hour) => {
+        {[15, 16, 17, 18, 19, 20, 21, 22, 23].map((hour) => {
           const isTimeBooked = tableDayBookings.some((b: any) => {
             // Adjust logic for next-day hours (0-3)
             const checkHour = hour < 4 ? hour + 24 : hour;
