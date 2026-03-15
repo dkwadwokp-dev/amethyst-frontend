@@ -54,9 +54,6 @@ const BookingList = () => {
       <Section className="bg-[#F8F9FA]">
         <div className="flex flex-col items-center justify-center py-20">
           <Loading />
-          <p className="mt-4 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-            Loading your bookings...
-          </p>
         </div>
       </Section>
     );

@@ -203,8 +203,14 @@ const BookForm = () => {
       }
 
       console.log("Submitting API Payload:", payload);
-      const booking = await createBooking(payload);
-      setSuccessBooking(booking);
+      const result = await createBooking(payload);
+
+      if (result.payment && result.payment.data?.authorization_url) {
+        window.location.href = result.payment.data.authorization_url;
+        return;
+      }
+
+      setSuccessBooking(result.booking || result);
 
       setFormData({
         type: initialType,

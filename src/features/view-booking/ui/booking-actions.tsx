@@ -3,6 +3,7 @@ import { Edit2, Download, XCircle, CreditCard, Loader2 } from "lucide-react";
 import { Section } from "../../shared/ui/section";
 import { generateInvoicePDF } from "../utils/generate-invoice";
 import { useState } from "react";
+import { useCreateBookingPayment } from "../../check-booking/actions/use-booking-payment";
 
 interface BookingActionsProps {
   booking: any;
@@ -10,8 +11,23 @@ interface BookingActionsProps {
 
 const BookingActions = ({ booking }: BookingActionsProps) => {
   const [isDownloading, setIsDownloading] = useState(false);
+  const { mutateAsync: createPayment, isPending: isPaying } =
+    useCreateBookingPayment();
+
   const isRoomPending = booking.type === "room" && booking.status === "PENDING";
   const canDownloadInvoice = booking.status !== "PENDING";
+
+  const handlePayNow = async () => {
+    try {
+      const payment = await createPayment(booking.reference);
+      if (payment?.data?.authorization_url) {
+        window.location.href = payment.data.authorization_url;
+      }
+    } catch (error) {
+      console.error("Payment creation failed:", error);
+      alert("Could not initiate payment. Please try again.");
+    }
+  };
 
   const handleDownloadInvoice = async () => {
     try {
@@ -32,9 +48,16 @@ const BookingActions = ({ booking }: BookingActionsProps) => {
         {isRoomPending && (
           <Button
             variant="primary"
-            className="bg-green-600 hover:bg-green-700 text-white !px-4 md:px-8 py-4 text-[11px] tracking-widest rounded-none border-none shadow-lg flex items-center justify-center gap-3 font-bold animate-pulse"
+            onClick={handlePayNow}
+            disabled={isPaying}
+            className="bg-green-600 hover:bg-green-700 text-white !px-4 md:px-8 py-4 text-[11px] tracking-widest rounded-none border-none shadow-lg flex items-center justify-center gap-3 font-bold animate-pulse disabled:opacity-70"
           >
-            <CreditCard className="w-4 h-4" /> PAY NOW & CONFIRM
+            {isPaying ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <CreditCard className="w-4 h-4" />
+            )}
+            {isPaying ? "PROCESSING..." : "PAY NOW & CONFIRM"}
           </Button>
         )}
         <Button

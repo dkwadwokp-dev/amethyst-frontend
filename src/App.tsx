@@ -21,6 +21,7 @@ import SingleEventPage from "./pages/SingleEventPage";
 import NewEventPage from "./pages/NewEventPage";
 import EditEventPage from "./pages/EditEventPage";
 import VerifyTicketPage from "./pages/VerifyTicketPage";
+import VerifyBookingPaymentPage from "./pages/VerifyBookingPaymentPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,10 @@ function App() {
               element={<VerifyTicketPage />}
             />
             <Route path="/verify-ticket" element={<VerifyTicketPage />} />
+            <Route
+              path="/verify-booking-payment"
+              element={<VerifyBookingPaymentPage />}
+            />
             <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="*" element={<NotFoundPage />} />
