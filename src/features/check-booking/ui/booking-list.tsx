@@ -117,25 +117,21 @@ const BookingList = () => {
 
         {/* Status Filter */}
         <div className="flex flex-wrap justify-center gap-4 mb-8">
-          {[
-            "ALL",
-            "PENDING",
-            "PROCESSED",
-            "COMPLETED",
-            "CANCELLED",
-          ].map((status) => (
-            <button
-              key={status}
-              onClick={() => handleStatusChange(status)}
-              className={`px-4 py-2 text-[10px] font-bold tracking-widest uppercase transition-all rounded-full border ${
-                statusFilter === status
-                  ? "bg-primary text-white border-primary"
-                  : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
-              }`}
-            >
-              {status}
-            </button>
-          ))}
+          {["ALL", "PENDING", "PROCESSED", "COMPLETED", "CANCELLED"].map(
+            (status) => (
+              <button
+                key={status}
+                onClick={() => handleStatusChange(status)}
+                className={`px-4 py-2 text-[10px] font-bold tracking-widest uppercase transition-all rounded-full border ${
+                  statusFilter === status
+                    ? "bg-primary text-white border-primary"
+                    : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
+                }`}
+              >
+                {status}
+              </button>
+            ),
+          )}
         </div>
 
         {filteredBookings.length === 0 ? (
