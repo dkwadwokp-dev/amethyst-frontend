@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock, X } from "lucide-react";
 import { getTimeStyle } from "../utils/book-utils";
 
 interface BookingTimePickerProps {
@@ -119,13 +119,14 @@ export const BookingTimePicker = ({
               type="button"
               disabled={isTimeBooked}
               onClick={() => handleTimeClick(hour)}
-              className={`py-3 text-xs font-semibold border transition-colors ${
+              className={`py-3 text-xs font-semibold border transition-colors flex items-center justify-center gap-2 ${
                 isTimeBooked
                   ? "bg-gray-50 border-gray-100 text-gray-300 cursor-not-allowed"
                   : getTimeStyle(hour, arrivalHour, departureHour)
               }`}
             >
               {displayLabel}
+              {isTimeBooked && <X className="w-3 h-3 text-gray-300 ml-1" />}
             </button>
           );
         })}
