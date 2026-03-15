@@ -52,6 +52,7 @@ function App() {
               path="/verify-ticket-payment"
               element={<VerifyTicketPage />}
             />
+            <Route path="/verify-ticket" element={<VerifyTicketPage />} />
             <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="*" element={<NotFoundPage />} />

@@ -10,6 +10,7 @@ export interface ReferenceVerificationFormProps {
   cancelLabel?: string;
   className?: string; // Additional classes for the form container
   layout?: "stack" | "row";
+  placeholder?: string;
 }
 
 export const ReferenceVerificationForm = ({
@@ -20,6 +21,7 @@ export const ReferenceVerificationForm = ({
   cancelLabel = "CANCEL",
   className = "",
   layout = "stack",
+  placeholder = "e.g. PY-XXXXXXXX",
 }: ReferenceVerificationFormProps) => {
   const [value, setValue] = useState(initialValue);
 
@@ -39,7 +41,7 @@ export const ReferenceVerificationForm = ({
     <form onSubmit={handleSubmit} className={`w-full ${className}`}>
       <div className="mb-4">
         <Input
-          placeholder="e.g. PY-XXXXXXXX"
+          placeholder={placeholder}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           className="text-center font-mono uppercase tracking-widest text-sm"

@@ -61,8 +61,8 @@ const VerifyTicketPage = () => {
             Verifying Ticket
           </h2>
           <p className="text-gray-500 mb-8 text-sm">
-            Please enter your payment reference code to verify your ticket
-            status.
+            Please enter your payment reference code or ticket ID to verify your
+            ticket status.
           </p>
           <ReferenceVerificationForm
             onSubmit={handleVerify}
@@ -70,6 +70,7 @@ const VerifyTicketPage = () => {
             submitLabel="VERIFY STATUS"
             cancelLabel="RETURN HOME"
             layout="stack"
+            placeholder="e.g. PY-XXXXXX or TC-XXXXXX"
           />
         </div>
       </div>
@@ -78,7 +79,9 @@ const VerifyTicketPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 font-manrope">
-      <div className="bg-white w-full max-w-5xl shadow-2xl border border-gray-100 flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+      <div
+        className={`bg-white w-full ${data?.ticketCodes?.length > 1 ? "max-w-5xl" : "max-w-xl"} shadow-2xl border border-gray-100 flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-500`}
+      >
         {isLoading ? (
           <div className="flex-1 py-20 flex flex-col items-center justify-center text-center p-8">
             <Loading className="py-12 md:py-36" />
@@ -99,7 +102,7 @@ const VerifyTicketPage = () => {
             </h2>
             <p className="text-gray-600 mb-8 max-w-xs mx-auto leading-relaxed text-sm">
               {(error as any).message ||
-                "We couldn't verify your payment. Please try entering your reference code manually."}
+                "We couldn't verify your ticket. Please try entering a valid reference or ticket code."}
             </p>
 
             <ReferenceVerificationForm
@@ -110,12 +113,13 @@ const VerifyTicketPage = () => {
               cancelLabel="HOME"
               layout="row"
               className="w-full max-w-xs mx-auto"
+              placeholder="PY-XXXXXX or TC-XXXXXX"
             />
           </div>
         ) : (
           <>
             {/* Left Side: Success Message */}
-            <div className="md:w-1/2 p-10 flex flex-col justify-center border-r border-gray-100 bg-white relative">
+            <div className="md:w-full p-10 flex flex-col justify-center border-r border-gray-100 bg-white relative">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-yellow-400 to-primary"></div>
 
               <div className="mb-8">
@@ -123,74 +127,89 @@ const VerifyTicketPage = () => {
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
                 <h2 className="text-3xl font-marcellus text-gray-900 mb-4 leading-tight">
-                  Payment <br />
-                  Successful
+                  Ticket Status: <br />
+                  Confirmed
                 </h2>
+
+                {data.eventId && (
+                  <div className="mb-6 p-4 bg-gray-50 border border-gray-100 rounded-sm">
+                    <h3 className="font-marcellus text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">
+                      {data.eventId.title}
+                    </h3>
+                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest space-y-1">
+                      <p>{new Date(data.eventId.date).toLocaleDateString()}</p>
+                      <p>{data.eventId.time}</p>
+                      <p>{data.eventId.location}</p>
+                    </div>
+                  </div>
+                )}
+
                 <p className="text-gray-600 leading-relaxed text-sm">
-                  Thank you for your purchase,{" "}
+                  Verified for{" "}
                   <span className="font-bold text-gray-900">
                     {data.fullName}
                   </span>
-                  . Your transaction has been completed and a confirmation email
-                  has been sent to{" "}
-                  <span className="underline decoration-gray-300 underline-offset-4">
-                    {data.email}
-                  </span>
-                  .
+                  . Your ticket(s) are valid and ready.
                 </p>
               </div>
 
-              <div className="mt-auto">
-                <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
-                  PAYMENT REFERENCE
+              {data.reference && (
+                <div className="mt-auto">
+                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
+                    PAYMENT REFERENCE
+                  </div>
+                  <div className="font-mono text-xl text-gray-900 bg-gray-50 p-4 border border-gray-100 inline-block mb-2 w-full text-center">
+                    {data.reference}
+                  </div>
+                  <p className="text-[10px] text-gray-400 italic">
+                    * Keep this reference safe for verifying your tickets at the
+                    venue.
+                  </p>
                 </div>
-                <div className="font-mono text-xl text-gray-900 bg-gray-50 p-4 border border-gray-100 inline-block mb-2 w-full text-center">
-                  {data.reference}
-                </div>
-                <p className="text-[10px] text-gray-400 italic">
-                  * Keep this reference safe for verifying your tickets at the
-                  venue.
-                </p>
-              </div>
+              )}
 
               <div className="mt-8 pt-8 border-t border-gray-100">
                 <Button
                   variant="outline"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate(`/events/${data.eventId.eventId}`)}
                   className="w-full justify-center py-6 text-xs tracking-widest font-bold border-gray-200 hover:bg-gray-50 text-gray-900"
                 >
-                  RETURN TO HOMEPAGE
+                  RETURN TO EVENT
                 </Button>
               </div>
             </div>
 
             {/* Right Side: Tickets */}
-            <div className="md:w-1/2 bg-gray-50 p-6 flex flex-col relative overflow-hidden">
-              {/* Decorative Circles */}
-              <div className="absolute -left-3 top-1/2 w-6 h-6 bg-white rounded-full translate-y-[-50%] z-10 border-r border-gray-100"></div>
+            {data.ticketCodes.length > 1 && (
+              <div className="md:w-full bg-gray-50 p-6 flex flex-col relative overflow-hidden">
+                {/* Decorative Circles */}
+                <div className="absolute -left-3 top-1/2 w-6 h-6 bg-white rounded-full translate-y-[-50%] z-10 border-r border-gray-100"></div>
 
-              <div className="mb-6 flex justify-between items-end">
-                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                  YOUR TICKETS ({data.ticketCodes?.length || 0})
-                </h3>
-                <span className="text-[10px] text-primary font-bold bg-primary/10 px-2 py-1 rounded-full uppercase tracking-wider">
-                  {data.ticketType} PASS
-                </span>
-              </div>
+                <div className="mb-6 flex justify-between items-end">
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    {data.reference
+                      ? `YOUR TICKETS (${data.ticketCodes?.length || 0})`
+                      : "VERIFIED TICKET"}
+                  </h3>
+                  <span className="text-[10px] text-primary font-bold bg-primary/10 px-2 py-1 rounded-full uppercase tracking-wider">
+                    {data.ticketType} PASS
+                  </span>
+                </div>
 
-              <div className="space-y-3 flex-1 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
-                {data.ticketCodes &&
-                  data.ticketCodes.map((code: string, idx: number) => (
-                    <TicketItem key={idx} code={code} idx={idx} />
-                  ))}
-              </div>
+                <div className="space-y-3 flex-1 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
+                  {data.ticketCodes &&
+                    data.ticketCodes.map((code: string, idx: number) => (
+                      <TicketItem key={idx} code={code} idx={idx} />
+                    ))}
+                </div>
 
-              <div className="mt-8 text-center">
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-                  Present these codes at the entrance
-                </p>
+                <div className="mt-8 text-center">
+                  <p className="text-[10px] text-gray-400 uppercase tracking-widest">
+                    Present this code at the entrance
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
           </>
         )}
       </div>
