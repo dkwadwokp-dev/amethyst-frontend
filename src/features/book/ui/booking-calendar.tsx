@@ -2,6 +2,7 @@ import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { getDateStyle } from "../utils/book-utils";
 import { Loading } from "../../shared/ui/loading";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface BookingCalendarProps {
   activeTab: "room" | "dining";
@@ -141,8 +142,10 @@ export const BookingCalendar = ({
           {activeTab === "room" ? "CHECK-IN — CHECK-OUT" : "SELECT DATE"}
         </span>
         <div className="flex items-center gap-4">
-          <button
+          <motion.button
             type="button"
+            whileHover={{ scale: 1.1, x: -2 }}
+            whileTap={{ scale: 0.9 }}
             onClick={prevMonth}
             className="p-1 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-30"
             disabled={
@@ -151,12 +154,25 @@ export const BookingCalendar = ({
             }
           >
             <ChevronLeft className="w-4 h-4 text-gray-400" />
-          </button>
-          <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase min-w-[100px] text-center">
-            {monthLabel}
-          </span>
-          <button
+          </motion.button>
+          <div className="overflow-hidden min-w-[100px]">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={monthLabel}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="text-[10px] text-gray-400 font-bold tracking-widest uppercase block text-center"
+              >
+                {monthLabel}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+          <motion.button
             type="button"
+            whileHover={{ scale: 1.1, x: 2 }}
+            whileTap={{ scale: 0.9 }}
             onClick={nextMonth}
             className="p-1 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-30"
             disabled={(() => {
@@ -174,18 +190,31 @@ export const BookingCalendar = ({
             })()}
           >
             <ChevronRight className="w-4 h-4 text-gray-400" />
-          </button>
+          </motion.button>
         </div>
       </div>
 
       <div className="relative">
-        {isCheckingAvailability && (
-          <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/70 backdrop-blur-[1px]">
-            <Loading className="py-0 scale-75" />
-          </div>
-        )}
+        <AnimatePresence>
+          {isCheckingAvailability && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 z-20 flex items-center justify-center bg-white/70 backdrop-blur-[1px]"
+            >
+              <Loading className="py-0 scale-75" />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <div className="grid grid-cols-7 gap-y-4 gap-x-1 text-center mb-2">
+        <motion.div 
+          key={monthLabel}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="grid grid-cols-7 gap-y-4 gap-x-1 text-center mb-2"
+        >
           {["SU", "MO", "TU", "WE", "TH", "FR", "SA"].map((day) => (
             <div
               key={day}
@@ -210,14 +239,16 @@ export const BookingCalendar = ({
 
             return (
               <div key={day} className="flex justify-center items-center">
-                <button
+                <motion.button
                   type="button"
+                  whileHover={!isUnavailable ? { scale: 1.15 } : {}}
+                  whileTap={!isUnavailable ? { scale: 0.9 } : {}}
                   disabled={isUnavailable}
                   onClick={(e) => {
                     e.preventDefault();
                     handleDateClick(day);
                   }}
-                  className={`w-8 h-8 flex items-center justify-center text-xs transition-colors  ${getDateStyle(
+                  className={`w-8 h-8 flex items-center justify-center text-xs transition-colors rounded-sm ${getDateStyle(
                     day,
                     isUnavailable,
                     activeTab,
@@ -229,11 +260,11 @@ export const BookingCalendar = ({
                   )}`}
                 >
                   {isBooked && !isPast && activeTab === "room" ? "X" : day}
-                </button>
+                </motion.button>
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

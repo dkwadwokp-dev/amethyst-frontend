@@ -1,6 +1,7 @@
 import { useImageModal } from "../../shared/context/image-modal-context";
 import { Maximize2 } from "lucide-react";
 import { Section } from "../../shared/ui/section";
+import { motion } from "framer-motion";
 
 const GalleryGrid = () => {
   const { openModal } = useImageModal();
@@ -36,7 +37,11 @@ const GalleryGrid = () => {
     <Section className="md:pb-24 bg-gray-200">
       <div className="grid grid-cols-2 gap-3 md:gap-4">
         <div className="flex flex-col gap-3 md:gap-4">
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[0].url, galleryImages[0].alt)
@@ -53,8 +58,12 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[1].url, galleryImages[1].alt)
@@ -71,8 +80,12 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[2].url, galleryImages[2].alt)
@@ -89,10 +102,14 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="flex flex-col gap-3 md:gap-4">
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[3].url, galleryImages[3].alt)
@@ -109,8 +126,12 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[4].url, galleryImages[4].alt)
@@ -127,8 +148,12 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             className="relative group cursor-pointer overflow-hidden"
             onClick={() =>
               openModal(galleryImages[5].url, galleryImages[5].alt)
@@ -145,7 +170,7 @@ const GalleryGrid = () => {
                 <Maximize2 size={24} className="text-white hidden md:block" />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </Section>

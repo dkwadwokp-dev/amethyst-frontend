@@ -2,10 +2,16 @@ import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
 import PageHero from "../features/shared/ui/page-hero";
 import BookingList from "../features/check-booking/ui/booking-list";
+import { motion } from "framer-motion";
 
 const BookingsPage = () => {
   return (
-    <div className="min-h-screen bg-[#F8F9FA] font-manrope">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-[#F8F9FA] font-manrope"
+    >
       <Header />
       <PageHero 
         title="ALL BOOKINGS"
@@ -14,7 +20,7 @@ const BookingsPage = () => {
       />
       <BookingList />
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

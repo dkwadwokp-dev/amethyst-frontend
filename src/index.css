@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #941B1B;
-  --color-secondary: #C2410C;
+  --color-primary: #941b1b;
+  --color-secondary: #c2410c;
   --color-accent: #d9d2c2;
   --color-dark: #62412e;
   --color-light: #ffffff;
@@ -19,7 +19,9 @@
   body {
     cursor: none !important;
   }
-  a, button, [role="button"] {
+  a,
+  button,
+  [role="button"] {
     cursor: none !important;
   }
 }
@@ -27,6 +29,8 @@
 body {
   background-color: #ebe8e3;
   transition: background-color 0.3s ease;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 ::selection {

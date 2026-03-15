@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import Logo from "./logo";
 import { useGetLoggedInUser } from "../../auth/actions/use-get-user";
 
@@ -125,9 +126,19 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
 
       {/* Mobile Navigation Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-[#0a0a0a] z-[60] flex flex-col lg:hidden overflow-y-auto">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 bg-[#0a0a0a] z-[60] flex flex-col lg:hidden overflow-y-auto"
+        >
           {/* Menu Header */}
-          <div className="flex justify-between items-center py-4 px-6 border-b border-white/5">
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex justify-between items-center py-4 px-6 border-b border-white/5"
+          >
             <Link to="/" onClick={closeMenu}>
               <Logo variant="light" />
             </Link>
@@ -137,77 +148,111 @@ const Header = ({ isTransparent: initialTransparent = false }: HeaderProps) => {
             >
               <X className="w-8 h-8" />
             </button>
-          </div>
+          </motion.div>
 
-          <div className="flex-1 flex flex-col items-center justify-center py-12 px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex-1 flex flex-col items-center justify-center py-12 px-6"
+          >
             <nav className="flex flex-col gap-6 items-center w-full">
               {navItems.map((item, index) => {
                 const path = getPath(item);
                 return (
-                  <NavLink
+                  <motion.div
                     key={item}
-                    to={path}
-                    onClick={closeMenu}
-                    className={({ isActive }) =>
-                      `text-3xl md:text-5xl font-marcellus tracking-tight transition-all duration-500 transform ${
-                        index === 0
-                          ? "delay-[100ms]"
-                          : index === 1
-                            ? "delay-[150ms]"
-                            : "delay-[200ms]"
-                      } animate-in slide-in-from-bottom-4 fade-in ${
-                        isActive && path !== "#"
-                          ? "text-primary"
-                          : "text-white/40 hover:text-white"
-                      }`
-                    }
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.08 }}
                   >
-                    {item}
-                  </NavLink>
+                    <NavLink
+                      to={path}
+                      onClick={closeMenu}
+                      className={({ isActive }) =>
+                        `text-3xl md:text-5xl font-marcellus tracking-tight transition-all duration-500 transform ${
+                          isActive && path !== "#"
+                            ? "text-primary"
+                            : "text-white/40 hover:text-white"
+                        }`
+                      }
+                    >
+                      {item}
+                    </NavLink>
+                  </motion.div>
                 );
               })}
 
-              <div className="w-12 h-px bg-white/10 my-8 animate-in zoom-in-0 duration-700 delay-500"></div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="w-12 h-px bg-white/10 my-8"
+              ></motion.div>
 
-              <NavLink
-                to="/check-booking"
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  `text-sm font-manrope font-bold tracking-[0.3em] uppercase pb-2 transition-all border-b animate-in slide-in-from-bottom-2 fade-in delay-700 ${
-                    isActive
-                      ? "text-primary border-primary"
-                      : "text-white hover:text-white border-transparent"
-                  }`
-                }
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
               >
-                CHECK BOOKING
-              </NavLink>
+                <NavLink
+                  to="/check-booking"
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    `text-sm font-manrope font-bold tracking-[0.3em] uppercase pb-2 transition-all border-b ${
+                      isActive
+                        ? "text-primary border-primary"
+                        : "text-white hover:text-white border-transparent"
+                    }`
+                  }
+                >
+                  CHECK BOOKING
+                </NavLink>
+              </motion.div>
             </nav>
-          </div>
+          </motion.div>
 
           {/* Social / Contact Footer */}
-          <div className="p-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-1000">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="p-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8"
+          >
             <div className="flex gap-8">
-              {["INSTAGRAM", "FACEBOOK", "LINKEDIN"].map((social) => (
-                <a
+              {["INSTAGRAM", "FACEBOOK", "LINKEDIN"].map((social, idx) => (
+                <motion.a
                   key={social}
                   href="#"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 1.0 + idx * 0.05 }}
                   className="text-[10px] font-bold tracking-[0.2em] text-white/40 hover:text-primary transition-colors"
                 >
                   {social}
-                </a>
+                </motion.a>
               ))}
             </div>
             <div className="text-center md:text-right">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase mb-2">
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 1.2 }}
+                className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase mb-2"
+              >
                 RESERVATIONS
-              </p>
-              <p className="text-white font-manrope text-sm">
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 1.25 }}
+                className="text-white font-manrope text-sm"
+              >
                 +234 800 123 4567
-              </p>
+              </motion.p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </header>
   );

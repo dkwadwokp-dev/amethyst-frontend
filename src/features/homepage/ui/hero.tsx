@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { useImageModal } from "../../shared/context/image-modal-context";
+import { motion, AnimatePresence } from "framer-motion";
 import hero1 from "../../../assets/hero-1.png";
 import hero2 from "../../../assets/hero-2.png";
 
@@ -84,7 +85,10 @@ const Hero = () => {
               className={`absolute inset-0 bg-cover bg-center transition-all duration-[3000ms] ${
                 index === current ? "scale-105" : "scale-100"
               } ${index === current ? "cursor-pointer pointer-events-auto" : "pointer-events-none"}`}
-              style={{ backgroundImage: `url('${slide.image}')`, backgroundPosition: 'center 50%' }}
+              style={{
+                backgroundImage: `url('${slide.image}')`,
+                backgroundPosition: "center 50%",
+              }}
               onClick={() => openModal(slide.image, slide.mainTitle)}
             />
             {/* Fine-tuned Overlays for an elegant balance */}
@@ -98,53 +102,80 @@ const Hero = () => {
       {/* Content Layer */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-20">
         <div className="max-w-4xl">
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`${index === current ? "block" : "hidden"}`}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               {/* Slide Counter */}
-              <div className="flex items-center gap-4 mb-8">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="flex items-center gap-4 mb-8"
+              >
                 <span className="text-stone-400 font-manrope text-sm tracking-[0.3em]">
-                  0{index + 1}
+                  0{current + 1}
                 </span>
                 <div className="h-px w-12 bg-stone-600"></div>
                 <span className="text-stone-500 font-manrope text-sm tracking-[0.3em]">
                   0{slides.length}
                 </span>
-              </div>
+              </motion.div>
 
               {/* Tagline */}
-              <p className="text-primary font-manrope text-xs md:text-sm font-bold tracking-[0.5em] uppercase mb-4">
-                {slide.smallTitle}
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="text-primary font-manrope text-xs md:text-sm font-bold tracking-[0.5em] uppercase mb-4"
+              >
+                {slides[current].smallTitle}
+              </motion.p>
 
               {/* Main Title */}
-              <h1 className="text-5xl md:text-8xl font-marcellus text-white leading-tight mb-8 tracking-[-0.02em] font-light">
-                {slide.mainTitle}
-              </h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
+                className="text-5xl md:text-8xl font-marcellus text-white leading-tight mb-8 tracking-[-0.02em] font-light"
+              >
+                {slides[current].mainTitle}
+              </motion.h1>
 
               {/* Description */}
-              <p className="max-w-xl text-stone-400 text-base md:text-lg font-manrope font-light leading-relaxed mb-12">
-                {slide.desc}
-              </p>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="max-w-xl text-stone-400 text-base md:text-lg font-manrope font-light leading-relaxed mb-12"
+              >
+                {slides[current].desc}
+              </motion.p>
 
               {/* CTA */}
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
                 <Link
-                  to={slide.link}
+                  to={slides[current].link}
                   className="inline-flex items-center gap-4 group"
                 >
                   <span className="text-white font-manrope text-sm font-bold tracking-widest uppercase py-4 border-b border-primary/30 group-hover:border-primary transition-all duration-300">
-                    {slide.cta}
+                    {slides[current].cta}
                   </span>
                   <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
                     <ArrowRight className="w-4 h-4 text-white" />
                   </div>
                 </Link>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 

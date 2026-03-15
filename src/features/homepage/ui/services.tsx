@@ -1,6 +1,7 @@
 import { Section } from "../../shared/ui/section";
 import { SectionHeading } from "../../shared/ui/section-heading";
 import { BedDouble, Utensils, Waves, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -38,9 +39,13 @@ const Services = () => {
         className="mb-10 md:mb-16 max-w-2xl mx-auto"
       />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {services.map((service) => (
-          <div
+        {services.map((service, index) => (
+          <motion.div
             key={service.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-white p-4 md:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-50 flex items-center justify-center rounded-full mb-4 md:mb-6 text-gray-700">
@@ -52,7 +57,7 @@ const Services = () => {
             <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed line-clamp-3">
               {service.desc}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

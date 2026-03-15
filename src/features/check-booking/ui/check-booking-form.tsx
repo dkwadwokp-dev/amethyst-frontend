@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Section } from "../../shared/ui/section";
 import { Button } from "../../shared/ui/button";
 import { Ticket } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   checkBookingSchema,
   type CheckBookingFormData,
@@ -42,22 +43,49 @@ const CheckBookingForm = () => {
   };
 
   return (
-    <Section className="bg-[#F8F9FA] py-24 flex items-center justify-center">
+    <Section className="bg-[#F8F9FA] py-24 flex items-center justify-center overflow-hidden">
       <div className="bg-white w-full mx-auto max-w-2xl px-6 md:px-8 py-8 md:py-14 shadow-sm text-center flex flex-col items-center">
-        <Ticket className="w-8 h-8 text-gray-400 mb-6" />
-        <h2 className="text-3xl font-marcellus text-gray-900 mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <Ticket className="w-8 h-8 text-gray-400 mb-6" />
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-3xl font-marcellus text-gray-900 mb-4"
+        >
           Check Your Booking
-        </h2>
-        <p className="text-xs text-gray-500 leading-relaxed max-w-sm mb-12 font-manrope font-semibold">
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-xs text-gray-500 leading-relaxed max-w-sm mb-12 font-manrope font-semibold"
+        >
           Enter your booking reference number and the email used during
           registration to view, modify, or cancel your upcoming reservation.
-        </p>
+        </motion.p>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full max-w-md space-y-6 text-left"
         >
-          <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="space-y-2"
+          >
             <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
               BOOKING REFERENCE
             </label>
@@ -74,9 +102,15 @@ const CheckBookingForm = () => {
                 {errors.reference.message}
               </p>
             )}
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="space-y-2"
+          >
             <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
               EMAIL ADDRESS (SAME AS BOOKING)
             </label>
@@ -93,17 +127,27 @@ const CheckBookingForm = () => {
                 {errors.email.message}
               </p>
             )}
-          </div>
+          </motion.div>
 
           {serverError && (
-            <div className="bg-primary/5 border border-primary/10 p-4 animate-in fade-in slide-in-from-top-1 duration-300">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-primary/5 border border-primary/10 p-4"
+            >
               <p className="text-[10px] text-primary font-bold text-center leading-relaxed">
                 {serverError}
               </p>
-            </div>
+            </motion.div>
           )}
 
-          <div className="pt-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="pt-8"
+          >
             <Button
               type="submit"
               variant="outline"
@@ -112,7 +156,7 @@ const CheckBookingForm = () => {
             >
               {isSubmitting ? "CHECKING..." : "VIEW BOOKING"}
             </Button>
-          </div>
+          </motion.div>
         </form>
       </div>
     </Section>

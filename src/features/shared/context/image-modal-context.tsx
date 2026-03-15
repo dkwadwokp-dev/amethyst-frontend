@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ImageModalContextType {
   openModal: (src: string, alt?: string) => void;
@@ -27,13 +28,15 @@ export const ImageModalProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ImageModalContext.Provider value={{ openModal, closeModal }}>
       {children}
-      {isOpen && (
-        <ImageModal
-          src={modalData.src}
-          alt={modalData.alt}
-          onClose={closeModal}
-        />
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <ImageModal
+            src={modalData.src}
+            alt={modalData.alt}
+            onClose={closeModal}
+          />
+        )}
+      </AnimatePresence>
     </ImageModalContext.Provider>
   );
 };
@@ -80,9 +83,20 @@ const ImageModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/95 animate-in fade-in duration-300">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/95"
+    >
       {/* Top Bar Actions */}
-      <div className="absolute top-0 left-0 right-0 p-6 flex items-center justify-between z-10">
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1, duration: 0.4 }}
+        className="absolute top-0 left-0 right-0 p-6 flex items-center justify-between z-10"
+      >
         <div className="text-white/80 font-manrope text-[10px] tracking-[0.3em] uppercase hidden md:block">
           {alt}
         </div>
@@ -143,32 +157,48 @@ const ImageModal = ({
             <X size={20} />
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Image Container */}
       <div
         className="w-full h-full flex items-center justify-center p-4 md:p-12 overflow-auto"
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
-        <div
-          className="relative transition-transform duration-300 ease-out cursor-grab active:cursor-grabbing"
-          style={{ transform: `scale(${scale})` }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.5,
+            duration: 0.5,
+            type: "spring",
+            bounce: 0.3,
+          }}
         >
-          <img
-            src={src}
-            alt={alt}
-            className="max-w-full max-h-[85vh] object-contain shadow-2xl "
-            onDoubleClick={handleResetZoom}
-          />
-        </div>
+          <div
+            className="relative transition-transform duration-300 ease-out cursor-grab active:cursor-grabbing"
+            style={{ transform: `scale(${scale})` }}
+          >
+            <img
+              src={src}
+              alt={alt}
+              className="max-w-full max-h-[85vh] object-contain shadow-2xl "
+              onDoubleClick={handleResetZoom}
+            />
+          </div>
+        </motion.div>
       </div>
 
       {/* Mobile Hint */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 20, x: "-50%" }}
+        animate={{ opacity: 1, y: 0, x: "-50%" }}
+        transition={{ delay: 0.3, duration: 0.4 }}
+        className="absolute bottom-6 left-1/2 md:hidden"
+      >
         <p className="text-white/30 text-[9px] tracking-widest uppercase font-bold">
           Double tap to reset zoom
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

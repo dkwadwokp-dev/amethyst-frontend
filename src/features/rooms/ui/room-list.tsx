@@ -3,6 +3,7 @@ import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
 import { Section } from "../../shared/ui/section";
 import { Loading } from "../../shared/ui/loading";
+import { motion } from "framer-motion";
 
 import { useRooms } from "../actions/use-rooms";
 
@@ -30,9 +31,13 @@ const RoomList = () => {
   return (
     <Section className="bg-[#F8F9FA] py-12 md:py-20">
       <div className="space-y-6 md:space-y-8 max-w-5xl mx-auto">
-        {rooms.map((room) => (
-          <div
+        {rooms.map((room, index) => (
+          <motion.div
             key={room.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-white p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-8 shadow-sm items-center"
           >
             <div className="w-full md:w-[35%] shrink-0">
@@ -86,7 +91,7 @@ const RoomList = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

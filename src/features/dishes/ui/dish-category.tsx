@@ -9,6 +9,7 @@ import {
 } from "../actions/use-dish-category";
 import { Loading } from "../../shared/ui/loading";
 import type { DishItem } from "../interfaces/dish.interface";
+import { motion } from "framer-motion";
 
 interface DishCategoryProps {
   subtitle: string;
@@ -43,8 +44,15 @@ const DishCategory = ({ subtitle, title, category }: DishCategoryProps) => {
       ) : (
         <>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
-            {items.slice(0, visibleCount).map((item: DishItem) => (
-              <div key={item.id} className="flex flex-col">
+            {items.slice(0, visibleCount).map((item: DishItem, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex flex-col"
+              >
                 <ImagePlaceholder
                   className="w-full aspect-square mb-3 md:mb-6  object-cover"
                   src={item.image}
@@ -61,7 +69,7 @@ const DishCategory = ({ subtitle, title, category }: DishCategoryProps) => {
                 <p className="text-[9px] md:text-[11px] text-gray-500 leading-relaxed pr-2 line-clamp-2">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
           {hasMore && (

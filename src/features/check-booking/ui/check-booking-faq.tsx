@@ -1,4 +1,5 @@
 import { Section } from "../../shared/ui/section";
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -37,17 +38,27 @@ const faqs = [
 
 const CheckBookingFaq = () => {
   return (
-    <Section className="bg-[#F8F9FA] border-t border-gray-100">
+    <Section className="bg-[#F8F9FA] border-t border-gray-100 overflow-hidden">
       <div className="mb-6 md:mb-12">
-        <h2 className="text-3xl font-marcellus text-gray-900">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-marcellus text-gray-900"
+        >
           Find Answers To Your Questions Here
-        </h2>
+        </motion.h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {faqs.map((faq, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
             className="bg-white p-4 md:p-8 border border-gray-100 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] "
           >
             <h4 className="font-bold text-sm text-gray-900 mb-4 font-manrope">
@@ -56,7 +67,7 @@ const CheckBookingFaq = () => {
             <p className="text-xs text-gray-500 leading-relaxed font-manrope">
               {faq.a}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

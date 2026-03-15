@@ -1,51 +1,95 @@
 import { Section } from "../../shared/ui/section";
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
+import { motion } from "framer-motion";
 
 const StorySection = () => {
   return (
     <Section className="bg-white md:py-24">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <ImagePlaceholder
-          className="w-full h-full min-h-[300px] md:min-h-[500px] object-cover"
-          src="https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg?auto=compress&cs=tinysrgb&w=1200"
-          text="HOTEL EXTEIOR"
-        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <ImagePlaceholder
+            className="w-full h-full min-h-[300px] md:min-h-[500px] object-cover"
+            src="https://images.pexels.com/photos/2034335/pexels-photo-2034335.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            text="HOTEL EXTERIOR"
+          />
+        </motion.div>
         <div>
-          <div className="w-16 h-1 bg-gray-200 mb-6"></div>
-          <h2 className="text-3xl md:text-4xl font-marcellus text-primary mb-6 uppercase">
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            whileInView={{ opacity: 1, width: 64 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="h-1 bg-gray-200 mb-6"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-3xl md:text-4xl font-marcellus text-primary mb-6 uppercase"
+          >
             Our Story
-          </h2>
-          <p className="text-xs text-gray-500 leading-relaxed font-manrope mb-6">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-xs text-gray-500 leading-relaxed font-manrope mb-6"
+          >
             Founded with a vision to redefine urban luxury, AH Hotel seamlessly
             blends sophisticated modern aesthetics with the absolute warmth of
             Afrocentric hospitality. Our journey began over a decade ago with a
             simple mission: to provide an unparalleled oasis of elegance and
             tranquility in the heart of the city.
-          </p>
-          <p className="text-xs text-gray-500 leading-relaxed font-manrope mb-8 md:mb-12">
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-xs text-gray-500 leading-relaxed font-manrope mb-8 md:mb-12"
+          >
             Every detail of our establishment has been meticulously curated to
             ensure an unforgettable experience for our guests. From our
             critically acclaimed dining restaurants to our world-class luxury
             suites, we remain dedicated to setting the highest standard for
             excellence, boundless comfort, and culture.
-          </p>
+          </motion.p>
           <div className="flex gap-4 md:gap-8">
-            <div className="border border-gray-200 px-4 md:px-8 py-4 md:py-6 text-center w-full shadow-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="border border-gray-200 px-4 md:px-8 py-4 md:py-6 text-center w-full shadow-sm"
+            >
               <div className="font-marcellus text-3xl text-gray-900 mb-2">
                 10+
               </div>
               <div className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
                 Years Experience
               </div>
-            </div>
-            <div className="border border-gray-200 px-4 md:px-8 py-4 md:py-6 text-center w-full shadow-sm">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="border border-gray-200 px-4 md:px-8 py-4 md:py-6 text-center w-full shadow-sm"
+            >
               <div className="font-marcellus text-3xl text-gray-900 mb-2">
                 75+
               </div>
               <div className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">
                 Luxury Rooms
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

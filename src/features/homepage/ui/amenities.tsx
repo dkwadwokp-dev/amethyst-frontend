@@ -1,6 +1,7 @@
 import { Section } from "../../shared/ui/section";
 import { SectionHeading } from "../../shared/ui/section-heading";
 import { Wifi, Waves, Car, ThermometerSnowflake } from "lucide-react";
+import { motion } from "framer-motion";
 
 const amenities = [
   {
@@ -36,8 +37,12 @@ const Amenities = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {amenities.map((item, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
             className="bg-[#F8F9FA] p-4 md:p-8 flex flex-col items-center text-center"
           >
             <div className="w-12 h-12 bg-white flex items-center justify-center rounded-full mb-4 md:mb-6 text-gray-900 shadow-sm border border-gray-100">
@@ -49,7 +54,7 @@ const Amenities = () => {
             <p className="text-gray-500 text-[10px] leading-relaxed max-w-[150px]">
               {item.subtitle}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

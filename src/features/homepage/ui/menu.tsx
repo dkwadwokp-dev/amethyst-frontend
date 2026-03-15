@@ -6,6 +6,7 @@ import { useDishes } from "../../dishes/actions/use-dishes";
 import { useImageModal } from "../../shared/context/image-modal-context";
 import { Loading } from "../../shared/ui/loading";
 import type { DishItem } from "../../dishes/interfaces/dish.interface";
+import { motion } from "framer-motion";
 
 const Menu = () => {
   const { openModal } = useImageModal();
@@ -29,8 +30,12 @@ const Menu = () => {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-4 md:gap-y-10">
           {displayedItems?.map((item: DishItem, idx) => {
             return (
-              <div
+              <motion.div
                 key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="flex items-center gap-3 md:gap-6 group cursor-pointer"
               >
                 <img
@@ -54,14 +59,14 @@ const Menu = () => {
                   </div>
                   <p className="text-gray-500 text-xs italic">{item.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
       )}
 
-      <div className="mt-10 md:mt-16 text-center">
-        <Link to="/dishes">
+      <div className="mt-10 md:mt-16 mx-auto flex items-center justify-center text-center">
+        <Link to="/dishes" className="">
           <Button variant="ghost">View All Menu</Button>
         </Link>
       </div>

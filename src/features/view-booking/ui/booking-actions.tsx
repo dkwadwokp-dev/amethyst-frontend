@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useCreateBookingPayment } from "../../check-booking/actions/use-booking-payment";
 import { useManageBooking } from "../../check-booking/actions/use-manage-booking";
 import { useGetLoggedInUser } from "../../auth/actions/use-get-user";
+import { motion } from "framer-motion";
 
 interface BookingActionsProps {
   booking: any;

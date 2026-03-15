@@ -5,6 +5,7 @@ import { Button } from "../../shared/ui/button";
 import { Link } from "react-router-dom";
 import { useRooms } from "../../rooms/actions/use-rooms";
 import { Loading } from "../../shared/ui/loading";
+import { motion } from "framer-motion";
 
 const Rooms = () => {
   const { data: rooms, isLoading, isError } = useRooms();
@@ -25,9 +26,13 @@ const Rooms = () => {
         </div>
       ) : (
         <div className="space-y-4 max-w-5xl mx-auto">
-          {rooms?.slice(0, 3).map((room) => (
-            <div
+          {rooms?.slice(0, 3).map((room, index) => (
+            <motion.div
               key={room.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               data-cursor-text="VIEW"
               className="bg-white md:px-2 flex flex-col md:flex-row md:items-center shadow-sm group overflow-hidden"
             >
@@ -114,18 +119,25 @@ const Rooms = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-
           <div className="pt-8 text-center">
-            <Link to="/rooms">
-              <Button
-                variant="outline"
-                className="bg-transparent  text-xs tracking-[0.2em] px-8 py-4 border-gray-300"
-              >
-                VIEW ALL ROOMS
-              </Button>
-            </Link>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="pt-8 text-center"
+            >
+              <Link to="/rooms">
+                <Button
+                  variant="outline"
+                  className="bg-transparent mx-auto text-xs tracking-[0.2em] px-8 py-4 border-gray-300"
+                >
+                  VIEW ALL ROOMS
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </div>
       )}

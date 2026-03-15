@@ -1,5 +1,6 @@
 import { Section } from "../../shared/ui/section";
 import { Phone, Megaphone, Mail, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 
 const ContactInfoCards = () => {
   const cards = [
@@ -29,8 +30,12 @@ const ContactInfoCards = () => {
     <Section className="bg-[#F8F9FA] md:pb-24">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {cards.map((card, idx) => (
-          <div
+          <motion.div
             key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
             className="bg-white group p-6 md:p-10 flex flex-col items-center text-center shadow-sm border border-gray-100"
           >
             <div className="text-gray-900 mb-4 group-hover:text-primary md:mb-6">
@@ -47,7 +52,7 @@ const ContactInfoCards = () => {
                 </p>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

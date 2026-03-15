@@ -1,5 +1,6 @@
 import { Section } from "../../shared/ui/section";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 const faqs = [
@@ -83,27 +84,53 @@ const FaqList = () => {
     <Section className="bg-[#F8F9FA] py-24">
       <div className="max-w-4xl mx-auto space-y-16">
         {faqs.map((category, catIdx) => (
-          <div key={catIdx}>
-            <h3 className="text-2xl font-marcellus text-gray-900 mb-8 border-b border-gray-200 pb-4">
+          <motion.div
+            key={catIdx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: catIdx * 0.2 }}
+          >
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 + catIdx * 0.2 }}
+              className="text-2xl font-marcellus text-gray-900 mb-8 border-b border-gray-200 pb-4"
+            >
               {category.category}
-            </h3>
+            </motion.h3>
             <div className="space-y-4">
               {category.questions.map((faq, qIdx) => {
                 const isOpen = openItems[`${catIdx}-${qIdx}`];
                 return (
-                  <div
+                  <motion.div
                     key={qIdx}
-                    className="bg-white border border-gray-100  shadow-sm hover:shadow-md transition-shadow"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.2 + qIdx * 0.1 + catIdx * 0.2,
+                    }}
+                    className="bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
                   >
                     <button
                       onClick={() => toggleItem(catIdx, qIdx)}
                       className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
                     >
-                      <h4
+                      <motion.h4
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 0.5,
+                          delay: 0.3 + qIdx * 0.1 + catIdx * 0.2,
+                        }}
                         className={`text-sm tracking-wide font-manrope pr-8 transition-colors ${isOpen ? "font-bold text-primary" : "font-semibold text-gray-900 hover:text-gray-600"}`}
                       >
                         {faq.q}
-                      </h4>
+                      </motion.h4>
                       {isOpen ? (
                         <ChevronUp className="w-5 h-5 text-primary shrink-0" />
                       ) : (
@@ -111,15 +138,23 @@ const FaqList = () => {
                       )}
                     </button>
                     {isOpen && (
-                      <div className="px-6 pb-6 pt-2 text-xs text-gray-500 font-manrope leading-relaxed border-t border-gray-50">
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: 0.4 + qIdx * 0.1 + catIdx * 0.2,
+                        }}
+                        className="px-6 pb-6 pt-2 text-xs text-gray-500 font-manrope leading-relaxed border-t border-gray-50"
+                      >
                         {faq.a}
-                      </div>
+                      </motion.div>
                     )}
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

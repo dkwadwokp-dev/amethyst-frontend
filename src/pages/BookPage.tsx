@@ -9,11 +9,12 @@ const BookPage = () => {
   return (
     <div className="min-h-screen bg-white font-manrope">
       <Header />
-      
-      <PageHero 
-        title="Book Your Experience" 
-        subtitle="RESERVATIONS" 
+
+      <PageHero
+        title="Book Your Experience"
+        subtitle="RESERVATIONS"
         usePattern={true}
+        sx={"!py-18 md:py-32"}
       />
 
       <div className="bg-[#F8F9FA] pb-16">
@@ -21,7 +22,7 @@ const BookPage = () => {
       </div>
 
       <BookGallery />
-      
+
       <CheckBookingFaq />
 
       <Footer />

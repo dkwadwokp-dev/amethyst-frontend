@@ -5,6 +5,7 @@ import { useImageModal } from "../../shared/context/image-modal-context";
 import { Section } from "../../shared/ui/section";
 import { useEvents } from "../actions/use-events";
 import { Loading } from "../../shared/ui/loading";
+import { motion } from "framer-motion";
 
 const EventList = () => {
   const { openModal } = useImageModal();
@@ -36,9 +37,13 @@ const EventList = () => {
 
   return (
     <Section className="flex flex-col gap-8 md:gap-12">
-      {events.map((event) => (
-        <div
+      {events.map((event, index) => (
+        <motion.div
           key={event._id}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
           className="bg-white border border-gray-100 shadow-sm flex flex-col md:flex-row gap-6 overflow-hidden items-center group mb-4 md:mb-8"
         >
           <div
@@ -90,7 +95,7 @@ const EventList = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </Section>
   );

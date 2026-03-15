@@ -13,6 +13,7 @@ import { BookingUserDetails } from "./booking-user-details";
 import { BookingSuccessModal } from "./booking-success-modal";
 import { useCreateBooking } from "../actions/use-create-booking";
 import { useCheckAvailability } from "../actions/use-check-availability";
+import { motion } from "framer-motion";
 
 const BookForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -229,9 +230,21 @@ const BookForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100  w-full max-w-2xl mx-auto -mt-16 md:-mt-24 relative z-10">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="bg-white p-6 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 w-full max-w-2xl mx-auto -mt-16 md:-mt-24 relative z-10"
+    >
       {/* Top Tabs */}
-      <div className="flex w-full mb-8 border-b border-gray-100">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex w-full mb-8 border-b border-gray-100"
+      >
         <button
           type="button"
           onClick={() => {
@@ -274,11 +287,17 @@ const BookForm = () => {
             Dining
           </span>
         </button>
-      </div>
+      </motion.div>
 
       <form onSubmit={handleFormSubmit} className="space-y-8">
         {/* Select Category */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
           <div>
             <label className="block text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-2">
               {activeTab === "room"
@@ -340,36 +359,57 @@ const BookForm = () => {
               <ChevronDown className="w-4 h-4 text-gray-400 absolute top-1/2 right-4 -translate-y-1/2 pointer-events-none" />
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Date / Calendar Picker */}
-        <BookingCalendar
-          activeTab={activeTab}
-          item={item}
-          errors={errors}
-          checkIn={checkIn}
-          checkOut={checkOut}
-          diningDate={diningDate}
-          setFormData={activeTab === "room" ? setFormData : setDiningSelection}
-          availabilityData={availabilityData}
-          isCheckingAvailability={isCheckingAvailability}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <BookingCalendar
+            activeTab={activeTab}
+            item={item}
+            errors={errors}
+            checkIn={checkIn}
+            checkOut={checkOut}
+            diningDate={diningDate}
+            setFormData={
+              activeTab === "room" ? setFormData : setDiningSelection
+            }
+            availabilityData={availabilityData}
+            isCheckingAvailability={isCheckingAvailability}
+          />
+        </motion.div>
 
         {/* Time Slots (Only visible when Dining active && date selected) */}
         {activeTab === "dining" && diningDate && (
-          <BookingTimePicker
-            item={item}
-            diningDate={diningDate}
-            arrivalHour={arrivalHour}
-            departureHour={departureHour}
-            errors={errors}
-            setFormData={setDiningSelection}
-            availabilityData={availabilityData}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <BookingTimePicker
+              item={item}
+              diningDate={diningDate}
+              arrivalHour={arrivalHour}
+              departureHour={departureHour}
+              errors={errors}
+              setFormData={setDiningSelection}
+              availabilityData={availabilityData}
+            />
+          </motion.div>
         )}
 
         {/* Guests / Capacity */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
           <label className="block text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-3">
             GUESTS
           </label>
@@ -394,17 +434,30 @@ const BookForm = () => {
               {errors.guests.message}
             </p>
           )}
-        </div>
+        </motion.div>
 
         {/* User Details */}
-        <BookingUserDetails
-          formData={formData}
-          errors={errors}
-          handleChange={handleChange}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <BookingUserDetails
+            formData={formData}
+            errors={errors}
+            handleChange={handleChange}
+          />
+        </motion.div>
 
         {/* Submit */}
-        <div className="pt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="pt-6"
+        >
           {availabilityError && (
             <p className="text-[10px] text-primary font-bold mb-4 text-center">
               Failed to check availability. Please try again later.
@@ -425,7 +478,7 @@ const BookForm = () => {
                   ? "COMPLETE BOOKING REQUEST"
                   : "RESERVE TABLE"}
           </Button>
-        </div>
+        </motion.div>
       </form>
 
       {successBooking && (
@@ -434,7 +487,7 @@ const BookForm = () => {
           onClose={() => setSuccessBooking(null)}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -6,6 +6,7 @@ import { Button } from "../../shared/ui/button";
 import { useGetBookingsQuery } from "../actions/use-get-bookings";
 import { rooms } from "../../rooms/data/rooms";
 import { diningAreas } from "../../book/data/tables";
+import { motion } from "framer-motion";
 
 const BookingList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -94,9 +95,15 @@ const BookingList = () => {
   }
 
   return (
-    <Section className="bg-[#F8F9FA]">
+    <Section className="bg-[#F8F9FA] overflow-hidden">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-center gap-8 border-b border-gray-200 mb-6 md:mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex justify-center gap-8 border-b border-gray-200 mb-6 md:mb-12"
+        >
           {["ALL", "ROOMS", "DINING"].map((tab) => (
             <button
               key={tab}
@@ -113,10 +120,16 @@ const BookingList = () => {
               )}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Status Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-4 mb-8"
+        >
           {["ALL", "PENDING", "PROCESSED", "COMPLETED", "CANCELLED"].map(
             (status) => (
               <button
@@ -132,17 +145,22 @@ const BookingList = () => {
               </button>
             ),
           )}
-        </div>
+        </motion.div>
 
         {filteredBookings.length === 0 ? (
-          <div className="text-center py-20 bg-white border border-gray-100">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-center py-20 bg-white border border-gray-100"
+          >
             <p className="text-xs text-gray-400 font-bold tracking-widest uppercase">
               No bookings found
             </p>
-          </div>
+          </motion.div>
         ) : (
           <div className="space-y-4 md:space-y-6">
-            {filteredBookings.map((booking) => {
+            {filteredBookings.map((booking, index) => {
               const media = getMedia(booking);
               const checkIn = new Date(booking.checkIn);
               const checkOut = new Date(booking.checkOut);
@@ -153,8 +171,17 @@ const BookingList = () => {
                   : `${checkIn.toLocaleDateString("en-US", { month: "short", day: "numeric" })} @ ${checkIn.getHours()}:00`;
 
               return (
-                <div
+                <motion.div
                   key={booking._id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    type: "spring",
+                    bounce: 0.2,
+                    delay: 0.1 + index * 0.1,
+                  }}
                   className="bg-white p-4 md:p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 md:gap-6 group hover:border-gray-200 transition-all"
                 >
                   {/* Image box */}
@@ -234,7 +261,7 @@ const BookingList = () => {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

@@ -7,6 +7,7 @@ import { Button } from "../../shared/ui/button";
 import { contactSchema, type ContactFormData } from "../schema/contact-schema";
 import { useSubmitContact } from "../actions/use-submit-contact";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 const ContactFormSection = () => {
   const { mutate, isPending } = useSubmitContact();
@@ -53,25 +54,50 @@ const ContactFormSection = () => {
   return (
     <Section className="bg-white pt-12 md:pt-24 pb-12 md:pb-16">
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <ImagePlaceholder
-          className="w-full h-[300px] lg:h-[600px]  object-cover"
-          src="/assets/reception-attendant.png"
-          text="CONTACT DESK"
-        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <ImagePlaceholder
+            className="w-full h-[300px] lg:h-[600px]  object-cover"
+            src="/assets/reception-attendant.png"
+            text="CONTACT DESK"
+          />
+        </motion.div>
 
         <div className="py-2 lg:px-8">
           <div className="mb-6 md:mb-10">
-            <h4 className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-3">
+            <motion.h4
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-[10px] font-black tracking-widest text-gray-500 uppercase mb-3"
+            >
               WE'RE HERE TO ASSIST
-            </h4>
-            <h2 className="text-3xl md:text-4xl font-marcellus text-primary">
+            </motion.h4>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-3xl md:text-4xl font-marcellus text-primary"
+            >
               Let's Talk
-            </h2>
+            </motion.h2>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="space-y-2"
+              >
                 <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                   NAME
                 </label>
@@ -86,8 +112,14 @@ const ContactFormSection = () => {
                     {errors.name.message}
                   </p>
                 )}
-              </div>
-              <div className="space-y-2">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="space-y-2"
+              >
                 <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                   EMAIL
                 </label>
@@ -102,10 +134,16 @@ const ContactFormSection = () => {
                     {errors.email.message}
                   </p>
                 )}
-              </div>
+              </motion.div>
             </div>
 
-            <div className="space-y-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="space-y-2"
+            >
               <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                 SUBJECT
               </label>
@@ -120,9 +158,15 @@ const ContactFormSection = () => {
                   {errors.subject.message}
                 </p>
               )}
-            </div>
+            </motion.div>
 
-            <div className="space-y-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="space-y-2"
+            >
               <label className="text-[10px] font-bold tracking-widest text-gray-700 uppercase">
                 MESSAGE
               </label>
@@ -136,9 +180,15 @@ const ContactFormSection = () => {
                   {errors.message.message}
                 </p>
               )}
-            </div>
+            </motion.div>
 
-            <div className="space-y-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="space-y-2"
+            >
               <div className="flex items-center gap-3 py-2">
                 <input
                   {...register("privacy")}
@@ -155,9 +205,15 @@ const ContactFormSection = () => {
                   {errors.privacy.message}
                 </p>
               )}
-            </div>
+            </motion.div>
 
-            <div className="pt-2">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="pt-2"
+            >
               <Button
                 type="submit"
                 variant="primary"
@@ -166,7 +222,7 @@ const ContactFormSection = () => {
               >
                 {isLoading ? "SENDING..." : "SEND INQUIRY"}
               </Button>
-            </div>
+            </motion.div>
 
             {/* Status Message */}
             {submitStatus.type && (
