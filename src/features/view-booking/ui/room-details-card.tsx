@@ -1,4 +1,4 @@
-import { Bed, Wifi, Wind } from "lucide-react";
+import { Bed, Wifi, Wind, Check } from "lucide-react";
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { useRoom } from "../../rooms/actions/use-rooms";
 
@@ -32,18 +32,39 @@ export const RoomDetailsCard = ({
           text={bookingType === "room" ? "EXECUTIVE SUITE" : "PREMIUM TABLE"}
         />
       )}
-      <div className="flex flex-wrap gap-4 mb-4 text-[10px] text-gray-500 font-bold tracking-widest uppercase">
-        <span className="flex items-center gap-1">
-          <Bed className="w-3 h-3" />{" "}
-          {room?.bed || (bookingType === "room" ? "1 KING BED" : "SEATING")}
-        </span>
-        <span className="flex items-center gap-1">
-          <Wifi className="w-3 h-3" /> FREE WIFI
-        </span>
-        <span className="flex items-center gap-1">
-          <Wind className="w-3 h-3" />{" "}
-          {bookingType === "room" ? "AC" : "CLIMATE CONTROL"}
-        </span>
+      {room?.title && (
+        <h3 className="text-xl font-marcellus text-primary mb-2 mt-4">
+          {room.title}
+        </h3>
+      )}
+
+      {/* Amenities List */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {room?.amenities && room.amenities.length > 0 ? (
+          room.amenities.map((amenity, idx) => (
+            <span
+              key={idx}
+              className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-100 text-[10px] font-bold tracking-widest uppercase text-gray-600"
+            >
+              <div className="w-1 h-1 bg-primary rounded-full" />
+              {amenity}
+            </span>
+          ))
+        ) : (
+          <div className="flex flex-wrap gap-4 text-[10px] text-gray-500 font-bold tracking-widest uppercase">
+            <span className="flex items-center gap-1">
+              <Bed className="w-3 h-3" />{" "}
+              {room?.bed || (bookingType === "room" ? "1 KING BED" : "SEATING")}
+            </span>
+            <span className="flex items-center gap-1">
+              <Wifi className="w-3 h-3" /> FREE WIFI
+            </span>
+            <span className="flex items-center gap-1">
+              <Wind className="w-3 h-3" />{" "}
+              {bookingType === "room" ? "AC" : "CLIMATE CONTROL"}
+            </span>
+          </div>
+        )}
       </div>
       <p className="text-xs text-gray-500 leading-relaxed font-manrope">
         {room?.desc ||

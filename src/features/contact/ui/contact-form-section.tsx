@@ -1,11 +1,20 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Section } from "../../shared/ui/section";
 import { ImagePlaceholder } from "../../shared/ui/image-placeholder";
 import { Button } from "../../shared/ui/button";
 import { contactSchema, type ContactFormData } from "../schema/contact-schema";
+import { useSubmitContact } from "../actions/use-submit-contact";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 const ContactFormSection = () => {
+  const { mutate, isPending } = useSubmitContact();
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string | null;
+  }>({ type: null, message: null });
+
   const {
     register,
     handleSubmit,
@@ -16,11 +25,30 @@ const ContactFormSection = () => {
   });
 
   const onSubmit = (data: ContactFormData) => {
-    // In a real app, you would send this to your API
-    console.log("Form Submitted:", data);
-    alert("Thank you! Your inquiry has been sent.");
-    reset();
+    setSubmitStatus({ type: null, message: null });
+    mutate(data, {
+      onSuccess: () => {
+        setSubmitStatus({
+          type: "success",
+          message:
+            "Thank you! Your inquiry has been received. We will get back to you shortly.",
+        });
+        reset();
+      },
+      onError: (error: any) => {
+        console.error("Contact form error:", error);
+        setSubmitStatus({
+          type: "error",
+          message:
+            error.response?.data?.message ||
+            error.message ||
+            "Something went wrong. Please try again or email us directly.",
+        });
+      },
+    });
   };
+
+  const isLoading = isSubmitting || isPending;
 
   return (
     <Section className="bg-white pt-12 md:pt-24 pb-12 md:pb-16">
@@ -133,12 +161,35 @@ const ContactFormSection = () => {
               <Button
                 type="submit"
                 variant="primary"
-                disabled={isSubmitting}
+                disabled={isLoading}
                 className="bg-[#2A2E33] hover:bg-black text-white px-8 py-3 text-xs tracking-widest  border-none shadow-none disabled:opacity-50"
               >
-                {isSubmitting ? "SENDING..." : "SEND INQUIRY"}
+                {isLoading ? "SENDING..." : "SEND INQUIRY"}
               </Button>
             </div>
+
+            {/* Status Message */}
+            {submitStatus.type && (
+              <div
+                className={`mt-6 p-4 border flex items-start gap-3 ${
+                  submitStatus.type === "success"
+                    ? "bg-green-50 border-green-200 text-green-800"
+                    : "bg-red-50 border-red-200 text-red-800"
+                }`}
+              >
+                {submitStatus.type === "success" ? (
+                  <CheckCircle className="w-5 h-5 shrink-0" />
+                ) : (
+                  <AlertCircle className="w-5 h-5 shrink-0" />
+                )}
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest mb-1">
+                    {submitStatus.type === "success" ? "Success" : "Error"}
+                  </h4>
+                  <p className="text-sm">{submitStatus.message}</p>
+                </div>
+              </div>
+            )}
           </form>
         </div>
       </div>
