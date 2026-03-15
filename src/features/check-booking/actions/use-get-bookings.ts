@@ -19,19 +19,21 @@ interface Booking {
   updatedAt: string;
 }
 
-export const useGetBookingsQuery = (type?: string) => {
+export const useGetBookingsQuery = (type?: string, status?: string) => {
   return useQuery<Booking[]>({
-    queryKey: ["bookings", type],
+    queryKey: ["bookings", type, status],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (type && type !== "ALL") {
         const queryType = type.toLowerCase().replace(/s$/, ""); // e.g., ROOMS -> room
         params.append("type", queryType);
       }
+      if (status && status !== "ALL") {
+        params.append("status", status);
+      }
 
-      const endpoint = params.toString()
-        ? `/bookings?${params.toString()}`
-        : "/bookings";
+      const queryString = params.toString();
+      const endpoint = queryString ? `/bookings?${queryString}` : "/bookings";
 
       return api<Booking[]>(endpoint, { requireAuth: true });
     },

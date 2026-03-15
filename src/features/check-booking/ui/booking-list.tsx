@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Section } from "../../shared/ui/section";
 import { Loading } from "../../shared/ui/loading";
 import { Calendar, Users, Clock, ArrowRight, Mail } from "lucide-react";
@@ -9,10 +8,30 @@ import { rooms } from "../../rooms/data/rooms";
 import { diningAreas } from "../../book/data/tables";
 
 const BookingList = () => {
-  const [filter, setFilter] = useState<"ALL" | "ROOMS" | "DINING">("ALL");
-  const { data: bookings, isLoading, error } = useGetBookingsQuery(filter);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = (searchParams.get("type") || "ALL") as
+    | "ALL"
+    | "ROOMS"
+    | "DINING";
+  const statusFilter = searchParams.get("status") || "ALL";
+
+  const {
+    data: bookings,
+    isLoading,
+    error,
+  } = useGetBookingsQuery(filter, statusFilter);
 
   const filteredBookings = bookings || [];
+
+  const handleTypeChange = (newType: string) => {
+    const currentStatus = searchParams.get("status") || "ALL";
+    setSearchParams({ type: newType, status: currentStatus });
+  };
+
+  const handleStatusChange = (newStatus: string) => {
+    const currentType = searchParams.get("type") || "ALL";
+    setSearchParams({ type: currentType, status: newStatus });
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -81,7 +100,7 @@ const BookingList = () => {
           {["ALL", "ROOMS", "DINING"].map((tab) => (
             <button
               key={tab}
-              onClick={() => setFilter(tab as any)}
+              onClick={() => handleTypeChange(tab)}
               className={`pb-4 text-[10px] font-bold tracking-widest uppercase transition-colors relative ${
                 filter === tab
                   ? "text-primary"
@@ -92,6 +111,29 @@ const BookingList = () => {
               {filter === tab && (
                 <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></div>
               )}
+            </button>
+          ))}
+        </div>
+
+        {/* Status Filter */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {[
+            "ALL",
+            "PENDING",
+            "PROCESSED",
+            "COMPLETED",
+            "CANCELLED",
+          ].map((status) => (
+            <button
+              key={status}
+              onClick={() => handleStatusChange(status)}
+              className={`px-4 py-2 text-[10px] font-bold tracking-widest uppercase transition-all rounded-full border ${
+                statusFilter === status
+                  ? "bg-primary text-white border-primary"
+                  : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
+              }`}
+            >
+              {status}
             </button>
           ))}
         </div>
