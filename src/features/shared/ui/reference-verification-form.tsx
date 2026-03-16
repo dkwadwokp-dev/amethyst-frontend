@@ -59,7 +59,7 @@ export const ReferenceVerificationForm = ({
           type="submit"
           variant="primary"
           className={`justify-center py-4 text-xs font-bold tracking-widest bg-black text-white hover:bg-gray-800 ${
-            layout === "row" ? "w-full md:flex-1" : "w-full"
+            layout === "row" ? "w-full md:flex-2" : "w-full"
           }`}
         >
           {submitLabel}

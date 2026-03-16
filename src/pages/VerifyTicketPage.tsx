@@ -44,6 +44,7 @@ const TicketItem = ({ code, idx }: { code: string; idx: number }) => {
 const VerifyTicketPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const goBack = () => navigate(-1);
 
   // Paystack returns 'reference' or 'trxref'
   const reference = searchParams.get("reference") || searchParams.get("trxref");
@@ -87,9 +88,9 @@ const VerifyTicketPage = () => {
           >
             <ReferenceVerificationForm
               onSubmit={handleVerify}
-              onCancel={() => navigate("/")}
+              onCancel={goBack}
               submitLabel="VERIFY STATUS"
-              cancelLabel="RETURN HOME"
+              cancelLabel="BACK"
               layout="row"
               placeholder="e.g. PY-XXXXXX or TC-XXXXXX"
             />
@@ -173,9 +174,9 @@ const VerifyTicketPage = () => {
               <ReferenceVerificationForm
                 initialValue={reference}
                 onSubmit={handleVerify}
-                onCancel={() => navigate("/")}
+                onCancel={goBack}
                 submitLabel="VERIFY"
-                cancelLabel="HOME"
+                cancelLabel="BACK"
                 layout="row"
                 className="w-full max-w-xs mx-auto"
                 placeholder="PY-XXXXXX or TC-XXXXXX"
