@@ -46,14 +46,14 @@ const GallerySection = () => {
           SIGNATURE CREATIONS
         </motion.h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[300px]">
-        {/* Large item top left */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 auto-rows-[180px] md:auto-rows-[300px]">
+        {/* Large item top left (span 2 cols on mobile, 2 cols on desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative overflow-hidden group md:col-span-2 cursor-pointer"
+          className="relative overflow-hidden group col-span-2 md:col-span-2 row-span-1 md:row-span-1 cursor-pointer"
           onClick={() => openModal(images[1].url, images[1].title)}
         >
           <img
@@ -73,13 +73,13 @@ const GallerySection = () => {
           </div>
         </motion.div>
 
-        {/* Top right */}
+        {/* Top right (span 1 col, 2 rows on desktop) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="relative overflow-hidden group md:row-span-2 cursor-pointer"
+          className="relative overflow-hidden group row-span-1 md:row-span-2 col-span-1 cursor-pointer"
           onClick={() => openModal(images[0].url, images[0].title)}
         >
           <img
@@ -99,13 +99,13 @@ const GallerySection = () => {
           </div>
         </motion.div>
 
-        {/* Bottom left */}
+        {/* Bottom left (mobile: col 1, row 2; desktop: col 1, row 2) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="relative overflow-hidden group cursor-pointer"
+          className="relative overflow-hidden group col-span-1 row-span-1 cursor-pointer"
           onClick={() => openModal(images[2].url, images[2].title)}
         >
           <img
@@ -125,13 +125,13 @@ const GallerySection = () => {
           </div>
         </motion.div>
 
-        {/* Bottom middle */}
+        {/* Bottom right (mobile: col 2, row 2; desktop: col 2, row 2) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="relative overflow-hidden group cursor-pointer"
+          className="relative overflow-hidden group col-span-2 md:col-span-1 row-span-1 cursor-pointer"
           onClick={() => openModal(images[3].url, images[3].title)}
         >
           <img

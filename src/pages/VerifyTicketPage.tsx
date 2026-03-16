@@ -56,12 +56,12 @@ const VerifyTicketPage = () => {
 
   if (!reference) {
     return (
-      <div className="min-h-screen flex items-center justify-center mx-auto bg-gray-50 p-6 font-manrope">
+      <div className="min-h-screen flex items-center justify-center mx-auto bg-gray-50 p-4 md:p-6 font-manrope">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white w-full max-w-md shadow-xl border border-gray-100 p-10 text-center"
+          className="bg-white w-full max-w-md shadow-xl border border-gray-100 p-4 md:p-10 text-center"
         >
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ const VerifyTicketPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 font-manrope">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-3 md:p-6 font-manrope">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ const VerifyTicketPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-1 py-16 flex flex-col items-center justify-center text-center p-8 w-full max-w-md mx-auto"
+            className="flex-1 py-16 flex flex-col items-center justify-center text-center p-4 md:p-8 w-full max-w-md mx-auto"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -168,6 +168,7 @@ const VerifyTicketPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className=" w-full"
             >
               <ReferenceVerificationForm
                 initialValue={reference}
@@ -188,7 +189,7 @@ const VerifyTicketPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="md:w-full p-10 flex flex-col justify-center border-r border-gray-100 bg-white relative"
+              className="md:w-full p-4 md:p-10 flex flex-col justify-center border-r border-gray-100 bg-white relative"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-yellow-400 to-primary"></div>
               <motion.div

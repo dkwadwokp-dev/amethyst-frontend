@@ -61,7 +61,7 @@ const Contact = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-6 max-w-md"
           >
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

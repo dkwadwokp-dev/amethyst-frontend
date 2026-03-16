@@ -1,7 +1,6 @@
 import Header from "../features/shared/ui/header";
 import Footer from "../features/shared/ui/footer";
 import BookForm from "../features/book/ui/book-form";
-import BookGallery from "../features/book/ui/book-gallery";
 import CheckBookingFaq from "../features/check-booking/ui/check-booking-faq";
 import PageHero from "../features/shared/ui/page-hero";
 
@@ -20,8 +19,6 @@ const BookPage = () => {
       <div className="bg-[#F8F9FA] pb-16">
         <BookForm />
       </div>
-
-      <BookGallery />
 
       <CheckBookingFaq />
 

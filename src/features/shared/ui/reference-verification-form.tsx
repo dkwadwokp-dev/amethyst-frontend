@@ -49,13 +49,17 @@ export const ReferenceVerificationForm = ({
         />
       </div>
       <div
-        className={layout === "row" ? "flex gap-2 w-full" : "space-y-3 w-full"}
+        className={
+          layout === "row"
+            ? "flex flex-col  md:flex-row gap-2  w-full"
+            : "space-y-3 w-full"
+        }
       >
         <Button
           type="submit"
           variant="primary"
           className={`justify-center py-4 text-xs font-bold tracking-widest bg-black text-white hover:bg-gray-800 ${
-            layout === "row" ? "flex-1" : "w-full"
+            layout === "row" ? "w-full md:flex-1" : "w-full"
           }`}
         >
           {submitLabel}
@@ -65,7 +69,7 @@ export const ReferenceVerificationForm = ({
           variant="outline"
           onClick={onCancel}
           className={`justify-center py-4 text-xs font-bold tracking-widest ${
-            layout === "row" ? "px-6" : "w-full"
+            layout === "row" ? "w-full md:flex-1 px-6" : "w-full"
           }`}
         >
           {cancelLabel}
