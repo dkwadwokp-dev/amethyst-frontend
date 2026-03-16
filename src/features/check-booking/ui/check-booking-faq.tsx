@@ -38,7 +38,7 @@ const faqs = [
 
 const CheckBookingFaq = () => {
   return (
-    <Section className="bg-[#F8F9FA] border-t border-gray-100 overflow-hidden">
+    <Section className="bg-[#F8F9FA] py-8 border-t border-gray-300 overflow-hidden">
       <div className="mb-6 md:mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

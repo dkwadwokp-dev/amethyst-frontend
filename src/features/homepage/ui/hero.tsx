@@ -77,12 +77,12 @@ const Hero = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
+            className={`absolute inset-0 transition-all duration-[3000ms] ease-in-out ${
               index === current ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
             <div
-              className={`absolute inset-0 bg-cover bg-center transition-all duration-[3000ms] ${
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-[5000ms] ${
                 index === current ? "scale-105" : "scale-100"
               } ${index === current ? "cursor-pointer pointer-events-auto" : "pointer-events-none"}`}
               style={{

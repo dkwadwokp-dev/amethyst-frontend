@@ -43,7 +43,7 @@ const CheckBookingForm = () => {
   };
 
   return (
-    <Section className="bg-[#F8F9FA] py-24 flex items-center justify-center overflow-hidden">
+    <Section className="bg-[#F8F9FA] py-12 md:py-24 flex items-center justify-center overflow-hidden">
       <div className="bg-white w-full mx-auto max-w-2xl px-6 md:px-8 py-8 md:py-14 shadow-sm text-center flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
