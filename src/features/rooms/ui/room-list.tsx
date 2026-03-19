@@ -68,7 +68,7 @@ const RoomList = () => {
               </div>
               <div className="flex flex-col items-start md:items-end justify-between md:w-32 shrink-0 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 text-right">
                 <div className="font-bold text-sm tracking-wide text-gray-900 uppercase">
-                  ${room.price}/NIGHT
+                  ₵{room.price}/NIGHT
                 </div>
                 <div className="w-full mt-6 md:mt-0 flex flex-col items-start md:items-end justify-end flex-1">
                   <Link

@@ -54,7 +54,7 @@ const Services = () => {
             <h3 className="font-bold text-[10px] md:text-[13px] tracking-widest mb-2 md:mb-3 uppercase">
               {service.title}
             </h3>
-            <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed line-clamp-3">
+            <p className="text-gray-500 text-[10px] md:text-xs leading-relaxed">
               {service.desc}
             </p>
           </motion.div>

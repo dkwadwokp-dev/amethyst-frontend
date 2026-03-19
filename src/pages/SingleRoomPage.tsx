@@ -248,7 +248,7 @@ const SingleRoomPage = () => {
                       STARTING FROM
                     </div>
                     <div className="text-4xl font-marcellus text-gray-900 flex items-end">
-                      ${room.price}
+                      ₵{room.price}
                       <span className="text-xs font-manrope font-semibold text-gray-500 mb-1 ml-2">
                         / NIGHT
                       </span>
@@ -270,12 +270,14 @@ const SingleRoomPage = () => {
                         BOOK THIS ROOM
                       </Button>
                     </Link>
-                    <Button
-                      variant="outline"
-                      className="w-full bg-white hover:bg-gray-50 text-gray-900 border-gray-200 px-6 py-4 text-[11px] font-bold tracking-widest rounded-none shadow-none"
-                    >
-                      CONTACT RESERVATIONS
-                    </Button>
+                    <Link to="/contact" className="block w-full">
+                      <Button
+                        variant="outline"
+                        className="w-full bg-white hover:bg-gray-50 text-gray-900 border-gray-200 px-6 py-4 text-[11px] font-bold tracking-widest rounded-none shadow-none"
+                      >
+                        CONTACT RESERVATIONS
+                      </Button>
+                    </Link>
                   </motion.div>
 
                   <motion.div

@@ -31,7 +31,7 @@ const Testimonials = () => {
             </div>
             <div className="flex items-center gap-4 border-t border-gray-100 pt-5 md:pt-6 mt-auto">
               <img
-                src={`https://i.pravatar.cc/150?u=${idx}`}
+                src={review.avatar}
                 alt={review.name}
                 className="w-10 h-10 rounded-full flex-shrink-0 object-cover shadow-sm"
               />

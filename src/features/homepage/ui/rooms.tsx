@@ -46,7 +46,7 @@ const Rooms = () => {
                 {/* Mobile Price Tag */}
                 <div className="absolute top-4 right-4 md:hidden bg-white/90 backdrop-blur-sm px-4 py-2  shadow-xl z-10">
                   <div className="text-lg font-bold font-marcellus text-gray-900">
-                    ${room.price}
+                    ₵{room.price}
                   </div>
                   <div className="text-[7px] tracking-[0.2em] font-black text-gray-400 -mt-1 uppercase">
                     Per Night
@@ -92,7 +92,7 @@ const Rooms = () => {
                 {/* Desktop Price & Action */}
                 <div className="hidden md:flex flex-col items-center justify-center md:border-l border-gray-100 pl-8 min-w-[180px]">
                   <div className="text-3xl font-bold font-marcellus text-gray-900 mb-1">
-                    ${room.price}
+                    ₵{room.price}
                   </div>
                   <div className="text-[9px] uppercase tracking-widest text-gray-400 mb-6 font-bold">
                     PER NIGHT

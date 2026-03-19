@@ -1,8 +1,8 @@
 export const reviews = [
-  { name: 'Sarah Jenkins', role: 'Business Traveler', text: 'AH Hotel masterfully blends efficiency with warmth. The unparalleled service and high-speed amenities exceeded all my executive needs.' },
-  { name: 'Michael Chen', role: 'Vacationer', text: 'I have traveled the globe, but the culinary experiences and sheer attention to detail here are genuinely in a class of their own.' },
-  { name: 'Aisha Bello', role: 'Family Trip', text: 'The atmosphere is incredibly welcoming. The Family Connect rooms offered exactly what we needed to relax and bond together.' },
-  { name: 'David Smith', role: 'Weekend Getaway', text: 'Exceeded all expectations. The restorative spa treatments and poolside service were the perfect way to spend a long weekend.' },
-  { name: 'Elena Rodriguez', role: 'Event Attendee', text: 'The conference room was spacious, and the Afrocentric decor added a beautiful cultural touch. Highly recommended for any gathering.' },
-  { name: 'James Wilson', role: 'Solo Traveler', text: 'A truly magnificent experience from check-in to check-out. The staff made me feel like royalty. I will absolutely be returning.' },
+  { name: 'Sarah Jenkins', role: 'Business Traveler', text: 'AH Hotel masterfully blends efficiency with warmth. The unparalleled service and high-speed amenities exceeded all my executive needs.', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150' },
+  { name: 'Michael Chen', role: 'Vacationer', text: 'I have traveled the globe, but the culinary experiences and sheer attention to detail here are genuinely in a class of their own.', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150' },
+  { name: 'Aisha Bello', role: 'Family Trip', text: 'The atmosphere is incredibly welcoming. The Family Connect rooms offered exactly what we needed to relax and bond together.', avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=150&h=150' },
+  { name: 'David Smith', role: 'Weekend Getaway', text: 'Exceeded all expectations. The restorative spa treatments and poolside service were the perfect way to spend a long weekend.', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150' },
+  { name: 'Elena Rodriguez', role: 'Event Attendee', text: 'The conference room was spacious, and the Afrocentric decor added a beautiful cultural touch. Highly recommended for any gathering.', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150' },
+  { name: 'James Wilson', role: 'Solo Traveler', text: 'A truly magnificent experience from check-in to check-out. The staff made me feel like royalty. I will absolutely be returning.', avatar: 'https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=150&h=150' },
 ];

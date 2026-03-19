@@ -22,7 +22,7 @@ const ContactInfoCards = () => {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "LOCATION",
-      lines: ["123 Luxury Avenue", "Beverly Hills, CA 90210"],
+      lines: ["14 Aviation Road", "Airport Residential Area, Accra, Ghana"],
     },
   ];
 
