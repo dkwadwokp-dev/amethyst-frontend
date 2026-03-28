@@ -19,7 +19,8 @@ export const ContactPoliciesCard = ({
         </h4>
         <div className="space-y-3 text-xs text-gray-600 font-manrope">
           <div className="flex items-center gap-3">
-            <Mail className="w-4 h-4 text-gray-400" /> reservations@ahhotel.com
+            <Mail className="w-4 h-4 text-gray-400" />{" "}
+            reservations@amethysthotel.com
           </div>
           <div className="flex items-center gap-3">
             <Phone className="w-4 h-4 text-gray-400" /> +1 (555) 123-4567

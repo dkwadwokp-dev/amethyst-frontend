@@ -42,7 +42,7 @@ const StorySection = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-xs text-gray-500 leading-relaxed font-manrope mb-6"
           >
-            Founded with a vision to redefine urban luxury, AH Hotel seamlessly
+            Founded with a vision to redefine urban luxury, Amethyst seamlessly
             blends sophisticated modern aesthetics with the absolute warmth of
             Afrocentric hospitality. Our journey began over a decade ago with a
             simple mission: to provide an unparalleled oasis of elegance and

@@ -40,12 +40,12 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-gray-600 text-sm leading-relaxed"
           >
-            At AH Hotel, we redefine the meaning of a luxury stay. Balancing
+            At Amethyst, we redefine the meaning of a luxury stay. Balancing
             sophisticated modern architecture with warm, Afrocentric
             hospitality, we create an environment that feels both expansive and
             intimately familiar. Whether you are seeking a peaceful retreat or a
             dynamic workspace, our dedicated team is committed to making your
-            stay profoundly memorable. Step into comfort, step into AH Hotel.
+            stay profoundly memorable. Step into comfort, step into Amethyst.
           </motion.p>
 
           <div className="grid grid-cols-4 gap-4 py-6 border-y border-gray-100">

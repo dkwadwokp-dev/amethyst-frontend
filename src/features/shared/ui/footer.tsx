@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="space-y-6">
             <p className="text-sm leading-relaxed max-w-xl text-gray-400 md:w-9/10">
               Providing unparalleled luxury and warm hospitality in the heart of
-              East Legon, Accra. AH Hotel seamlessly blends modern
+              East Legon, Accra. Amethyst seamlessly blends modern
               sophistication with rich Afrocentric culture, creating an oasis of
               tranquility for global travelers. Whether you're visiting for a
               high-stakes business meeting or a relaxing weekend getaway,
@@ -138,7 +138,7 @@ const Footer = () => {
                 RESERVATIONS
               </span>
               <p className="text-sm text-gray-400 font-manrope">
-                +233 (0) 302 123 4567 • reservations@ahhotel.com
+                +233 (0) 302 123 4567 • reservations@amethysthotel.com
               </p>
             </div>
             <div className="flex flex-col gap-1">

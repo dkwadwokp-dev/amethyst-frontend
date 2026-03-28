@@ -11,7 +11,7 @@ const MapSection = () => {
         className="w-full h-full"
       >
         <iframe
-          title="AH Hotel Location"
+          title="Amethyst Hotel Location"
           src="https://www.openstreetmap.org/export/embed.html?bbox=-0.2100%2C5.5900%2C-0.1700%2C5.6200&layer=mapnik&marker=5.6037%2C-0.1870"
           className="w-full h-full border-0"
           loading="lazy"

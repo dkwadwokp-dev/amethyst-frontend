@@ -6,7 +6,7 @@ const team = [
   {
     name: "Emmanuel Asante",
     role: "General Manager",
-    bio: "With over 20 years in luxury hospitality across three continents, Emmanuel leads AH Hotel with a vision rooted in excellence and Ghanaian warmth.",
+    bio: "With over 20 years in luxury hospitality across three continents, Emmanuel leads Amethyst with a vision rooted in excellence and Ghanaian warmth.",
     image: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400",
   },
   {

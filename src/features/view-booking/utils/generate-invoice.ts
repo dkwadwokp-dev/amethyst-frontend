@@ -1,6 +1,9 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+const formatCurrency = (value: number) =>
+  `GHS ${value.toLocaleString("en-GH", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
 export const generateInvoicePDF = (booking: any) => {
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();
@@ -8,13 +11,13 @@ export const generateInvoicePDF = (booking: any) => {
   // Header
   doc.setFontSize(22);
   // doc.setFont("marcellus", "bold");
-  doc.text("AH HOTEL & SPA", 20, 25);
+  doc.text("AMETHYST SUITES & DINING", 20, 25);
 
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(100);
-  doc.text("123 Luxury Avenue, Ocean City", 20, 32);
-  doc.text("Contact: +1 (555) 123-4567 | reservations@ahhotel.com", 20, 37);
+  doc.text("14 Aviation Road, Airport Residential Area, Accra, Ghana", 20, 32);
+  doc.text("Contact: +233 (0) 302 123 4567 | reservations@amethysthotel.com", 20, 37);
 
   // Invoice Title
   doc.setFontSize(14);
@@ -51,7 +54,7 @@ export const generateInvoicePDF = (booking: any) => {
       booking.type === "room" ? "Accommodation" : "Dining Reservation",
       booking.itemType || booking.resourceId || "Standard Luxury",
       booking.guests + " Guest(s)",
-      booking.type === "room" ? `$${subtotalValue.toFixed(2)}` : "Included",
+      booking.type === "room" ? formatCurrency(subtotalValue) : "Included",
     ],
   ];
 
@@ -70,30 +73,30 @@ export const generateInvoicePDF = (booking: any) => {
   if (booking.type === "room") {
     doc.setFont("helvetica", "bold");
     doc.text("Subtotal:", 140, finalY);
-    doc.text(`$${subtotalValue.toFixed(2)}`, 175, finalY);
+    doc.text(formatCurrency(subtotalValue), 175, finalY);
 
     doc.text("Taxes (14%):", 140, finalY + 7);
-    doc.text(`$${taxValue.toFixed(2)}`, 175, finalY + 7);
+    doc.text(formatCurrency(taxValue), 175, finalY + 7);
 
     doc.setFontSize(12);
     doc.line(140, finalY + 10, 190, finalY + 10);
     doc.text("Total Amount:", 140, finalY + 17);
-    doc.text(`$${amount.toFixed(2)}`, 175, finalY + 17);
+    doc.text(formatCurrency(amount), 175, finalY + 17);
   } else {
     doc.setFont("helvetica", "bold");
     doc.text("Total Amount:", 140, finalY);
-    doc.text(`$${amount.toFixed(2)}`, 175, finalY);
-
-    // Footer
-    doc.setFontSize(8);
-    doc.setTextColor(150);
-    doc.text(
-      "Thank you for choosing AH Hotel & Spa. We look forward to your visit.",
-      pageWidth / 2,
-      finalY + 40,
-      { align: "center" },
-    );
-
-    doc.save(`invoice-${booking.reference}.pdf`);
+    doc.text(formatCurrency(amount), 175, finalY);
   }
+
+  // Footer
+  doc.setFontSize(8);
+  doc.setTextColor(150);
+  doc.text(
+    "Thank you for choosing Amethyst Suites & Dining. We look forward to your visit.",
+    pageWidth / 2,
+    finalY + 40,
+    { align: "center" },
+  );
+
+  doc.save(`invoice-${booking.reference}.pdf`);
 };

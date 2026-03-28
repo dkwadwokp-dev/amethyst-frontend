@@ -48,14 +48,14 @@ export const Logo: React.FC<LogoProps> = ({
             isLight ? "text-white" : "text-gray-900"
           }`}
         >
-          AH Hotel
+          Amethyst
         </span>
         <span
           className={`text-[8px] md:text-[9px] tracking-[0.4em] uppercase opacity-60 font-manrope font-bold ${
             isLight ? "text-stone-300" : "text-stone-500"
           }`}
         >
-          & Residences
+          Suites & Dining
         </span>
       </div>
     </div>
