@@ -17,8 +17,8 @@ export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
           <div className="flex justify-between items-center text-sm text-gray-600">
             <span>{booking.type === "room" ? "Room" : "Resource"} Rate</span>
             <span>
-              $
-              {subtotal.toLocaleString(undefined, {
+              GHS{" "}
+              {subtotal.toLocaleString("en-GH", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
@@ -27,8 +27,8 @@ export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
           <div className="flex justify-between items-center text-sm text-gray-600">
             <span>Taxes & Fees (14%)</span>
             <span>
-              $
-              {tax.toLocaleString(undefined, {
+              GHS{" "}
+              {tax.toLocaleString("en-GH", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
@@ -43,8 +43,8 @@ export const PaymentSummaryCard = ({ booking }: PaymentSummaryCardProps) => {
             Total Amount
           </span>
           <span className="font-bold text-lg text-gray-900">
-            $
-            {amount.toLocaleString(undefined, {
+            GHS{" "}
+            {amount.toLocaleString("en-GH", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}

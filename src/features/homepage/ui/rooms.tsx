@@ -97,7 +97,10 @@ const Rooms = () => {
                   <div className="text-[9px] uppercase tracking-widest text-gray-400 mb-6 font-bold">
                     PER NIGHT
                   </div>
-                  <Link to={`/book?room=${room.id}`} className="w-full">
+                  <Link
+                    to={`/book?type=room&itemType=${room.id}`}
+                    className="w-full"
+                  >
                     <Button
                       variant="primary"
                       className="w-full text-[10px] tracking-[0.2em] font-bold bg-primary text-white border-none rounded-none py-4"

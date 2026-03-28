@@ -72,7 +72,7 @@ const RoomList = () => {
                 </div>
                 <div className="w-full mt-6 md:mt-0 flex flex-col items-start md:items-end justify-end flex-1">
                   <Link
-                    to={`/book?room=${room.id}`}
+                    to={`/book?type=room&itemType=${room.id}`}
                     className="w-full block mb-3"
                   >
                     <Button
