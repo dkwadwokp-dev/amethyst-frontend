@@ -7,7 +7,7 @@ export const breakfastItems: DishItem[] = [
     price: "₵14",
     desc: "Smashed avocado on sourdough with a perfectly poached egg.",
     image:
-      "https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqZIsZLCPbwjLwjpZAVJRAxTLVQC8qhYLw4g&s",
   },
   {
     id: "bf_02",
@@ -27,11 +27,11 @@ export const breakfastItems: DishItem[] = [
   },
   {
     id: "bf_04",
-    name: "ACAI BOWL",
-    price: "₵15",
-    desc: "Organic acai blended with seasonal fruits, granola, and toasted coconut flakes.",
+    name: "HAUSA KOKO",
+    price: "₵12",
+    desc: "Warm fermented millet porridge infused with ginger and cloves, served with crispy koose fritters and a drizzle of groundnut milk.",
     image:
-      "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://www.thespruceeats.com/thmb/hSJddfU_-RSiOqMsgbvB461LETA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/hausa-koko-spicy-millet-porridge-39547-hero-01-edb486a34d6a4ee3b8b347430838d1f7.jpg",
   },
   {
     id: "bf_05",
@@ -52,26 +52,18 @@ export const breakfastItems: DishItem[] = [
   {
     id: "bf_07",
     name: "FRENCH TOAST",
-    price: "₵13",
+    price: "25",
     desc: "Thick-cut brioche French toast with powdered sugar and vanilla bean syrup.",
     image:
-      "https://images.unsplash.com/photo-1484723091739-30990ceeb1b4?auto=format&fit=crop&q=80&w=800",
+      "https://www.forkknifeswoon.com/wp-content/uploads/2012/12/easy-vanilla-honey-french-toast-fork-knife-swoon-01.jpg",
   },
   {
     id: "bf_08",
-    name: "SMOKED SALMON BAGEL",
-    price: "₵15",
-    desc: "Toasted everything bagel with cream cheese, smoked salmon, and capers.",
+    name: "KELEWELE & EGG",
+    price: "₵13",
+    desc: "Golden spiced fried plantains seasoned with ginger, cloves, and anise pepper, served alongside a perfectly fried egg.",
     image:
-      "https://images.pexels.com/photos/5945559/pexels-photo-5945559.jpeg?auto=compress&cs=tinysrgb&w=400",
-  },
-  {
-    id: "bf_09",
-    name: "BELGIAN WAFFLE",
-    price: "₵12",
-    desc: "Golden waffle served with whipped cream, strawberries, and warm syrup.",
-    image:
-      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800",
+      "https://travelfoodatlas.com/wp-content/uploads/2019/08/Ghanaian-Kelewele-fried-plantains-recipe.jpeg?auto=format&fit=crop&q=80&w=800",
   },
 ];
 
@@ -86,11 +78,11 @@ export const lunchItems: DishItem[] = [
   },
   {
     id: "ln_02",
-    name: "QUINOA SALAD",
-    price: "₵14",
-    desc: "Refreshing mixed greens tossed with quinoa, cherry tomatoes, and a light citrus vinaigrette.",
+    name: "WAAKYE",
+    price: "₵16",
+    desc: "Slow-cooked rice and black-eyed beans served with boiled spaghetti, shito pepper sauce, fried plantains, and your choice of grilled chicken or fried fish.",
     image:
-      "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://eatwithafia.com/wp-content/uploads/2025/02/IMG_8612-1097x1536.jpg",
   },
   {
     id: "ln_03",
@@ -106,15 +98,15 @@ export const lunchItems: DishItem[] = [
     price: "₵20",
     desc: "Creamy arborio rice prepared with wild mushrooms, truffle oil, and parmesan crisp.",
     image:
-      "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&q=80&w=800",
+      "https://www.inspiredtaste.net/wp-content/uploads/2011/12/Mushroom-Risotto-Recipe-2-1200.jpg",
   },
   {
     id: "ln_05",
-    name: "CAESAR WRAP",
-    price: "₵15",
-    desc: "Classic Caesar salad with grilled chicken wrapped in a spinach tortilla.",
+    name: "JOLLOF RICE",
+    price: "₵17",
+    desc: "Smoky, tomato-based oven-baked Ghanaian jollof rice served with a choice of grilled chicken or fried fish and sweet fried plantains.",
     image:
-      "https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://eatwellabi.com/wp-content/uploads/2022/11/Jollof-rice-16.jpg",
   },
   {
     id: "ln_06",
@@ -138,15 +130,15 @@ export const lunchItems: DishItem[] = [
     price: "₵16",
     desc: "Slow-roasted pulled pork smothered in BBQ sauce on a toasted brioche bun.",
     image:
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=800",
+      "https://rainbowplantlife.com/wp-content/uploads/2025/07/vegan-pulled-pork-sandwich-cover-photo-scaled.jpg",
   },
   {
     id: "ln_09",
-    name: "VEGAN BUDDHA BOWL",
+    name: "KONTOMIRE STEW",
     price: "₵15",
-    desc: "Roasted sweet potatoes, chickpeas, avocado, and tahini dressing over warm grains.",
+    desc: "Tender cocoyam leaves slow-cooked with smoked fish, garden eggs, and a rich palm nut base, served over steamed rice.",
     image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800",
+      "https://eatwithafia.com/wp-content/uploads/2025/02/DSC_1801-1-1024x1536.jpg",
   },
   {
     id: "ln_10",
@@ -173,7 +165,7 @@ export const dinnerItems: DishItem[] = [
     price: "₵32",
     desc: "Fresh Atlantic salmon served with asparagus and lemon butter sauce.",
     image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&q=80&w=800",
+      "https://static01.nyt.com/images/2024/02/13/multimedia/LH-pan-seared-salmon-lwzt/LH-pan-seared-salmon-lwzt-jumbo.jpg?quality=75&auto=webp",
   },
   {
     id: "dn_02",
@@ -185,20 +177,13 @@ export const dinnerItems: DishItem[] = [
   },
   {
     id: "dn_03",
-    name: "LOBSTER RAVIOLI",
+    name: "FUFU & LIGHT SOUP",
     price: "₵28",
-    desc: "Handmade ravioli stuffed with butter-poached lobster in a rich creamy bisque.",
+    desc: "Hand-pounded cassava and plantain fufu served in a delicately spiced light soup with goat meat, tomatoes, and garden eggs.",
     image:
-      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&q=80&w=800",
+      "https://africanapron.com/wp-content/uploads/2022/03/Fufu-with-Light-Soup-750x675.png",
   },
-  {
-    id: "dn_04",
-    name: "SLOW-ROASTED LAMB",
-    price: "₵38",
-    desc: "Fall-off-the-bone tender lamb shank braised in a savory red wine reduction.",
-    image:
-      "https://images.unsplash.com/photo-1546549032-9571cd6b27df?auto=format&fit=crop&q=80&w=800",
-  },
+
   {
     id: "dn_05",
     name: "RIBEYE STEAK",
@@ -233,19 +218,11 @@ export const dinnerItems: DishItem[] = [
   },
   {
     id: "dn_09",
-    name: "PORK TENDERLOIN",
-    price: "₵29",
-    desc: "Herb-crusted pork tenderloin served with an apple cider glaze and green beans.",
+    name: "GRILLED TILAPIA",
+    price: "₵30",
+    desc: "Whole tilapia marinated in a blend of local spices, garlic, and fresh herbs, grilled over an open flame and served with banku and a signature pepper sauce.",
     image:
-      "https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=400",
-  },
-  {
-    id: "dn_10",
-    name: "EGGPLANT PARMESAN",
-    price: "₵22",
-    desc: "Crispy breaded eggplant layered with marinara, mozzarella, and fresh basil.",
-    image:
-      "https://images.pexels.com/photos/6287525/pexels-photo-6287525.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://cookingwithclaudy.com/wp-content/uploads/2023/02/bca2acd9329ec7bb2050f52a3293d0e5.jpg",
   },
 ];
 
@@ -288,7 +265,7 @@ export const dessertItems: DishItem[] = [
     price: "₵9",
     desc: "Warm cinnamon apple cobbler topped with an oat crumble and served with ice cream.",
     image:
-      "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?auto=format&fit=crop&q=80&w=800",
+      "https://stordfkenticomedia.blob.core.windows.net/df-us/rms/media/recipemediafiles/recipe%20images%20and%20files/retail/desktop%20(600x600)/2023.april/2023_retail_apple-cobbler_600x600.jpg?ext=.jpg",
   },
   {
     id: "ds_06",
@@ -296,15 +273,15 @@ export const dessertItems: DishItem[] = [
     price: "₵11",
     desc: "Light and airy Belgian chocolate mousse topped with fresh chocolate shavings.",
     image:
-      "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&q=80&w=800",
+      "https://sugargeekshow.com/wp-content/uploads/2019/01/chocolate_mousse_recipe-_BEST.jpg",
   },
   {
     id: "ds_07",
-    name: "KEY LIME PIE",
-    price: "₵10",
-    desc: "Tart and creamy key lime filling served on a graham cracker crust.",
+    name: "BOFROT",
+    price: "₵9",
+    desc: "Light and pillowy Ghanaian fried dough balls, golden on the outside and airy inside, dusted in cinnamon sugar and served with a honey dipping sauce.",
     image:
-      "https://images.unsplash.com/photo-1476887334197-56af4b0cf0b8?auto=format&fit=crop&q=80&w=800",
+      "https://travelandmunchies.com/wp-content/uploads/2022/11/IMG_0891-scaled.jpg",
   },
   {
     id: "ds_08",
@@ -363,7 +340,7 @@ export const drinkItems: DishItem[] = [
     price: "₵20",
     desc: "A refreshing alcohol-free fruit punch pitcher meant to be shared.",
     image:
-      "https://images.pexels.com/photos/1564534/pexels-photo-1564534.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://i0.wp.com/www.spicesinmydna.com/wp-content/uploads/2019/06/Watermelon-Mint-Mojito-Mocktail-Pitcher.jpg?resize=610%2C915&ssl=1",
   },
   {
     id: "dr_07",
@@ -375,11 +352,11 @@ export const drinkItems: DishItem[] = [
   },
   {
     id: "dr_08",
-    name: "MATCHA LATTE",
-    price: "₵7",
-    desc: "Premium ceremonial grade matcha whisked with steamed oat milk.",
+    name: "SOBOLO",
+    price: "₵6",
+    desc: "House-brewed hibiscus flower tea infused with ginger, cloves, and fresh pineapple, served chilled over ice.",
     image:
-      "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&q=80&w=800",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ1gLEpoJq8tQKUuddNh7lqZYf4-wsSmW--w&s",
   },
   {
     id: "dr_09",
@@ -387,7 +364,7 @@ export const drinkItems: DishItem[] = [
     price: "₵6",
     desc: "Rich espresso layered with milk and vanilla, topped with caramel drizzle.",
     image:
-      "https://images.unsplash.com/photo-1561047029-3000c68339ca?auto=format&fit=crop&q=80&w=800",
+      "https://www.allrecipes.com/thmb/hHZ8OjScUDlL9l5XJjYyWM9KAGw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/258686-IcedCaramelMacchiato-ddmps-4x3-104704-2effb74f7d504b8aa5fbd52204d0e2e5.jpg",
   },
   {
     id: "dr_10",
@@ -395,15 +372,15 @@ export const drinkItems: DishItem[] = [
     price: "₵13",
     desc: "Tequila blended with fresh pineapple juice, lime, and a tajin rim.",
     image:
-      "https://images.pexels.com/photos/2789328/pexels-photo-2789328.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://www.theanthonykitchen.com/wp-content/uploads/2022/05/Pineapple-Margarita-3.2.jpg",
   },
   {
     id: "dr_11",
-    name: "SPARKLING WATER",
-    price: "₵4",
-    desc: "Premium mineral carbonated water served chilled with a slice of lemon.",
+    name: "FRESH COCONUT WATER",
+    price: "₵5",
+    desc: "Pure young coconut water served chilled, naturally refreshing and rich in electrolytes — straight from the shell.",
     image:
-      "https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9F4ss2motlPox6wqHzchhiMVSnBPCIrEmsQ&s",
   },
   {
     id: "dr_12",
