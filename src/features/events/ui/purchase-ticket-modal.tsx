@@ -227,7 +227,7 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                         TOTAL
                       </h4>
                       <p className="font-marcellus text-xl text-primary font-bold">
-                        ${totalPrice}
+                        GHS{totalPrice}
                       </p>
                     </div>
                   </div>
