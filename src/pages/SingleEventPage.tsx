@@ -260,7 +260,7 @@ const SingleEventPage = () => {
                             {ticket.type}
                           </span>
                           <span className="text-lg font-marcellus text-primary">
-                            ${ticket.price}
+                            GHS{ticket.price}
                           </span>
                         </motion.div>
                       ))}

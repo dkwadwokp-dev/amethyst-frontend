@@ -35,7 +35,7 @@ const BORDER = "#E5E7EB";
 const WHITE = "#FFFFFF";
 
 const formatCurrency = (value: number) =>
-  `GHS ${value.toLocaleString("en-GH", {
+  `GHS${value.toLocaleString("en-GH", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;

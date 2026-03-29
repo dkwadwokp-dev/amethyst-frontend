@@ -138,7 +138,7 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                             <span
                               className={`font-marcellus text-lg ${ticket.availableQuantity === 0 ? "text-gray-300" : "text-primary"}`}
                             >
-                              ${ticket.price}
+                              GHS{ticket.price}
                             </span>
                             {ticket.availableQuantity !== null &&
                               ticket.availableQuantity !== undefined && (
@@ -197,7 +197,7 @@ const PurchaseTicketModal = ({ event, onClose }: PurchaseTicketModalProps) => {
                         TOTAL AMOUNT
                       </span>
                       <span className="text-3xl font-marcellus text-gray-900">
-                        ${totalPrice}
+                        GHS{totalPrice}
                       </span>
                     </div>
                     <Button

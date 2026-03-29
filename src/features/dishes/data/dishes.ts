@@ -257,7 +257,7 @@ export const dessertItems: DishItem[] = [
     price: "₵10",
     desc: "Silky vanilla custard topped with a perfectly caramelized and brittle sugar crust.",
     image:
-      "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?auto=format&fit=crop&q=80&w=800",
+      "https://www.allrecipes.com/thmb/y-S61IJkYyCUjTMGYqkaoJGwBrY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-228515-simple-creme-brulee-dessert-dmfs-4x3-821623e7a86548eeb89370ac23d5f251.jpg",
   },
   {
     id: "ds_05",
@@ -332,7 +332,7 @@ export const drinkItems: DishItem[] = [
     price: "₵15",
     desc: "A sophisticated mix of vodka, espresso, and coffee liqueur.",
     image:
-      "https://images.pexels.com/photos/3407777/pexels-photo-3407777.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "https://www.chelseadishes.com/wp-content/uploads/2021/12/baileys-martini-2.jpg",
   },
   {
     id: "dr_06",

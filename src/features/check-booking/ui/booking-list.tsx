@@ -237,7 +237,7 @@ const BookingList = () => {
                     <div className="flex flex-row md:flex-col justify-end items-end md:items-stretch gap-2 border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 md:pl-6 min-w-[140px]">
                       {booking.type === "room" && (
                         <span className="text-xl md:text-2xl font-marcellus tracking-normal normal-case text-black/80 ">
-                          ${(booking.amount || 0).toLocaleString()}
+                          GHS{(booking.amount || 0).toLocaleString()}
                         </span>
                       )}
                       <Button

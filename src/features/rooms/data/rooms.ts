@@ -29,10 +29,10 @@ export const rooms: Room[] = [
   {
     id: "rm_02",
     leadImage:
-      "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://webbox.imgix.net/images/scmwttivwljcinct/19f77dda-dfc3-41bb-840d-c6fa68f971b4.jpg?auto=format,compress&fit=crop&crop=entropy",
     otherImages: [
       "https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://roomraccoon.com/wp-content/uploads/2024/06/2-1.png",
     ],
     title: "THE DELUXE ROOM",
     price: "220",
@@ -84,10 +84,10 @@ export const rooms: Room[] = [
   {
     id: "rm_04",
     leadImage:
-      "https://images.pexels.com/photos/271614/pexels-photo-271614.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.danetti.com/cdn/shop/files/AmalfiLuxeChampLifestyleMain_1bf8754d-690f-4925-b659-56ea3ff38b03.jpg?v=1733846726",
     otherImages: [
+      "https://static1.eskypartners.com/travelguide/twin-room-double-room-jaka-roznica.jpg",
       "https://images.pexels.com/photos/3315291/pexels-photo-3315291.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/260024/pexels-photo-260024.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
     title: "THE FAMILY CONNECT ROOM",
     price: "520",
@@ -138,10 +138,10 @@ export const rooms: Room[] = [
   {
     id: "rm_06",
     leadImage:
-      "https://images.pexels.com/photos/1034584/pexels-photo-1034584.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://www.snowlandhotelsandresorts.com/wp-content/uploads/2025/01/Honeymoon_Suite_1.jpg",
     otherImages: [
-      "https://images.pexels.com/photos/813692/pexels-photo-813692.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://seapointe.com/wp-content/uploads/2024/04/1-Thumbnail-Master-Bath-Remodel.jpg",
     ],
     title: "THE HONEYMOON SUITE",
     price: "800",
