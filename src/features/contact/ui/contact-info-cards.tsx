@@ -7,17 +7,17 @@ const ContactInfoCards = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "FRONT DESK",
-      lines: ["+1 (555) 123-4567", "+1 (555) 123-4568"],
+      lines: ["+233 (550) 529 015", "+233 (547) 203 542"],
     },
     {
       icon: <Megaphone className="w-6 h-6" />,
       title: "SALES & MARKETING",
-      lines: ["+1 (555) 987-0001", "+1 (555) 987-0002"],
+      lines: ["+233 (550) 529 015", "+233 (547) 203 542"],
     },
     {
       icon: <Mail className="w-6 h-6" />,
-      title: "EMAIL ADDRESS",
-      lines: ["hello@amethysthotel.com", "events@amethysthotel.com"],
+      title: "EMAIL ADDRhESS",
+      lines: ["hello@ametysthotel.com", "events@amethysthotel.com"],
     },
     {
       icon: <MapPin className="w-6 h-6" />,
