@@ -111,33 +111,6 @@ export const rooms: Room[] = [
   {
     id: "rm_05",
     leadImage:
-      "https://images.pexels.com/photos/6492397/pexels-photo-6492397.jpeg?auto=compress&cs=tinysrgb&w=800",
-    otherImages: [
-      "https://images.pexels.com/photos/6538942/pexels-photo-6538942.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    title: "THE PRESIDENTIAL SUITE",
-    price: "1,200",
-    guests: "4 GUESTS",
-    bed: "2 KING BEDS",
-    size: "150 SQM",
-    desc: "Our most lavish offering. Expansive layouts encompassing a private dining room and dedicated workspace.",
-    longDesc:
-      "The Presidential Suite is the crowning jewel of Amethyst Suites, reserved for those who demand the zenith of urban living. Spreading over 150 square meters, the suite is a self-contained world of opulence. It features a grand foyer, a private dining room that accommodates six guests, and a professional workspace equipped with the latest technology. Every surface is finished with premium materials—Italian marble, hand-woven textiles, and rare hardwoods. Guests enjoy the services of a dedicated butler who manages every detail of the stay, from wardrobe management to private culinary events. The master bedroom offers a 270-degree view of the skyline, while the bathroom features a massive jacuzzi and a private steam room. This is not just a suite; it is a statement.",
-    amenities: [
-      "Dedicated Buttler",
-      "Private Dining Room",
-      "Panoramic Skyline Views",
-      "Oversized Smart TVs",
-      "Executive Workspace",
-      "Luxury Bathroom with Jacuzzi",
-      "Premium Surround Sound",
-      "VIP Access",
-    ],
-  },
-  {
-    id: "rm_06",
-    leadImage:
       "https://www.snowlandhotelsandresorts.com/wp-content/uploads/2025/01/Honeymoon_Suite_1.jpg",
     otherImages: [
       "https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -160,6 +133,33 @@ export const rooms: Room[] = [
       "High-Speed Wi-Fi",
       "Premium Sound System",
       "Couple's Bathrobes",
+    ],
+  },
+  {
+    id: "rm_06",
+    leadImage:
+      "https://images.pexels.com/photos/6492397/pexels-photo-6492397.jpeg?auto=compress&cs=tinysrgb&w=800",
+    otherImages: [
+      "https://images.pexels.com/photos/6538942/pexels-photo-6538942.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=800",
+    ],
+    title: "THE PRESIDENTIAL SUITE",
+    price: "1,200",
+    guests: "4 GUESTS",
+    bed: "2 KING BEDS",
+    size: "150 SQM",
+    desc: "Our most lavish offering. Expansive layouts encompassing a private dining room and dedicated workspace.",
+    longDesc:
+      "The Presidential Suite is the crowning jewel of Amethyst Suites, reserved for those who demand the zenith of urban living. Spreading over 150 square meters, the suite is a self-contained world of opulence. It features a grand foyer, a private dining room that accommodates six guests, and a professional workspace equipped with the latest technology. Every surface is finished with premium materials—Italian marble, hand-woven textiles, and rare hardwoods. Guests enjoy the services of a dedicated butler who manages every detail of the stay, from wardrobe management to private culinary events. The master bedroom offers a 270-degree view of the skyline, while the bathroom features a massive jacuzzi and a private steam room. This is not just a suite; it is a statement.",
+    amenities: [
+      "Dedicated Buttler",
+      "Private Dining Room",
+      "Panoramic Skyline Views",
+      "Oversized Smart TVs",
+      "Executive Workspace",
+      "Luxury Bathroom with Jacuzzi",
+      "Premium Surround Sound",
+      "VIP Access",
     ],
   },
 ];
