@@ -1,19 +1,9 @@
 import { Section } from "../../shared/ui/section";
-import { Phone, Megaphone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
 const ContactInfoCards = () => {
   const cards = [
-    {
-      icon: <Phone className="w-6 h-6" />,
-      title: "FRONT DESK",
-      lines: ["+233 (550) 529 015", "+233 (547) 203 542"],
-    },
-    {
-      icon: <Megaphone className="w-6 h-6" />,
-      title: "SALES & MARKETING",
-      lines: ["+233 (550) 529 015", "+233 (547) 203 542"],
-    },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "EMAIL ADDRhESS",
@@ -28,7 +18,7 @@ const ContactInfoCards = () => {
 
   return (
     <Section className="bg-[#F8F9FA] md:pb-24">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+      <div className="grid grid-cols-2 gap-3 md:gap-6">
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
