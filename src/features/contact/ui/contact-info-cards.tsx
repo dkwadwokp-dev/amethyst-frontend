@@ -6,8 +6,8 @@ const ContactInfoCards = () => {
   const cards = [
     {
       icon: <Mail className="w-6 h-6" />,
-      title: "EMAIL ADDRhESS",
-      lines: ["hello@ametysthotel.com", "events@amethysthotel.com"],
+      title: "EMAIL ADDRESS",
+      lines: ["contact@amethystsnd.com"],
     },
     {
       icon: <MapPin className="w-6 h-6" />,
