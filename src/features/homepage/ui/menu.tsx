@@ -54,7 +54,7 @@ const Menu = () => {
                     </h4>
                     <div className="absolute left-0 bottom-1.5 w-full border-b-[1.5px] border-dotted border-gray-300 z-0"></div>
                     <span className="font-bold text-sm bg-white pl-2 relative z-10">
-                      {item.price}
+                      ₵{item.price}
                     </span>
                   </div>
                   <p className="text-gray-500 text-xs italic">{item.desc}</p>

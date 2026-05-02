@@ -63,7 +63,7 @@ const DishCategory = ({ subtitle, title, category }: DishCategoryProps) => {
                     {item.name}
                   </h4>
                   <span className="font-bold text-[9px] md:text-[11px] text-gray-900 ml-1">
-                    {item.price}
+                    ₵{item.price}
                   </span>
                 </div>
                 <p className="text-[9px] md:text-[11px] text-gray-500 leading-relaxed pr-2 line-clamp-2">
